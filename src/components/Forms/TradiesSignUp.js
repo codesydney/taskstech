@@ -228,12 +228,9 @@ export default function TradieSignUp() {
                 error={errors.categories}
 
                     >
-                    <MenuItem value={"ACT"}>ACT</MenuItem>
-                    <MenuItem value={"NSW"}>NSW</MenuItem>
-                    <MenuItem value={"NT"}>NT</MenuItem>
-                    <MenuItem value={"QLD"}>QLD</MenuItem>
-                    <MenuItem value={"SA"}>SA</MenuItem>
-                    <MenuItem value={"TAS"}>TAS</MenuItem>
+                    <MenuItem value={"electrical"}>Electrical</MenuItem>
+                    <MenuItem value={""}>Installer</MenuItem>
+                    <MenuItem value={""}></MenuItem>
 
                     </Select>
                     {/* <FormHelperText>Label + placeholder</FormHelperText> */}

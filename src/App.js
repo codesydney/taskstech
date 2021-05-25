@@ -4,6 +4,7 @@ import CustomerSignUp from './components/Forms/CustomerSignUp';
 import CustomerLogin from "./components/Forms/CustomerLogIn";
 import TradieLogin from './components/Forms/TradieLogIn';
 import TradieSignUp from "./components/Forms/TradiesSignUp";
+import CreateNewCustomer from './components/Forms/CreateNewCustomer';
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       {/* <TradieLogin /> */}
       {/* <CustomerSignUp /> */}
       {/* <CustomerLogin /> */}
-      <TradieSignUp />
+      {/* <TradieSignUp /> */}
+      <CreateNewCustomer />
     </div>
   );
 }

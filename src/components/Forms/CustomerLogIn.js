@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TradieLogin = () => {
+const CustomerLogin = () => {
   const { handleChange, values, handleSubmit, errors } = useForm(validate);
 
   const classes = useStyles();
@@ -62,7 +62,7 @@ const TradieLogin = () => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-       <Logo />
+      <Logo />
       <Grid item xs={12} sm={7} md={7} component={Paper} elevation={6} square>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -122,7 +122,7 @@ const TradieLogin = () => {
                 variant="contained"
                 className={classes.submit}
               >
-                [CUSTOMER - NEXT]
+                [TRADIES - NEXT]
               </Button>
             </form>
           </div>
@@ -132,4 +132,4 @@ const TradieLogin = () => {
   );
 }
 
-export default TradieLogin;
+export default CustomerLogin;

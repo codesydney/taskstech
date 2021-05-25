@@ -55,6 +55,10 @@ export default function validateInfo(values) {
     if(!values.postcode){
         errors.postcode = 'Postcode is required to choose'
     }
+    // Catefories Validation
+    if(!values.categories){
+        errors.categories = 'Categories is required to choose'
+    }
 
 
     return errors;

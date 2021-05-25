@@ -1,8 +1,23 @@
-import React from 'react'
+import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+
+
+
+const useStyles = makeStyles((theme) => ({
+  image: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#4e4af2",
+    paddingRight: "4%",
+  },
+}))
 
 function Logo() {
+  const classes = useStyles();
     return (
-        <>
+        <Grid item xs={false} sm={5} md={5} className={classes.image}>
              <svg
           width="100vw"
           height="150"
@@ -40,7 +55,7 @@ function Logo() {
             fill="white"
           />
         </svg>
-        </>
+        </Grid>
     )
 }
 

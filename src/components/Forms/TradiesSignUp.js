@@ -12,18 +12,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import useForm from './useForm';
-import validate from './validateInfo'
+import validate from './validateInfo';
+import Logo from "./Logo";
+
 
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-  },
-  image: {
-    backgroundColor: 'linear-gradient(to right bottom, #430089, #82ffa1)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -46,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function TradieSignUp() {
     const {handleChange, values, handleSubmit, errors} = useForm(validate);
 
   const classes = useStyles();
@@ -54,11 +51,11 @@ export default function SignUp() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+       <Logo />
+      <Grid item xs={12} sm={7} md={7} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h4">
-            Sign up
+            Tradies Sign up
           </Typography>
           <form className={classes.form}  onSubmit={handleSubmit}>
           <Grid container spacing={3}>
@@ -82,7 +79,7 @@ export default function SignUp() {
                 variant="outlined"
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="First Name*"
                 autoFocus
                 value={values.firstName}
                 onChange={handleChange}
@@ -95,7 +92,7 @@ export default function SignUp() {
                 variant="outlined"
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Last Name*"
                 name="lastName"
                 autoComplete="name"
                 value={values.lastName}
@@ -106,32 +103,32 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="organization"
-                name="company"
-                variant="outlined"
-                fullWidth
-                id="company"
-                label="Company"
-                autoFocus
-                value={values.company}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
                 variant="outlined"
                 fullWidth
                 id="phone"
-                label="Phone No"
+                label="Phone No*"
                 name="phone"
                 autoComplete="tel"
                 value={values.phone}
                 onChange={handleChange}
                 error={errors.phone}
-
               />
               {errors.phone && <p className="errormessage">{errors.phone}</p>}
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="organization"
+                name="licence"
+                variant="outlined"
+                fullWidth
+                id="licence"
+                label="Licenc No"
+                autoFocus
+                value={values.licence}
+                onChange={handleChange}
+              />
+            </Grid>
+            
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="email"
@@ -139,7 +136,7 @@ export default function SignUp() {
                 variant="outlined"
                 fullWidth
                 id="email"
-                label="Email"
+                label="Email*"
                 autoFocus
                 value={values.email}
                 onChange={handleChange}
@@ -154,7 +151,7 @@ export default function SignUp() {
                 variant="outlined"
                 fullWidth
                 id="confirmemail"
-                label="Confirm Email"
+                label="Confirm Email*"
                 name="confirmemail"
                 autoComplete="email"
                 value={values.confirmemail}
@@ -172,7 +169,7 @@ export default function SignUp() {
                 variant="outlined"
                 fullWidth
                 id="password"
-                label="Password"
+                label="Password*"
                 autoFocus
                 value={values.password}
                 onChange={handleChange}
@@ -189,7 +186,7 @@ export default function SignUp() {
                 variant="outlined"
                 fullWidth
                 id="confirmpassword"
-                label="Confirm Password"
+                label="Confirm Password*"
                 name="confirmpassword"
                 autoComplete="password"
                 value={values.confirmpassword}
@@ -201,34 +198,34 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="address"
-                name="address"
+                autoComplete="role"
+                name="role"
                 variant="outlined"
                 fullWidth
-                id="address"
-                label="Address"
+                id="role"
+                label="Role"
                 autoFocus
-                value={values.address}
+                value={values.role}
                 onChange={handleChange}
-                error={errors.address}
+                // error={errors.role}
 
               />
-              {errors.address && <p className="errormessage">{errors.address}</p>}
+              {/* {errors.address && <p className="errormessage">{errors.address}</p>} */}
             </Grid>
             <Grid item xs={12} sm={6}>
             <FormControl className={classes.formControl} fullWidth>
                     <InputLabel shrink id="state">
-                    State
+                    Categories*
                     </InputLabel>
                     <Select
-                    name="state"
+                    name="categories"
                     variant="outlined"
-                    label="state"
-                    id="state"
-                    value={values.state}
+                    label="categories"
+                    id="categories"
+                    value={values.categories}
                     className={classes.select}
                     onChange={handleChange}
-                error={errors.state}
+                error={errors.categories}
 
                     >
                     <MenuItem value={"ACT"}>ACT</MenuItem>
@@ -241,23 +238,23 @@ export default function SignUp() {
                     </Select>
                     {/* <FormHelperText>Label + placeholder</FormHelperText> */}
                 </FormControl>
-                {errors.state && <p className="errormessage">{errors.state}</p>}
+                {errors.categories && <p className="errormessage">{errors.categories}</p>}
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12} className={classes.description}>
               <TextField
-                autoComplete="postcode"
+                autoComplete="text"
                 variant="outlined"
                 fullWidth
-                id="lastName"
-                label="Postcode"
-                name="postcode"
-                autoComplete="postcode"
-                value={values.postcode}
+                id="Description"
+                label="description"
+                name="description"
+                autoComplete="description"
+                value={values.description}
                 onChange={handleChange}
-                error={errors.postcode}
+                // error={errors.description}
 
               />
-              {errors.postcode && <p className="errormessage">{errors.postcode}</p>}
+              {/* {errors.postcode && <p className="errormessage">{errors.postcode}</p>} */}
             </Grid>
             
             {/* <Grid item xs={12}>
@@ -292,10 +289,7 @@ export default function SignUp() {
 
           </Grid>
             
-            
-            {/* <Box mt={5}>
-              <Copyright />
-            </Box> */}
+
           </form>
         </div>
       </Grid>

@@ -15,6 +15,12 @@ const useForm = validate => {
         state: '',
         postcode: '',
         showPassword: false,
+        licence:'',
+        role:'',
+        categories:'',
+        description: '',
+        
+        
 
     });
     const [errors, setErrors] = useState({});

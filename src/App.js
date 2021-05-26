@@ -11,10 +11,10 @@ function App() {
   return (
     <div className="App">
       {/* <TradieLogin /> */}
-      {/* <CustomerSignUp /> */}
+      <CustomerSignUp />
       {/* <CustomerLogin /> */}
       {/* <TradieSignUp /> */}
-      <CreateNewCustomer />
+      {/* <CreateNewCustomer /> */}
     </div>
   );
 }

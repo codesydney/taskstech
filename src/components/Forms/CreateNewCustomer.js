@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
   }));
   
   export default function CreateNewCustomer() {
-      const {handleChange, values, handleSubmit, errors} = useForm(validate);
-  
+    const {handleChange, values, handleSubmit, errors} = useForm(validate);
     const classes = useStyles();
+
   
     return (
       <Grid container component="main" className={classes.root}>

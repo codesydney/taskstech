@@ -24,6 +24,7 @@ const CreateJob = () => {
     const status = useSelector((state) => state.status.job);
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
+    
     const dispatch = useDispatch();
     const { 
         handleUserInput, 
@@ -40,7 +41,7 @@ const CreateJob = () => {
         dispatch(getStatus());
     }, [indicator]);
     
-    
+    console.log()
 
     return (
         <Box
@@ -78,7 +79,7 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <TextField
-                            error={!formIsValid()} 
+                            error={formIsValid() === true ? false : true} 
                             helperText={ errors.helperText }
                             value={fields.jobName}
                             name='jobName'

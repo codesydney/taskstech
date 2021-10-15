@@ -9,7 +9,7 @@ export const useFormControl = () => {
     const [jobStatus, setJobStatus] = useState('Not yet started');
     const [jobStatusId, setJobStatusId] = useState(1);
     const nameLimitRegex = /^.{29,30}$/;
-    const descriptionLimitRegex = /^.{99,100}$/
+    const descriptionLimitRegex = /^.{99,100}$/;
     const dispatch = useDispatch();
 
     let jobObject = {
@@ -89,9 +89,8 @@ export const useFormControl = () => {
 
     const formIsValid = () => {
         const { jobName, description } = fields;
-        let isValid;
 
-        isValid = jobName && description && Object.values(errors)
+        let isValid = jobName && description && Object.values(errors)
             .every(v => v === '') ? true : false;
 
         return isValid;

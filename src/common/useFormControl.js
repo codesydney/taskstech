@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { createJob } from '../actions/action';
 
@@ -6,6 +6,8 @@ import { createJob } from '../actions/action';
 export const useFormControl = () => {
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});
+    const [customerName, setCustomerName] = useState('');
+    const [customerId, setCustomerId] = useState('');
     const [jobStatus, setJobStatus] = useState('Not yet started');
     const [jobStatusId, setJobStatusId] = useState(1);
     const nameLimitRegex = /^.{29,30}$/;
@@ -17,8 +19,14 @@ export const useFormControl = () => {
         description: fields.description,
         job_status_id: fields.job_status_id,
         tradesperson_id: fields.tradesperson_id,
-        customer_id: Number(fields.customer_id)
+        customer_id: Number(customerId)//Number(fields.customer_id)
     }
+
+    let customerLookup = {
+        user_id: 0,
+        first_name: '',
+        last_name: ''
+    };
 
     const handleUserInput = event => {
         const { name, value } = event.target
@@ -32,15 +40,27 @@ export const useFormControl = () => {
         const index = event.target.selectedIndex;
         const el = event.target.childNodes[index]
         const option = el.getAttribute('id');
-
+        
         setJobStatus(event.target.value)
         setJobStatusId(Number(option))
         setFields({ ...fields, [name]: Number(jobStatusId) });
     };
 
+    const handleLookupDropdownChange = (event, params = customerLookup) => {
+        event.preventDefault();
+        const {  value } = event.target;
+        
+        
+        console.log(params.props)
+        setCustomerId(params.props.user_id);
+        setCustomerName(value);
+        
+    };
+    
     const handleSubmit = event => {
         event.preventDefault();
-
+        console.log('customerId')
+        console.log(customerId)
         dispatch(createJob(jobObject, true));
         resetFields();
     };
@@ -100,11 +120,13 @@ export const useFormControl = () => {
         validate,
         handleUserInput,
         handleDropdownChange,
+        handleLookupDropdownChange,
         handleSubmit,
         jobStatus,
         jobStatusId,
         formIsValid,
         errors,
-        fields
+        fields,
+        customerName
     }
 }

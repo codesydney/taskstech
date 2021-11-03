@@ -1,3 +1,4 @@
+// Jobs Action Types 
 export const CREATE_JOB_STARTED = 'CREATE_JOB_STARTED';
 export const CREATE_JOB = 'CREATE_JOB';
 export const CREATE_JOB_FAILED = 'CREATE_JOB_FAILED';
@@ -14,6 +15,10 @@ export const GET_ACTIVITY_STARTED = 'GET_ACTIVITY_STARTED';
 export const GET_ACTIVITY = 'GET_ACTIVITY';
 export const GET_ACTIVITIES_STARTED = 'GET_ACTIVITIES_STARTED';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
+
+/* Customer Action Types */
+export const GET_CUSTOMERS_STARTED = 'GET_CUSTOMERS_STARTED';
+export const GET_CUSTOMERS = "GET_CUSTOMERS"
 
 // Inventory Action Types
 export const FETCH_INVENTORY = 'FETCH_INVENTORY';

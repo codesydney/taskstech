@@ -6,13 +6,15 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+
 import Lookup from '../../../common/Lookup';
 import { useDispatch, useSelector } from "react-redux";
-
-import { useFormControl } from "../../../common/useFormControl";
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
 import { getCustomers } from "../../../actions/customerActions";
+import { createJob } from '../../../actions/action';
+import { useState } from "react";
+
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -24,29 +26,118 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const CreateJob = () => {
+    const [jobName, setJobName] = useState('');
+    const [description, setDescription] = useState('');
+    const [tradespersonId, setTradespersonId] = useState(1);
+
+    const [customerName, setCustomerName] = useState('');
+    const [customerId, setCustomerId] = useState(0);
+    const [jobStatus, setJobStatus] = useState('Not yet started');
+    const [jobStatusId, setJobStatusId] = useState(1);
     const status = useSelector((state) => state.status.job);
     const { customers } = useSelector((state) => state);
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
 
     const dispatch = useDispatch();
-    const {
-        handleUserInput,
-        handleDropdownChange,
-        handleSubmit,
-        jobStatus,
-        errors,
-        formIsValid,
-        fields
-    } = useFormControl();
-
 
     useEffect(() => {
         dispatch(getStatus());
         dispatch(getCustomers())
     }, [indicator]);
 
-    console.log()
+    let jobObject = {
+        name: jobName,
+        description: description,
+        job_status_id: jobStatusId,
+        tradesperson_id: tradespersonId,
+        customer_id: customerId
+    }
+
+    const handleUserInput = event => {
+        const { name, value } = event.target;
+
+        if (name === "jobName") {
+            setJobName(value)
+        }
+        if (name === "description") {
+            setDescription(value)
+        }
+        if (name === "tradesperson_id") {
+            setTradespersonId(value)
+        }
+    };
+
+    const handleDropdownChange = (event, params) => {
+        event.preventDefault();
+        const { name, selectedIndex, childNodes, value } = event.target;
+
+        switch (name) {
+            case 'job_status_id':
+                {
+                    const index = selectedIndex;
+                    const el = childNodes[index]
+                    const option = el.getAttribute('id');
+
+                    setJobStatus(value)
+                    setJobStatusId(Number(option));
+                    break;
+                }
+            case 'customer_id':
+                {
+                    const { user_id } = params.props;
+
+                    if (user_id !== 0) setCustomerId(user_id);
+
+                    setCustomerName(value);
+                    
+                    break;
+                }
+            default:
+                console.log('error')
+                break;
+        }
+    };
+
+    /*
+    const handleLookupDropdownChange = (event, params) => {
+        event.preventDefault();
+        const { value } = event.target;
+        const { user_id } = params.props;
+
+        if (user_id !== 0) {
+            setCustomerId(user_id);
+        }
+        setCustomerName(value);
+        console.log(jobObject);
+    };
+    */
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        dispatch(createJob(jobObject, true));
+        resetFields();
+        console.log(jobObject)
+    };
+
+    const resetFields = () => {
+
+        jobObject = {
+            customer_id: '',
+            description: '',
+            jobName: '',
+            job_status_id: 1,
+            tradesperson_id: ''
+        };
+        setJobName('');
+        setDescription('');
+        setJobStatus('Not yet started');
+        setJobStatusId(1);
+        //setCustomerName();
+        //setCustomerId(0);
+    }
+
+
 
     return (
         <Box
@@ -84,9 +175,9 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <TextField
-                            error={formIsValid() === true ? false : true}
-                            helperText={errors.helperText}
-                            value={fields.jobName}
+                            //error={formIsValid() === true ? false : true}
+                            //helperText={errors.helperText}
+                            value={jobName}
                             name='jobName'
                             required
                             id="outlined-error-helper-text"
@@ -98,9 +189,9 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
-                            error={!formIsValid()}
-                            helperText={errors.helperText}
-                            value={fields.description}
+                            //error={!formIsValid()}
+                            //helperText={errors.helperText}
+                            value={description}
                             name='description'
                             id="outlined-error-helper-text"
                             label="Description"
@@ -130,12 +221,16 @@ const CreateJob = () => {
                         </TextField>
                     </div>
                     <div>
-                        <Lookup data={customers.payload} />
+                        <Lookup
+                            data={customers.payload}
+                            handleDropdownChange={handleDropdownChange}
+                            customerName={customerName}
+                        />
                     </div>
                     <div>
                         <TextField
                             error={false}
-                            value={fields.tradesperson_id}
+                            value={tradespersonId}
                             name='tradesperson_id'
                             required
                             id="outlined-error-helper-text"
@@ -144,13 +239,13 @@ const CreateJob = () => {
                             onChange={handleUserInput}
                         />
                     </div>
-                    
-                    
+
+
                 </Item>
                 <Item>
                     <div>
                         <Button
-                            disabled={!formIsValid()}
+                            //disabled={!formIsValid()}
                             variant="contained"
                             color="primary"
                             onClick={handleSubmit}

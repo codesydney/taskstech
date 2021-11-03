@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useFormControl } from "../common/useFormControl";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -17,7 +17,6 @@ const MenuProps = {
   },
 };
 
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -27,19 +26,28 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect({ data }) {
+export default function MultipleSelect({
+  data,
+  handleDropdownChange,
+  customerName
+}) {
+  const [customers, setCustomers] = useState([]);
   const theme = useTheme();
-  const { handleLookupDropdownChange, customerName } = useFormControl();
- 
+
+  useEffect(() => {
+    setCustomers(data);
+  });
+
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 535, mt: 3 }}>
+    <div className='Lookup'>
+      {/* m: 1, width: 535, mt: 3 */}
+      <FormControl sx={{ m: 1, width: '90%', mt: 1 }}>
         <Select
           displayEmpty
           value={customerName}
-          
+
           name='customer_id'
-          onChange={handleLookupDropdownChange}
+          onChange={handleDropdownChange}
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
@@ -48,10 +56,11 @@ export default function MultipleSelect({ data }) {
             
             return selected;
           }}
-          
+
           MenuProps={MenuProps}
+
         >
-          {Object.entries(data).map(([key, value]) => (
+          {customers.map((value, key) => (
             <MenuItem
               key={key} //user_id
               value={`${value.first_name} ${value.last_name}`}

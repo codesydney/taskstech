@@ -63,9 +63,6 @@ export const getStatus = () => async dispatch => {
     }
 }
 
-// Trader Action
-
-
 // Authentication Action
 export const listenAuthState = () => {
     return async (dispatch) => {
@@ -289,5 +286,31 @@ export const signOut = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('id')
         dispatch(push('/login'));
+    }
+}
+
+
+//Customer Action
+
+export const customerRegistration = (firstname, lastname, email,  address, phone) => {
+    return async () => {
+        const customerRegistrationData = {
+            email: email,
+            first_name: firstname,
+            last_name: lastname,
+            address:address,
+            phone: phone,
+        }
+        console.log(customerRegistrationData)
+        try {
+            taskstechApi.post('users/customer', customerRegistrationData)
+                .then(res => {
+                    console.log(res)
+                    alert("Customer has been registered successfully.")
+                    // dispatch(push('/login'))
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 }

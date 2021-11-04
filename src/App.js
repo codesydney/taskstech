@@ -27,6 +27,9 @@ function App() {
         <Route exact path='/create/job' component={CreateJob} />
         <Route exact path='/signup' component={Pages.SignUp} />
         <Route exact path='/create/customer' component={Pages.CustomerRegistration} />
+        <Route exact path='/view/customers' component={Pages.CustomerListPage} />
+
+
 
 
                 <Auth>

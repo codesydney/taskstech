@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { customerRegistration} from "../../actions/action";
+import { customerRegistration} from "../../actions/customerActions";
 
 
 

@@ -73,7 +73,7 @@ function RightSideBar({history}) {
         {
             text: "View All Customers",
             icon: <PeopleAltIcon />,
-            onClick: () => history.push("/view/custumers"),
+            onClick: () => history.push("/view/customers"),
         },
         {
             text: "Create New Inventory",

@@ -208,7 +208,6 @@ export const signIn = (email, password) => {
                 }
             )
                 .then(res => {
-                    console.log(res)
                     localStorage.setItem("token", res.data.token)
                     localStorage.setItem("id", res.data.user_id)
                     dispatch(signInAction({
@@ -290,27 +289,3 @@ export const signOut = () => {
 }
 
 
-//Customer Action
-
-export const customerRegistration = (firstname, lastname, email,  address, phone) => {
-    return async () => {
-        const customerRegistrationData = {
-            email: email,
-            first_name: firstname,
-            last_name: lastname,
-            address:address,
-            phone: phone,
-        }
-        console.log(customerRegistrationData)
-        try {
-            taskstechApi.post('users/customer', customerRegistrationData)
-                .then(res => {
-                    console.log(res)
-                    alert("Customer has been registered successfully.")
-                    // dispatch(push('/login'))
-                })
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-}

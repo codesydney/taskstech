@@ -39,6 +39,7 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
             last_name: lastname,
             address:address,
             phone: phone,
+            pasword:"Password"
         }
         console.log(customerRegistrationData)
         try {

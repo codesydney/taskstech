@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
-
+import { push } from 'connected-react-router';
 
 export const getCustomers = (loading = true) => async dispatch => {
     const token = localStorage.getItem('token');
@@ -26,5 +26,51 @@ export const getCustomers = (loading = true) => async dispatch => {
             })
     } catch (error) {
         console.log(error.message)
+    }
+}
+
+
+
+export const customerRegistration = (firstname, lastname, email,  address, phone) => {
+    return async (dispatch) => {
+        const customerRegistrationData = {
+            email: email,
+            first_name: firstname,
+            last_name: lastname,
+            address:address,
+            phone: phone,
+            password:"Password"
+        }
+        console.log(customerRegistrationData)
+        try {
+            taskstechApi.post('users/customer', customerRegistrationData)
+                .then(() => {
+                    alert("Customer has been registered successfully.")
+                    dispatch(push('/view/customers'))
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
+
+//Update Customer
+
+export const updateCustomer = (customerData, id) => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('token');
+        try {
+            taskstechApi.put(`/users/customer/${id}`, customerData, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+
+                .then(() => {
+                    alert("Customer's Profile has been updated!")
+                    dispatch(push('/view/customers'))
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 }

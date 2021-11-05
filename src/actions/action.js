@@ -63,9 +63,6 @@ export const getStatus = () => async dispatch => {
     }
 }
 
-// Trader Action
-
-
 // Authentication Action
 export const listenAuthState = () => {
     return async (dispatch) => {
@@ -211,7 +208,6 @@ export const signIn = (email, password) => {
                 }
             )
                 .then(res => {
-                    console.log(res)
                     localStorage.setItem("token", res.data.token)
                     localStorage.setItem("id", res.data.user_id)
                     dispatch(signInAction({
@@ -291,3 +287,5 @@ export const signOut = () => {
         dispatch(push('/login'));
     }
 }
+
+

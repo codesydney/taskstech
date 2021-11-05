@@ -13,6 +13,7 @@ import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import InventoryDetail from "./components/inventory/InventoryDetail";
 
+
 import * as Pages from "../src/pages/Pages"
 
 function App() {
@@ -25,6 +26,12 @@ function App() {
         <Route exact path='/view/jobs' component={ViewJobs} />
         <Route exact path='/create/job' component={CreateJob} />
         <Route exact path='/signup' component={Pages.SignUp} />
+        <Route exact path='/create/customer' component={Pages.CustomerRegistration} />
+        <Route exact path='/view/customers' component={Pages.CustomerListPage} />
+        <Route exact={true} path="/detail/customer/:id" component={Pages.CustomerProfileUpdate} />
+
+
+
 
                 <Auth>
                     <Route exact path="/create/job" component={CreateJob} />

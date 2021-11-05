@@ -142,7 +142,7 @@ export default function InventoryDetail() {
                 square={false}
             >
                 <div className={classes.header}>
-                    <h3>Inventory Details</h3>
+                    <h3>Customer Details</h3>
                 </div>
                 <div className={classes.paper}>
                     <div

@@ -44,8 +44,7 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
         console.log(customerRegistrationData)
         try {
             taskstechApi.post('users/customer', customerRegistrationData)
-                .then(res => {
-                    console.log(res)
+                .then(() => {
                     alert("Customer has been registered successfully.")
                     dispatch(push('/view/customers'))
                 })
@@ -59,16 +58,16 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
 //Update Customer
 
 export const updateCustomer = (customerData, id) => {
-    return async () => {
+    return async (dispatch) => {
         const token = localStorage.getItem('token');
         try {
             taskstechApi.put(`/users/customer/${id}`, customerData, {
                 headers: { authorization: `Bearer ${token}` }
             })
 
-                .then(res => {
-                    console.log(res)
+                .then(() => {
                     alert("Customer's Profile has been updated!")
+                    dispatch(push('/view/customers'))
                 })
         } catch (error) {
             console.log(error.message)

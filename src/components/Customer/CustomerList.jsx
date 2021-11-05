@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+    DataGrid,
+    GridToolbarFilterButton,
+  } from '@mui/x-data-grid';
+import PropTypes from 'prop-types';
+import { createTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
+
+
 import { useDispatch, useSelector } from "react-redux";
 import { getCustomers } from "../../actions/customerActions";
 import Button from '@material-ui/core/Button';
@@ -8,20 +16,43 @@ import {push} from 'connected-react-router';
 // import { getCustomersList } from "../../selector/customerSelector";
 
 
+const defaultTheme = createTheme();
+const useStyles = makeStyles(
+  (theme) => ({
+    root: {
+      padding: theme.spacing(0.5, 0.5, 0),
+      justifyContent: 'end',
+      display: 'flex',
+      alignItems: 'flex-end',
+      flexWrap: 'wrap',
+    },}),
+  { defaultTheme },
+);
+
+function QuickSearchToolbar() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+        <GridToolbarFilterButton />
+    </div>
+  );
+}
+
+QuickSearchToolbar.propTypes = {
+  clearSearch: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
+
+
 export default function CustomerList() {
     const dispatch = useDispatch();
     const state = useSelector((state)=>state.customers.payload)
 
-
-
-
-    console.log(state)
-
-
     const handleClick = (cellValues) => {
         cellValues
       };
-
 
     const viewDetail = params => {
         return (
@@ -95,13 +126,13 @@ export default function CustomerList() {
         <h2>Customer List</h2>
         <div style={{ height: 400, width: "90%", margin:"auto", maxWidth:600}}>
             <DataGrid
+                components={{ Toolbar: QuickSearchToolbar }}
                 rows={state}
                 getRowId = {(row) =>row.user_id}
                 columns={columns}
                 pageSize={15}
                 rowsPerPageOptions={[15]}
-                // checkboxSelection
-                // disableSelectionOnClick
+                density="compact"
             />
         </div>
         </>

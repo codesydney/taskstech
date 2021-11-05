@@ -39,7 +39,7 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
             last_name: lastname,
             address:address,
             phone: phone,
-            pasword:"Password"
+            password:"Password"
         }
         console.log(customerRegistrationData)
         try {
@@ -48,6 +48,27 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
                     console.log(res)
                     alert("Customer has been registered successfully.")
                     // dispatch(push('/login'))
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
+
+//Update Customer
+
+export const updateCustomer = (customerData, id) => {
+    return async () => {
+        const token = localStorage.getItem('token');
+        try {
+            taskstechApi.put(`/users/customer/${id}`, customerData, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+
+                .then(res => {
+                    console.log(res)
+                    alert("Customer's Profile has been updated!")
                 })
         } catch (error) {
             console.log(error.message)

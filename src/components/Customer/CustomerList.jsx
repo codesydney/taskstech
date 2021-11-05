@@ -32,7 +32,7 @@ export default function CustomerList() {
                 handleClick(params)
                  let id = params.row.user_id
                 console.log(id)
-                dispatch(push('/users/customer/' + id))
+                dispatch(push('/detail/customer/' + id))
             }}
           >
             <MenuBookIcon />

@@ -28,6 +28,7 @@ function App() {
         <Route exact path='/signup' component={Pages.SignUp} />
         <Route exact path='/create/customer' component={Pages.CustomerRegistration} />
         <Route exact path='/view/customers' component={Pages.CustomerListPage} />
+        <Route exact={true} path="/detail/customer/:id" component={Pages.CustomerProfileUpdate} />
 
 
 

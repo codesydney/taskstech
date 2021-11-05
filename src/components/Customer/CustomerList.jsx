@@ -3,7 +3,6 @@ import {
     DataGrid,
     GridToolbarFilterButton,
   } from '@mui/x-data-grid';
-import PropTypes from 'prop-types';
 import { createTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 
@@ -39,11 +38,7 @@ function QuickSearchToolbar() {
   );
 }
 
-QuickSearchToolbar.propTypes = {
-  clearSearch: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-};
+
 
 
 export default function CustomerList() {

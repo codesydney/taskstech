@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
-
+import { push } from 'connected-react-router';
 
 export const getCustomers = (loading = true) => async dispatch => {
     const token = localStorage.getItem('token');
@@ -32,7 +32,7 @@ export const getCustomers = (loading = true) => async dispatch => {
 
 
 export const customerRegistration = (firstname, lastname, email,  address, phone) => {
-    return async () => {
+    return async (dispatch) => {
         const customerRegistrationData = {
             email: email,
             first_name: firstname,
@@ -47,7 +47,7 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
                 .then(res => {
                     console.log(res)
                     alert("Customer has been registered successfully.")
-                    // dispatch(push('/login'))
+                    dispatch(push('/view/customers'))
                 })
         } catch (error) {
             console.log(error.message)

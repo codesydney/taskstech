@@ -28,7 +28,19 @@ const Item = styled(Paper)(({ theme }) => ({
 const CreateJob = () => {
     const [jobName, setJobName] = useState('');
     const [description, setDescription] = useState('');
-    const [tradespersonId, setTradespersonId] = useState(1);
+    const [tradespersonId, setTradespersonId] = useState('');
+
+    const [jobNameIsValid, setJobNameIsValid] = useState(false);
+    const [descriptionIsValid, setDescriptionIsValid] = useState(false);
+    const [tradespersonIdIsValid, setTradespersonIdIsValid] = useState(false);
+    const [customerNameIsValid, setCustomerNameIsValid] = useState(false);
+
+    const [errors, setErrors] = useState({
+        jobName: { helperText: '', fieldError: false },
+        description: { helperText: '', fieldError: false },
+        tradesperson_id: { helperText: '', fieldError: false },
+        customer_id: { helperText: '', fieldError: false },
+    });
 
     const [customerName, setCustomerName] = useState('');
     const [customerId, setCustomerId] = useState(0);
@@ -56,21 +68,86 @@ const CreateJob = () => {
 
     const handleUserInput = event => {
         const { name, value } = event.target;
+        let { helperText, fieldError } = fieldValidator(value, name);
 
         if (name === "jobName") {
-            setJobName(value)
+            setJobName(value);
+            switch (fieldError) {
+                case false:
+                    setJobNameIsValid(true);
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setJobNameIsValid(false);
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
         }
         if (name === "description") {
-            setDescription(value)
+            setDescription(value);
+
+            switch (fieldError) {
+                case false:
+                    setDescriptionIsValid(true);
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setDescriptionIsValid(false);
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
         }
         if (name === "tradesperson_id") {
-            setTradespersonId(value)
+            setTradespersonId(value);
+
+            switch (fieldError) {
+                case false:
+                    setTradespersonIdIsValid(true);
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setTradespersonIdIsValid(false);
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+    };
+
+    const fieldValidator = (field, fieldName) => {
+        const fieldLimitReach = fieldName === 'jobName' ? /^.{29,30}$/ : /^.{99,100}$/;
+
+        if (field === '') {
+            return {
+                helperText: 'field is empty.',
+                fieldError: true
+            }
+        }
+        else if (field.length > 0 && fieldLimitReach.test(field) === false) {
+
+            return {
+                helperText: '',
+                fieldError: false
+            }
+        }
+        else if (fieldLimitReach.test(field) === true) {
+            return {
+                helperText: 'Maximum character limit reached.',
+                fieldError: true
+            }
         }
     };
 
     const handleDropdownChange = (event, params) => {
-        event.preventDefault();
         const { name, selectedIndex, childNodes, value } = event.target;
+        let { helperText, fieldError } = fieldValidator(value, name);//
 
         switch (name) {
             case 'job_status_id':
@@ -89,8 +166,18 @@ const CreateJob = () => {
 
                     if (user_id !== 0) setCustomerId(user_id);
 
-                    setCustomerName(value);
-                    
+                    if (fieldError === false) {//
+                        setCustomerName(value);
+                        setCustomerNameIsValid(true); //
+                        setErrors({ [name]: { helperText, fieldError } });
+                        console.log(errors)
+                    }
+                    if (fieldError === true) {
+                        setCustomerNameIsValid(false);//
+                        setErrors({ [name]: { helperText, fieldError } });
+                        console.log(errors)
+                    }
+
                     break;
                 }
             default:
@@ -99,19 +186,17 @@ const CreateJob = () => {
         }
     };
 
-    /*
-    const handleLookupDropdownChange = (event, params) => {
-        event.preventDefault();
-        const { value } = event.target;
-        const { user_id } = params.props;
-
-        if (user_id !== 0) {
-            setCustomerId(user_id);
+    const isNotValid = () => {
+        if (jobNameIsValid &&
+            descriptionIsValid &&
+            tradespersonIdIsValid &&
+            customerNameIsValid) {
+            return false;
         }
-        setCustomerName(value);
-        console.log(jobObject);
+        else {
+            return true;
+        }
     };
-    */
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -133,8 +218,6 @@ const CreateJob = () => {
         setDescription('');
         setJobStatus('Not yet started');
         setJobStatusId(1);
-        //setCustomerName();
-        //setCustomerId(0);
     }
 
 
@@ -175,8 +258,8 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <TextField
-                            //error={formIsValid() === true ? false : true}
-                            //helperText={errors.helperText}
+                            error={errors.jobName === undefined ? false : errors.jobName.fieldError}
+                            helperText={errors.jobName === undefined ? false : errors.jobName.helperText}
                             value={jobName}
                             name='jobName'
                             required
@@ -189,8 +272,8 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
-                            //error={!formIsValid()}
-                            //helperText={errors.helperText}
+                            error={errors.description === undefined ? '' : errors.description.fieldError}
+                            helperText={errors.description === undefined ? '' : errors.description.helperText}
                             value={description}
                             name='description'
                             id="outlined-error-helper-text"
@@ -223,11 +306,13 @@ const CreateJob = () => {
                     <div>
                         <Lookup
                             data={customers.payload}
-                            handleDropdownChange={handleDropdownChange}
                             customerName={customerName}
+                            handleDropdownChange={handleDropdownChange}
+                            errors={errors}
                         />
                     </div>
                     <div>
+                        {/* Will be replaced with lookup */}
                         <TextField
                             error={false}
                             value={tradespersonId}
@@ -245,7 +330,7 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <Button
-                            //disabled={!formIsValid()}
+                            disabled={isNotValid()}
                             variant="contained"
                             color="primary"
                             onClick={handleSubmit}

@@ -28,8 +28,8 @@ function getStyles(name, personName, theme) {
 
 export default function MultipleSelect({
   data,
+  customerName,
   handleDropdownChange,
-  customerName
 }) {
   const [customers, setCustomers] = useState([]);
   const theme = useTheme();
@@ -40,12 +40,10 @@ export default function MultipleSelect({
 
   return (
     <div className='Lookup'>
-      {/* m: 1, width: 535, mt: 3 */}
       <FormControl sx={{ m: 1, width: '90%', mt: 1 }}>
         <Select
           displayEmpty
           value={customerName}
-
           name='customer_id'
           onChange={handleDropdownChange}
           input={<OutlinedInput />}
@@ -62,7 +60,7 @@ export default function MultipleSelect({
         >
           {customers.map((value, key) => (
             <MenuItem
-              key={key} //user_id
+              key={key}
               value={`${value.first_name} ${value.last_name}`}
               style={getStyles(value.first_name, customerName, theme)}
               user_id={value.user_id}

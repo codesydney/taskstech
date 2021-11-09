@@ -42,15 +42,13 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
             password:"Password"
         }
         console.log(customerRegistrationData)
-        try {
             taskstechApi.post('users/customer', customerRegistrationData)
                 .then(() => {
                     alert("Customer has been registered successfully.")
                     dispatch(push('/view/customers'))
-                })
-        } catch (error) {
-            console.log(error.message)
-        }
+                }). catch ((error) => {
+                    alert(error.response.data.message)
+        })
     }
 }
 

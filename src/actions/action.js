@@ -184,21 +184,20 @@ export const signUp = (firstname, lastname, email, password, confirmPassword, de
             phone: phone
         }
         console.log(traderSignUpData)
-        try {
             taskstechApi.post('users/tradesperson', traderSignUpData)
-                .then(res => {
+                .then((res) => {
                     console.log(res)
+                    alert("Your account has been successfully created. \n\nWelcome!")
                     dispatch(push('/login'))
-                })
-        } catch (error) {
-            console.log(error.message)
-        }
+                }). catch ((error)=> {
+                     console.log(error.response)
+                     alert(error.response.data.message)
+        })
     }
 }
 
 export const signIn = (email, password) => {
     return async (dispatch) => {
-        try {
             taskstechApi.post(`/tokens`, {},
                 {
                     auth: {
@@ -216,10 +215,10 @@ export const signIn = (email, password) => {
                     }))
                     getTraderData()
                     dispatch(push('/list/inventory'))
-                })
-        } catch (error) {
-            console.log(error.message)
-        }
+                }). catch ((error)=> {
+                    console.log(error.response)
+                    alert("Email and Password does not match. \n\nPlease try again.")
+        })
     }
 }
 

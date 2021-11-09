@@ -124,6 +124,12 @@ export default function TradieSignUp() {
             )
         );
     };
+
+    const onKeyEnter = (event)=>{
+        if(event.key === "Enter"){
+            handleSubmit();
+        }
+    }
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -202,6 +208,23 @@ export default function TradieSignUp() {
                                     onChange={inputEmail}
                                 />
                             </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={12}
+                                className={classes.description}
+                            >
+                                <TextField
+                                    autoComplete="text"
+                                    variant="outlined"
+                                    fullWidth
+                                    id="Description"
+                                    label="description"
+                                    name="description"
+                                    value={description}
+                                    onChange={inputDescription}
+                                />
+                            </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     type="password"
@@ -227,26 +250,12 @@ export default function TradieSignUp() {
                                     name="confirmpassword"
                                     value={confirmPassword}
                                     onChange={inputConfirmPassword}
+                                    onKeyPress={(event)=>onKeyEnter(event)}
+
                                 />
                             </Grid>
 
-                            <Grid
-                                item
-                                xs={12}
-                                sm={12}
-                                className={classes.description}
-                            >
-                                <TextField
-                                    autoComplete="text"
-                                    variant="outlined"
-                                    fullWidth
-                                    id="Description"
-                                    label="description"
-                                    name="description"
-                                    value={description}
-                                    onChange={inputDescription}
-                                />
-                            </Grid>
+                            
                         </Grid>
                         <Grid container className={classes.buttonContainer}>
                             <Grid item xs={4}>

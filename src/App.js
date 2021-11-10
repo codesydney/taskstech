@@ -13,28 +13,19 @@ import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import InventoryDetail from "./components/inventory/InventoryDetail";
 
-
-import * as Pages from "../src/pages/Pages"
+import * as Pages from "../src/pages/Pages";
 
 function App() {
-  return (
-    <div className='App'>
-      <Header />
-      <RightSideBar />
-      <Switch>
-        <Route exact path='/login' component={Pages.Login} />
-        <Route exact path='/view/jobs' component={ViewJobs} />
-        <Route exact path='/create/job' component={CreateJob} />
-        <Route exact path='/signup' component={Pages.SignUp} />
-        <Route exact path='/create/customer' component={Pages.CustomerRegistration} />
-        <Route exact path='/view/customers' component={Pages.CustomerListPage} />
-        <Route exact={true} path="/detail/customer/:id" component={Pages.CustomerProfileUpdate} />
-
-
-
+    return (
+        <div className="App">
+            <Header />
+            <RightSideBar />
+            <Switch>
+                <Route exact path="/login" component={Pages.Login} />
+                <Route exact path="/signup" component={Pages.SignUp} />
 
                 <Auth>
-                    <Route exact path="/create/job" component={CreateJob} />
+                    {/* Inventory Routes */}
                     <Route
                         exact={true}
                         path="/create/inventory"
@@ -50,12 +41,47 @@ function App() {
                         path="/detail/inventory/:id"
                         component={InventoryDetail}
                     />
+                    {/* Trader Routes */}
                     <Route
                         exact
                         path="/tradie/profile"
                         component={TradieProfileForm}
                     />
-                    <Route exact path="/view/jobs/diary" component={JobDiary} />
+                    {/* Customer Routes */}
+                    <Route
+                        exact
+                        path="/create/customer"
+                        component={Pages.CustomerRegistration}
+                    />
+                    <Route
+                        exact
+                        path="/view/customers"
+                        component={Pages.CustomerListPage}
+                    />
+                    <Route
+                        exact={true}
+                        path="/detail/customer/:id"
+                        component={Pages.CustomerProfileUpdate}
+                    />
+                    {/* Job Routes */}
+                    <Route 
+                        exact path="/view/jobs" 
+                        component={ViewJobs} 
+                     />
+                    <Route 
+                        exact path="/create/job" 
+                        component={CreateJob} 
+                     />
+                    <Route 
+                        exact path="/view/jobs/diary" 
+                        component={JobDiary} 
+                    />
+                    <Route 
+                        exact path="/create/job" 
+                        component={CreateJob} 
+                    />
+
+
                 </Auth>
             </Switch>
         </div>

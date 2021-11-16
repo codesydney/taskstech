@@ -88,6 +88,12 @@ const Login = () => {
         dispatch(signIn(email, password));
     };
 
+    const onKeyEnter = (event)=>{
+        if(event.key === "Enter"){
+            handleSubmit();
+        }
+    }
+
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -138,6 +144,7 @@ const Login = () => {
                                 value={password}
                                 onChange={inputPassword}
                                 autoComplete="password"
+                                onKeyPress={(event)=>onKeyEnter(event)}
                             />
                             <div className={classes.links}>
                                 <Link href="#" variant="body2">

@@ -181,6 +181,7 @@ export default function InventoryDetail() {
                                     label="Email"
                                     value={email}
                                     onChange={inputEmail}
+                                    disabled={true}
                                 />
                             </Grid>
 

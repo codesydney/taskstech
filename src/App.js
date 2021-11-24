@@ -76,12 +76,6 @@ function App() {
                         exact path="/view/jobs/diary" 
                         component={JobDiary} 
                     />
-                    <Route 
-                        exact path="/create/job" 
-                        component={CreateJob} 
-                    />
-
-
                 </Auth>
             </Switch>
         </div>

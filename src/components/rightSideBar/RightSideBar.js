@@ -108,7 +108,6 @@ function RightSideBar({history}) {
                 {rightSideData.map(({ text, icon, onClick }) => (
                     <ListItem button key={text} onClick={onClick}>
                         {icon && <ListItemIcon>{icon}</ListItemIcon>}
-
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -121,7 +120,9 @@ function RightSideBar({history}) {
         <div>
             {["MENU"].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>
+                    <Button  
+                        style={{color: "#4e4af2", fontFamily: "Poppins", fontSize: "25px", fontWeight: "500"}} 
+                        onClick={toggleDrawer(anchor, true)}>
                         {anchor}
                     </Button>
                     <SwipeableDrawer

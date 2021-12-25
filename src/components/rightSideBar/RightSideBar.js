@@ -119,7 +119,7 @@ function RightSideBar({history}) {
 
     return (
         <div>
-            {["left", "right"].map((anchor) => (
+            {["MENU"].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}>
                         {anchor}

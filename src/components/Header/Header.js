@@ -14,10 +14,10 @@ const useStyles = makeStyles(() => ({
 const Header = () => {
   const classes = useStyles();
   return (
-    <AppBar position='static'>
+    <AppBar position='static' style={{backgroundColor: '#4e4af2', color: "#F0F0F0", fontFamily: "Poppins", fontSize: "30px", fontWeight: "500" }}>
       <Toolbar>
         <Typography className={classes.typographyStyles}>
-          <p style={{color: "#F0F0F0", fontFamily: "Poppins", fontSize: "30px", fontWeight: "500" }}>
+          <p style={{backgroundColor: '#4e4af2', color: "#F0F0F0", fontFamily: "Poppins", fontSize: "30px", fontWeight: "500" }}>
             TASKSTECH
           </p>
         </Typography>

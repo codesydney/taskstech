@@ -56,32 +56,32 @@ function RightSideBar({history}) {
     // Information for the right side navigation ,The list of the items on the sidebar
     const rightSideData = [
         {
-            text: "Create New Job",
+            text: "New Job",
             icon: <CreateIcon />,
             onClick: () => history.push("/create/job"),
         },
         {
-            text: "View All Jobs",
+            text: "All Jobs",
             icon: <SelectAllIcon />,
             onClick: () => history.push("/view/jobs"),
         },
         {
-            text: "Create New Customer",
+            text: "New Customer",
             icon: <PersonAddIcon />,
             onClick: () => history.push("/create/customer"),
         },
         {
-            text: "View All Customers",
+            text: "All Customers",
             icon: <PeopleAltIcon />,
             onClick: () => history.push("/view/customers"),
         },
         {
-            text: "Create New Inventory",
+            text: "New Inventory",
             icon: <PostAddIcon />,
             onClick: () => history.push("/create/inventory"),
         },
         {
-            text: "Viewn All Inventory",
+            text: "All Inventories",
             icon: <WorkIcon />,
             onClick: () => history.push("/list/inventory"),
         },

@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import SetSerialNoArea from "./setSerialArea";
+//import SetSerialNoArea from "./setSerialArea";
 import { updateInventory, deleteInventory } from "../../actions/action";
 import taskstechApi from '../../api/taskstechApi';
 import { useDispatch } from "react-redux";
@@ -217,7 +217,6 @@ export default function InventoryDetail() {
                                     value={quantity}
                                     type="number"
                                     onChange={inputQuantity}
-                                    disabled="true"
                                 />
                             </Grid>
                             {/* <Grid item xs={2} sm={2}>
@@ -283,6 +282,8 @@ export default function InventoryDetail() {
                                     multiline={true}
                                 />
                             </Grid>
+
+                            {/*               
                             <Grid
                                 item
                                 xs={12}
@@ -290,7 +291,9 @@ export default function InventoryDetail() {
                             >
                               <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} iid={iid} />
                                 
-                            </Grid>
+                            </Grid> 
+                            */}
+
                         </Grid>
                         <Grid container className={classes.buttonContainer}>
                             <Grid item xs={4}>

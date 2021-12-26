@@ -319,7 +319,7 @@ const CreateJob = () => {
                             name='tradesperson_id'
                             required
                             id="outlined-error-helper-text"
-                            label="Tradesperson Id"
+                            label="Search Assigned Tradesperson"
                             variant="outlined"
                             onChange={handleUserInput}
                         />

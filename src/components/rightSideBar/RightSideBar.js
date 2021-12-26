@@ -61,7 +61,7 @@ function RightSideBar({history}) {
             onClick: () => history.push("/create/job"),
         },
         {
-            text: "All Jobs",
+            text: "Jobs",
             icon: <SelectAllIcon />,
             onClick: () => history.push("/view/jobs"),
         },
@@ -71,7 +71,7 @@ function RightSideBar({history}) {
             onClick: () => history.push("/create/customer"),
         },
         {
-            text: "All Customers",
+            text: "Customers",
             icon: <PeopleAltIcon />,
             onClick: () => history.push("/view/customers"),
         },
@@ -81,7 +81,7 @@ function RightSideBar({history}) {
             onClick: () => history.push("/create/inventory"),
         },
         {
-            text: "All Inventories",
+            text: "Inventories",
             icon: <WorkIcon />,
             onClick: () => history.push("/list/inventory"),
         },

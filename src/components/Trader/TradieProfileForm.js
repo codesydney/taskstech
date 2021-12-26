@@ -111,7 +111,9 @@ const useStyles = makeStyles((theme) => ({
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={2} md={2}>
+        {/*
             Left Side Bar
+        */}
         </Grid>
         <Grid item xs={12} sm={8} md={8} component={Paper} elevation={6} square>
             <div className={classes.header}>
@@ -239,7 +241,9 @@ const useStyles = makeStyles((theme) => ({
           </div>
         </Grid>
         <Grid item xs={false} sm={2} md={2}>
+        {/*
             right sidebar
+        */}
         </Grid>        
       </Grid>
     );

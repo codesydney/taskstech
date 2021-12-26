@@ -69,7 +69,11 @@ export default function InventoryList() {
     }, []);
 
     return (
-        <div style={{ height: 400, width: "90%", margin:"auto", maxWidth:600}}>
+      <>
+        <p style={{color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px"}}>
+          Inventories
+        </p>      
+        <div style={{ height: 600, width: "90%", margin:"auto", maxWidth:800}}>
             <DataGrid
                 rows={items}
                 columns={columns}
@@ -79,5 +83,6 @@ export default function InventoryList() {
                 // disableSelectionOnClick
             />
         </div>
+      </>  
     );
 }

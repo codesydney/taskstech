@@ -214,7 +214,7 @@ export const signIn = (email, password) => {
                         id: res.data.user_id,
                     }))
                     getTraderData()
-                    dispatch(push('/list/inventory'))
+                    dispatch(push('/view/jobs'))
                 }). catch ((error)=> {
                     console.log(error.response)
                     alert("Email and Password does not match. \n\nPlease try again.")

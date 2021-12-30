@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
   },
   serialNoField:{
       display:"none",
-      color: "red",
   },
   form: {
       width: "100%", // Fix IE 11 issue.

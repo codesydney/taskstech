@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-//import SetSerialNoArea from "./setSerialArea";
+import SetSerialNoArea from "./setSerialArea";
 import { updateInventory, deleteInventory } from "../../actions/action";
 import taskstechApi from '../../api/taskstechApi';
 import { useDispatch } from "react-redux";
@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "row-reverse",
       paddingTop: "5vh",
   },
-
+  serialNoField:{
+      display:"none",
+      color: "red",
+  },
   form: {
       width: "100%", // Fix IE 11 issue.
       marginTop: theme.spacing(5),
@@ -105,10 +108,10 @@ export default function InventoryDetail() {
     },
     [setModel_no]
     );
-    // useEffect(()=>{
-    //     console.log(serialNos)
-    //     setQuantity(serialNos.length)
-    // },[serialNos])
+    useEffect(()=>{
+        console.log(serialNos)
+        setQuantity(serialNos.length)
+    },[serialNos])
 
     
     useEffect(async () => {
@@ -283,16 +286,17 @@ export default function InventoryDetail() {
                                 />
                             </Grid>
 
-                            {/*               
+                                          
                             <Grid
                                 item
                                 xs={12}
                                 sm={12}
+                                className={classes.serialNoField}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} iid={iid} />
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} iid={iid}/>
                                 
                             </Grid> 
-                            */}
+                           
 
                         </Grid>
                         <Grid container className={classes.buttonContainer}>

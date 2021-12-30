@@ -13,15 +13,19 @@ import { push } from 'connected-react-router';
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-      height: "100vh",
-  },
+//   root: {
+//       height: "100vh",
+//   },
   header: {
       display: "flex",
       flexDirection: "column",
       alignItems: "start",
       marginTop: "2rem",
       marginLeft: "2rem",
+  },
+  inventoryUpdateForm:{
+        maxWidth:"800px",
+        margin:"0 auto"
   },
   paper: {
       margin: theme.spacing(2, 2),
@@ -32,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
       display: "flex",
       flexDirection: "row-reverse",
-      paddingTop: "5vh",
+      paddingTop: "3vh",
   },
   serialNoField:{
       display:"none",
@@ -42,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(5),
   },
   submit: {
-      margin: theme.spacing(3, 2, 3, 6),
+      margin: theme.spacing(3, 2, 3, 4),
   },
 }));
 
@@ -164,16 +168,17 @@ export default function InventoryDetail() {
   return (
     <Grid container component="main" className={classes.root}>
             <CssBaseline />
-            <Grid item xs={false} sm={2} md={2}>
-            </Grid>
+            {/* <Grid item xs={false} sm={false} md={2}>
+            </Grid> */}
             <Grid
                 item
                 xs={12}
                 sm={12}
-                md={8}
+                md={10}
                 component={Paper}
                 elevation={6}
                 square={false}
+                className={classes.inventoryUpdateForm}
             >
                 <div className={classes.header}>
                     <h3>Inventory Details</h3>
@@ -328,8 +333,8 @@ export default function InventoryDetail() {
                     </div>
                 </div>
             </Grid>
-            <Grid item xs={false} sm={2} md={2}>
-            </Grid>
+            {/* <Grid item xs={false} sm={false} md={2}>
+            </Grid> */}
         </Grid>
   );
 }

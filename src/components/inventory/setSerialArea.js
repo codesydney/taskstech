@@ -20,7 +20,8 @@ const SetSerialNoArea = (props) => {
     const classes = useStyles();
     const [index, setIndex] = useState(0)
     const [id, setId] = useState("")
-     const [serialNo, setSerialNo] = useState("");
+    const [serialNo, setSerialNo] = useState("");
+    // const [prevSerialNos, setPrevSerialNos] = useState([])
 
 
 
@@ -61,20 +62,30 @@ const SetSerialNoArea = (props) => {
 
     
     useEffect(()=>{
-        props.setSerialNos([])
-        setIndex(0)
-        handleSerialNo();
+        if(props.quantity > props.serialNos.length){
+            for(let i = props.serialNos.length; i < props.quantity; i ++){
+                addSerialNo(i+1)
+            }
+        }
+        else if(props.quantity !="" && props.quantity < props.serialNos.length){
+            console.log("quantity is smaller")
+            let tempSerialNos = []
+            for(let i = 0; i < props.quantity; i++){
+                tempSerialNos.push(props.serialNos[i])
+            }
+            props.setSerialNos(tempSerialNos)
+        }
     },[props.quantity])
 
 
     
 
 
-    const handleSerialNo = () => {
-        for (let i=0; i < props.quantity; i++){
-            addSerialNo((i+1).toString());
-        }
-    }
+    // const handleSerialNo = () => {
+    //     for (let i=0; i < props.quantity; i++){
+    //         addSerialNo((i+1).toString());
+    //     }
+    // }
     return (
         <div>
             <TableContainer>

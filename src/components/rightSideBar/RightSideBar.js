@@ -118,12 +118,12 @@ function RightSideBar({history}) {
 
     return (
         <div>
-            {["MENU"].map((anchor) => (
+            {["left"].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Button  
                         style={{color: "#4e4af2", fontFamily: "Poppins", fontSize: "25px", fontWeight: "500"}} 
                         onClick={toggleDrawer(anchor, true)}>
-                        {anchor}
+                        MENU
                     </Button>
                     <SwipeableDrawer
                         anchor={anchor}

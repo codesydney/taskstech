@@ -32,7 +32,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "row-reverse",
       paddingTop: "5vh",
   },
-
+  serialNoField:{
+      display:"none"
+  },
   form: {
       width: "100%", // Fix IE 11 issue.
       marginTop: theme.spacing(5),
@@ -263,7 +265,7 @@ export default function NewInventory() {
                                 item
                                 xs={12}
                                 sm={12}
-                                // className={classes.notes}
+                                className={classes.serialNoField}
                             >
                               <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} setQuantity={setQuantity}/>
                                 

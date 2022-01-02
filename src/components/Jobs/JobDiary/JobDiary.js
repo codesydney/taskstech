@@ -40,9 +40,6 @@ export default function JobDiary({ rows }) {
     setOpen(false);
   };
 
-  // remove 
-  //const addDiary = React.createElement(Button, {variant:"outlined", onClick: handleClickOpen}, AddCircleOutlineIcon, );
-  // remove 
   return (
     <Container maxWidth="lg" className={classes.root}>
       <div >

@@ -52,7 +52,6 @@ export default function FormDialog({ open, handleClose,handleReload, jobId = '' 
             onChange={(e) => setDescription(e.target.value)}
           />
           <div id="img-upload">
-            
             <div id='preview'>
               { preview !== '' ? <img src={`${preview}`} width='100vw' height='100vh'/> : null}
             </div>

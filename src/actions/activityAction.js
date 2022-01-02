@@ -47,7 +47,6 @@ export const getActivity = (loading = true) => async dispatch => {
                         loading: false
                     });
                 }
-                /* */
             })
     } catch (error) {
         console.log(error.message)
@@ -63,7 +62,7 @@ export const addActivity = (activity) => async dispatch => {
         "upload_photo": activity.image,
         "job_id": activity.jobId
     };
-    console.log(job)
+    
     try {
         taskstechApi.post(`/activity`, job, config)
             .then(res => {

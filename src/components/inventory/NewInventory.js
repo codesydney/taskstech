@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
       alignItems: "center",
   },
+  inventoryCreationForm:{
+    maxWidth:"800px",
+    margin:"0 auto"
+},
   buttonContainer: {
       display: "flex",
       flexDirection: "row-reverse",
@@ -125,16 +129,15 @@ export default function NewInventory() {
   return (
     <Grid container component="main" className={classes.root}>
             <CssBaseline />
-            <Grid item xs={false} sm={2} md={2}>
-            </Grid>
             <Grid
                 item
                 xs={12}
                 sm={12}
-                md={8}
+                md={10}
                 component={Paper}
                 elevation={6}
                 square={false}
+                className={classes.inventoryCreationForm}
             >
                 <div className={classes.header}>
                     <h3>Create New Inventory</h3>
@@ -146,20 +149,6 @@ export default function NewInventory() {
                         className={classes.form}
                     >
                         <Grid container spacing={3}>
-                            {/* <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="name"
-                                    name="inventoryId"
-                                    variant="outlined"
-                                    fullWidth
-                                    id="inventoryId"
-                                    label="Inventory ID"
-                                    autoFocus
-                                    // value={}
-                                    // onChange={}
-                                    disabled={true}
-                                />
-                            </Grid> */}
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     variant="outlined"
@@ -297,8 +286,6 @@ export default function NewInventory() {
                         </Grid>
                     </div>
                 </div>
-            </Grid>
-            <Grid item xs={false} sm={2} md={2}>
             </Grid>
         </Grid>
   );

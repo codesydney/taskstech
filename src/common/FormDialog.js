@@ -36,7 +36,7 @@ export default function FormDialog({ open, handleClose,handleReload, jobId = '' 
   return (
     <div>
       <Dialog open={open} onClose={handleClose} >
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Upload Photo</DialogTitle>
         <DialogContent>
           <DialogContentText>
 

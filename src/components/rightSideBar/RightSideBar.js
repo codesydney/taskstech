@@ -56,32 +56,32 @@ function RightSideBar({history}) {
     // Information for the right side navigation ,The list of the items on the sidebar
     const rightSideData = [
         {
-            text: "Create New Job",
+            text: "New Job",
             icon: <CreateIcon />,
             onClick: () => history.push("/create/job"),
         },
         {
-            text: "View All Jobs",
+            text: "Jobs",
             icon: <SelectAllIcon />,
             onClick: () => history.push("/view/jobs"),
         },
         {
-            text: "Create New Customer",
+            text: "New Customer",
             icon: <PersonAddIcon />,
             onClick: () => history.push("/create/customer"),
         },
         {
-            text: "View All Customers",
+            text: "Customers",
             icon: <PeopleAltIcon />,
             onClick: () => history.push("/view/customers"),
         },
         {
-            text: "Create New Inventory",
+            text: "New Inventory",
             icon: <PostAddIcon />,
             onClick: () => history.push("/create/inventory"),
         },
         {
-            text: "Viewn All Inventory",
+            text: "Inventories",
             icon: <WorkIcon />,
             onClick: () => history.push("/list/inventory"),
         },
@@ -108,7 +108,6 @@ function RightSideBar({history}) {
                 {rightSideData.map(({ text, icon, onClick }) => (
                     <ListItem button key={text} onClick={onClick}>
                         {icon && <ListItemIcon>{icon}</ListItemIcon>}
-
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -119,10 +118,12 @@ function RightSideBar({history}) {
 
     return (
         <div>
-            {["left", "right"].map((anchor) => (
+            {["left"].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>
-                        {anchor}
+                    <Button  
+                        style={{color: "#4e4af2", fontFamily: "Poppins", fontSize: "25px", fontWeight: "500"}} 
+                        onClick={toggleDrawer(anchor, true)}>
+                        MENU
                     </Button>
                     <SwipeableDrawer
                         anchor={anchor}

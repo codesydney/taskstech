@@ -49,7 +49,7 @@ export default function MultipleSelect({
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>Search Customers</em>;
+              return <em>Search Customer Name</em>;
             }
             
             return selected;

@@ -118,8 +118,10 @@ export default function CustomerList() {
 
     return (
         <>
-        <h2>Customer List</h2>
-        <div style={{ height: 400, width: "90%", margin:"auto", maxWidth:600}}>
+        <p style={{color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px"}}>
+          Customers
+        </p>
+        <div style={{ height: 600, width: "90%", margin:"auto", maxWidth:800}}>
             <DataGrid
                 components={{ Toolbar: QuickSearchToolbar }}
                 rows={state}

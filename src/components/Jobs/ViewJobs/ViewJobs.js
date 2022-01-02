@@ -116,11 +116,11 @@ export default function FullWidthTabs() {
                             variant="fullWidth"
                             aria-label="full width tabs example"
                         >
-                            <Tab label="All Jobs" {...a11yProps(0)} />
-                            <Tab label="Completed Jobs" {...a11yProps(1)} />
-                            <Tab label="Active Jobs" {...a11yProps(2)} />
+                            <Tab label="All" {...a11yProps(0)} />
+                            <Tab label="Completed" {...a11yProps(1)} />
+                            <Tab label="Active" {...a11yProps(2)} />
                         </Tabs>
-                    </AppBar>
+                    </AppBar>                    
                     <SwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={value}
@@ -129,21 +129,21 @@ export default function FullWidthTabs() {
                         <TabPanel value={value} index={0} dir={theme.direction} >
                             <DataTable 
                                 jobs={job} 
-                                title='All Jobs' 
+                                title='All' 
                                 parentCallback={callback} 
                             />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <DataTable
                                 jobs={completedJobs}
-                                title='Completed Jobs'
+                                title='Completed'
                                 parentCallback={callback} 
                             /> 
                         </TabPanel>
                         <TabPanel value={value} index={2} dir={theme.direction}>
                             <DataTable
                                 jobs={activeJobs}
-                                title='Active Jobs'
+                                title='Active'
                                 parentCallback={callback} 
                             />  
                         </TabPanel>
@@ -152,10 +152,15 @@ export default function FullWidthTabs() {
             );
     };
 
-    return (
-        <Container maxWidth="lg" className={classes.root}>
-            {renderDataTable()}
-            <SimpleBackdrop loading={job.loading} />
-        </Container>
+    return (        
+        <>
+            <p style={{color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px"}}>
+            Jobs
+            </p>             
+            <Container maxWidth="lg" className={classes.root}>
+                {renderDataTable()}
+                <SimpleBackdrop loading={job.loading} />
+            </Container>
+        </>            
     );
 }

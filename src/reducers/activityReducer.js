@@ -29,6 +29,17 @@ function activityReducer(state = initialState, action) {
                 payload: action.payload,
                 loading: false
             };
+        case actions.ADD_ACTIVITY_STARTED:
+            return {
+                ...state,
+                loading: true
+            };
+        case actions.ADD_ACTIVITY:
+            return {
+                ...state,
+                payload: action.payload,
+                loading: false
+            };
         default:
             return state;
     }

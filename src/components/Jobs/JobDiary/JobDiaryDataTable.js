@@ -26,14 +26,19 @@ const diaryColumns = [
   }, 
 ];
 
-export default function JobDiaryDataTable({ diary }) {
+
+
+export default function JobDiaryDataTable({ diary, handleReload, reload }) {
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
   const id = diary === undefined ? 0 : diary.id; // fixes the undefined issue temporarilly
 
   useEffect(() => {
     dispatch(getActivities(true, id));
-  }, []);
+
+    if(reload) handleReload(false);
+    
+  }, [reload]);
 
   return (
     <div style={{ height: 400, width: '100%' }}>
@@ -43,6 +48,7 @@ export default function JobDiaryDataTable({ diary }) {
         pageSize={5}
         checkboxSelection
         disableSelectionOnClick
+        
       />
     </div>
   );

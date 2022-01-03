@@ -1,5 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
+import { push } from 'connected-react-router';
 
 export const getActivities = (loading = true, id) => async dispatch => {
     const token = localStorage.getItem('token');
@@ -9,9 +10,8 @@ export const getActivities = (loading = true, id) => async dispatch => {
     };
 
     try {
-        taskstechApi.post(`/get_all_activity`,job , config)
+        taskstechApi.post(`/get_all_activity`, job, config)
             .then(res => {
-                console.log(res)
                 dispatch({
                     type: actions.GET_ACTIVITIES_STARTED,
                     loading: loading
@@ -23,7 +23,6 @@ export const getActivities = (loading = true, id) => async dispatch => {
                         loading: false
                     });
                 }
-                /**/
             })
     } catch (error) {
         console.log(error.message)
@@ -48,13 +47,35 @@ export const getActivity = (loading = true) => async dispatch => {
                         loading: false
                     });
                 }
-                /* */
+            })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const addActivity = (activity) => async dispatch => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    const job = {
+        "description": activity.description,
+        "upload_photo": activity.image,
+        "job_id": activity.jobId
+    };
+    
+    try {
+        taskstechApi.post(`/activity`, job, config)
+            .then(res => {
+                dispatch({
+                    type: actions.ADD_ACTIVITY_STARTED,
+                    loading: true
+                });
+                if (res.data) {
+                    dispatch(push('/view/jobs'));
+                }
             })
     } catch (error) {
         console.log(error.message)
     }
 
-
 }
-
-

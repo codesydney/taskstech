@@ -1,0 +1,19 @@
+div#add-section {
+    margin-bottom: 2%;
+}
+
+div#add-content {
+    display: flex;
+    justify-content: end;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    padding: 5px 15px;
+    min-width: 10px;
+    height: 53px;
+    background-color: orange;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}

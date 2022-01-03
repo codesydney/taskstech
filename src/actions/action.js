@@ -123,7 +123,7 @@ export const createInventory = (inventoryData) => {
             })
                 .then(res => {
                     console.log(res)
-                    alert ("Created Item Successfully")
+                    alert ("Item created successfully!")
                     dispatch(push('/list/inventory'))
                 })
         } catch (error) {
@@ -141,7 +141,7 @@ export const updateInventory = (inventoryData, iid) => {
             })
                 .then(res => {
                     console.log(res)
-                    alert ("Update Item Successfully!")
+                    alert ("Item updated successfully!")
                     dispatch(push('/list/inventory'))
                 })
         } catch (error) {

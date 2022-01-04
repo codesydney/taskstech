@@ -41,13 +41,15 @@ export default function JobDiary({ rows }) {
 
   return (
     <Container maxWidth="lg" className={classes.root}>
-      <div >
-        <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
-          Job Diary
-        </p>
+      <div>
+
 
         <div id='add-section'>
+
           <div id='add-content'>
+            <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
+              Job Diary
+            </p>
             <Button variant="outlined" onClick={handleClickOpen}>
               <NoteAddIcon />
             </Button>
@@ -57,6 +59,7 @@ export default function JobDiary({ rows }) {
         <JobDiaryDataTable reload={reload} handleReload={handleReload} diary={rows} />
       </div>
       {open === true ? <FormDialog open={open} jobId={rows?.id} handleClose={handleClose} handleReload={handleReload} /> : null}
+
     </Container>
   );
 }

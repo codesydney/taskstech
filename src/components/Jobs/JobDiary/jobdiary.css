@@ -4,7 +4,7 @@ div#add-section {
 
 div#add-content {
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
 
 button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
@@ -16,4 +16,10 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
     border-radius: 50px;
     border: none;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    top: 1rem;
+    left: 2rem;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined:hover {
+    background-color: goldenrod;
 }

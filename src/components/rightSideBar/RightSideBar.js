@@ -63,7 +63,10 @@ function RightSideBar({history}) {
         {
             text: "Jobs",
             icon: <SelectAllIcon />,
-            onClick: () => history.push("/view/jobs"),
+            onClick: () => {
+                history.push("/view/jobs"),
+                window.location.reload()
+            }
         },
         {
             text: "New Customer",

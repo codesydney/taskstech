@@ -72,7 +72,7 @@ export default function FullWidthTabs() {
         setParams(cellValues)
         history.push("/view/jobs/diary");
     };
-    
+
     const completedJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
@@ -86,7 +86,7 @@ export default function FullWidthTabs() {
         })
     };
 
-    
+
     useEffect(() => {
         dispatch(getAllJobs(job?.loading));
     }, []);
@@ -107,6 +107,9 @@ export default function FullWidthTabs() {
             )
             : (
                 <React.Fragment>
+                    <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
+                        Jobs
+                    </p>
                     <AppBar position="static" color="default">
                         <Tabs
                             value={value}
@@ -120,47 +123,44 @@ export default function FullWidthTabs() {
                             <Tab label="Completed" {...a11yProps(1)} />
                             <Tab label="Active" {...a11yProps(2)} />
                         </Tabs>
-                    </AppBar>                    
+                    </AppBar>
                     <SwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={value}
                         onChangeIndex={handleChangeIndex}
                     >
                         <TabPanel value={value} index={0} dir={theme.direction} >
-                            <DataTable 
-                                jobs={job} 
-                                title='All' 
-                                parentCallback={callback} 
+                            <DataTable
+                                jobs={job}
+                                title='All'
+                                parentCallback={callback}
                             />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <DataTable
                                 jobs={completedJobs}
                                 title='Completed'
-                                parentCallback={callback} 
-                            /> 
+                                parentCallback={callback}
+                            />
                         </TabPanel>
                         <TabPanel value={value} index={2} dir={theme.direction}>
                             <DataTable
                                 jobs={activeJobs}
                                 title='Active'
-                                parentCallback={callback} 
-                            />  
+                                parentCallback={callback}
+                            />
                         </TabPanel>
                     </SwipeableViews>
                 </React.Fragment>
             );
     };
 
-    return (        
+    return (
         <>
-            <p style={{color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px"}}>
-            Jobs
-            </p>             
             <Container maxWidth="lg" className={classes.root}>
                 {renderDataTable()}
                 <SimpleBackdrop loading={job.loading} />
             </Container>
-        </>            
+        </>
     );
 }

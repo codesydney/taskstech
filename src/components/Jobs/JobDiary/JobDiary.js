@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from "@material-ui/core/Typography";
 import Container from '@material-ui/core/Container';
 import Button from "@material-ui/core/Button";
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
@@ -43,9 +42,9 @@ export default function JobDiary({ rows }) {
   return (
     <Container maxWidth="lg" className={classes.root}>
       <div >
-        <Typography component="h1" variant="h5" className={classes.diary}>
+        <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
           Job Diary
-        </Typography>
+        </p>
 
         <div id='add-section'>
           <div id='add-content'>

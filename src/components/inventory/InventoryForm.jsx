@@ -157,7 +157,7 @@ export default function InventoryForm(props) {
   
     const handleDelete = () => {
         dispatch(deleteInventory(props.iid));
-        alert ("Delete Item Successfully!");
+        alert ("Item deleted successfully!");
         dispatch(push('/list/inventory'))
     }
 

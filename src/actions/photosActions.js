@@ -9,7 +9,7 @@ export const addPhoto = (photoData) => async dispatch => {
         })
             .then(res => {
                 console.log(res)
-                alert("Photo successfully uploaded.")
+                alert("Photo uploaded successfully!")
                 dispatch(push('/jobs/diary'))
             })
     } catch (error) {

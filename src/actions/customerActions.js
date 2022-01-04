@@ -44,7 +44,7 @@ export const customerRegistration = (firstname, lastname, email,  address, phone
         console.log(customerRegistrationData)
             taskstechApi.post('users/customer', customerRegistrationData)
                 .then(() => {
-                    alert("Customer has been registered successfully.")
+                    alert("Customer registered successfully!")
                     dispatch(push('/view/customers'))
                 }). catch ((error) => {
                     alert(error.response.data.message)

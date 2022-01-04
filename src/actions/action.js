@@ -158,7 +158,7 @@ export const deleteInventory = (iid) => {
             })
                 .then(res => {
                     console.log(res)
-                    // alert ("Delete Item Successfully!");
+                    // alert ("Item deleted successfully!");
                     // dispatch(push('/inventory/list'))
 
                 })

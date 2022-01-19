@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
+//import SwipeableViews from 'react-swipeable-views';
 import Container from '@material-ui/core/Container';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -96,10 +96,12 @@ export default function FullWidthTabs() {
     };
 
 
+    /*
     const handleChangeIndex = (index) => {
         setValue(index);
     };
 
+    */
     const renderDataTable = () => {
         return isClicked === true
             ? (
@@ -124,12 +126,7 @@ export default function FullWidthTabs() {
                             <Tab label="Active" {...a11yProps(2)} />
                         </Tabs>
                     </AppBar>
-                    <SwipeableViews
-                        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                        index={value}
-                        onChangeIndex={handleChangeIndex}
-                    >
-                        <TabPanel value={value} index={0} dir={theme.direction} >
+                    <TabPanel value={value} index={0} dir={theme.direction} >
                             <DataTable
                                 jobs={job}
                                 title='All'
@@ -150,7 +147,6 @@ export default function FullWidthTabs() {
                                 parentCallback={callback}
                             />
                         </TabPanel>
-                    </SwipeableViews>
                 </React.Fragment>
             );
     };
@@ -159,6 +155,7 @@ export default function FullWidthTabs() {
         <>
             <Container maxWidth="lg" className={classes.root}>
                 {renderDataTable()}
+                
                 <SimpleBackdrop loading={job.loading} />
             </Container>
         </>

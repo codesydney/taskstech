@@ -2,7 +2,8 @@ import * as actions from '../actions/actionTypes';
 
 const initialState = {
     loading: false,
-    payload: []
+    payload: [],
+    showModal: false
 };
 
 function jobsReducer(state = initialState, action) {
@@ -10,13 +11,15 @@ function jobsReducer(state = initialState, action) {
         case actions.CREATE_JOB_STARTED:
             return {
                 ...state,
-                loading: true
+                payload: action.payload,
+                loading: true,
+                showModal: false
             };
-        case actions.CREATE_JOB:
+        case actions.CREATE_JOB_SUCCESS:
             return {
                 ...state,
-                payload: action.payload,
-                loading: false
+                loading: false,
+                showModal: true
             };
         case actions.GET_ALL_JOBS_STARTED:
             return {

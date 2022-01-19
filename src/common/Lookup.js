@@ -31,11 +31,11 @@ export default function MultipleSelect({
   customerName,
   handleDropdownChange,
 }) {
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState([]); //
   const theme = useTheme();
 
   useEffect(() => {
-    setCustomers(data);
+    setCustomers(data);  // should be generic
   });
 
   return (
@@ -44,12 +44,12 @@ export default function MultipleSelect({
         <Select
           displayEmpty
           value={customerName}
-          name='customer_id'
+          name='customer_id' // should be generic
           onChange={handleDropdownChange}
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>Search Customer Name</em>;
+              return <em>Search Customer Name</em>; // Should be generic
             }
             
             return selected;
@@ -58,7 +58,7 @@ export default function MultipleSelect({
           MenuProps={MenuProps}
 
         >
-          {customers.map((value, key) => (
+          {customers.map((value, key) => ( // should be generic TBD
             <MenuItem
               key={key}
               value={`${value.first_name} ${value.last_name}`}

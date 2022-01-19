@@ -6,6 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import AlertModal from '../../../common/AlertModal';
 
 import Lookup from '../../../common/Lookup';
 import { useDispatch, useSelector } from "react-redux";
@@ -28,13 +29,11 @@ const Item = styled(Paper)(({ theme }) => ({
 const CreateJob = () => {
     const [jobName, setJobName] = useState('');
     const [description, setDescription] = useState('');
-    const [tradespersonId, setTradespersonId] = useState('');
 
     const [jobNameIsValid, setJobNameIsValid] = useState(false);
     const [descriptionIsValid, setDescriptionIsValid] = useState(false);
-    const [tradespersonIdIsValid, setTradespersonIdIsValid] = useState(false);
     const [customerNameIsValid, setCustomerNameIsValid] = useState(false);
-
+    
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
         description: { helperText: '', fieldError: false },
@@ -47,11 +46,13 @@ const CreateJob = () => {
     const [jobStatus, setJobStatus] = useState('Not yet started');
     const [jobStatusId, setJobStatusId] = useState(1);
     const status = useSelector((state) => state.status.job);
-    const { customers } = useSelector((state) => state);
+    const { customers, job } = useSelector((state) => state);
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
 
     const dispatch = useDispatch();
+
+    useSelector((state) => console.log(state));
 
     useEffect(() => {
         dispatch(getStatus());
@@ -62,7 +63,6 @@ const CreateJob = () => {
         name: jobName,
         description: description,
         job_status_id: jobStatusId,
-        tradesperson_id: tradespersonId,
         customer_id: customerId
     }
 
@@ -101,25 +101,11 @@ const CreateJob = () => {
                     break;
             }
         }
-        if (name === "tradesperson_id") {
-            setTradespersonId(value);
-
-            switch (fieldError) {
-                case false:
-                    setTradespersonIdIsValid(true);
-                    setErrors({ [name]: { helperText, fieldError } });
-                    break;
-                case true:
-                    setTradespersonIdIsValid(false);
-                    setErrors({ [name]: { helperText, fieldError } });
-                    break;
-                default:
-                    break;
-            }
-        }
-
+        
 
     };
+
+    console.log(`showModal: ${job.showModal}`)
 
     const fieldValidator = (field, fieldName) => {
         const fieldLimitReach = fieldName === 'jobName' ? /^.{29,30}$/ : /^.{99,100}$/;
@@ -166,14 +152,14 @@ const CreateJob = () => {
 
                     if (user_id !== 0) setCustomerId(user_id);
 
-                    if (fieldError === false) {//
+                    if (fieldError === false) {
                         setCustomerName(value);
-                        setCustomerNameIsValid(true); //
+                        setCustomerNameIsValid(true);
                         setErrors({ [name]: { helperText, fieldError } });
                         console.log(errors)
                     }
                     if (fieldError === true) {
-                        setCustomerNameIsValid(false);//
+                        setCustomerNameIsValid(false);
                         setErrors({ [name]: { helperText, fieldError } });
                         console.log(errors)
                     }
@@ -189,7 +175,6 @@ const CreateJob = () => {
     const isNotValid = () => {
         if (jobNameIsValid &&
             descriptionIsValid &&
-            tradespersonIdIsValid &&
             customerNameIsValid) {
             return false;
         }
@@ -200,7 +185,7 @@ const CreateJob = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(createJob(jobObject, true));
+        dispatch(createJob(jobObject));
         resetFields();
         console.log(jobObject)
     };
@@ -219,8 +204,6 @@ const CreateJob = () => {
         setJobStatus('Not yet started');
         setJobStatusId(1);
     }
-
-
 
     return (
         <Box
@@ -311,20 +294,6 @@ const CreateJob = () => {
                             errors={errors}
                         />
                     </div>
-                    <div>
-                        {/* Will be replaced with lookup */}
-                        <TextField
-                            error={false}
-                            value={tradespersonId}
-                            name='tradesperson_id'
-                            required
-                            id="outlined-error-helper-text"
-                            label="Search Assigned Tradesperson"
-                            variant="outlined"
-                            onChange={handleUserInput}
-                        />
-                    </div>
-
 
                 </Item>
                 <Item>
@@ -337,11 +306,14 @@ const CreateJob = () => {
                         >
                             Create
                         </Button>
+                        {job.showModal === true ? <AlertModal showModal={job.showModal} /> : null}
+                        
                     </div>
                 </Item>
             </Paper>
 
             <SimpleBackdrop loading={indicator} /> {/**/}
+
         </Box>
     );
 }

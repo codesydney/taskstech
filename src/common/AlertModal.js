@@ -2,6 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
+import * as History from 'history';
+export const history = History.createBrowserHistory();
 
 const style = {
   position: 'absolute',
@@ -19,18 +21,15 @@ const style = {
 
 export default function AlertModal({ showModal }) {
   const [open, setOpen] = React.useState(showModal);
-  /*
-  const handleOpen = () => {
-    setOpen(true);
-  };
- */
+
   const handleClose = () => {
     setOpen(false);
-  }; 
+    history.push("/view/jobs"),
+    window.location.reload();
+  };
 
   return (
     <div>
-      { /* <Button onClick={handleOpen}>Open Modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}

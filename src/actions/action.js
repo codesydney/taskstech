@@ -22,9 +22,26 @@ export const createJob = (job) => async dispatch => {
     } catch (error) {
         console.log(error.message)
     }
+}
 
+export const updateJob = (job) => async dispatch => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
-
+    try {
+        dispatch({ type: actions.UPDATE_JOB_STARTED, loading: true, showModal: false });
+        
+        await taskstechApi
+            .put(`/job/${job.id}`, job, config)
+            .then((res) => {
+                console.log(res)
+                dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: job, loading: false, showModal: true });
+            }).catch(e => {
+                console.log(e)
+            });
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 
@@ -88,24 +105,25 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
-                    if (res.data){
-                    const items = res.data
-                    const inventoryList = []
-                    items.forEach(item => {
-                        const inventoryItem = {
-                            name:item.name,
-                            description:item.description,
-                            supplier:item.supplier,
-                            model_no:item.model_no,
-                            price:item.price,
-                            id:item.id,
-                            notes:item.notes,
-                            inventory_details:item.inventory_details,
-                            quantity:item.inventory_details.length
-                        }
-                        inventoryList.push(inventoryItem)
-                    })
-                    dispatch(fetchInventoryAction(inventoryList))}
+                    if (res.data) {
+                        const items = res.data
+                        const inventoryList = []
+                        items.forEach(item => {
+                            const inventoryItem = {
+                                name: item.name,
+                                description: item.description,
+                                supplier: item.supplier,
+                                model_no: item.model_no,
+                                price: item.price,
+                                id: item.id,
+                                notes: item.notes,
+                                inventory_details: item.inventory_details,
+                                quantity: item.inventory_details.length
+                            }
+                            inventoryList.push(inventoryItem)
+                        })
+                        dispatch(fetchInventoryAction(inventoryList))
+                    }
                 })
         } catch (error) {
             console.log(error.message)
@@ -123,7 +141,7 @@ export const createInventory = (inventoryData) => {
             })
                 .then(res => {
                     console.log(res)
-                    alert ("Item created successfully!")
+                    alert("Item created successfully!")
                     dispatch(push('/list/inventory'))
                 })
         } catch (error) {
@@ -141,7 +159,7 @@ export const updateInventory = (inventoryData, iid) => {
             })
                 .then(res => {
                     console.log(res)
-                    alert ("Item updated successfully!")
+                    alert("Item updated successfully!")
                     dispatch(push('/list/inventory'))
                 })
         } catch (error) {
@@ -184,41 +202,41 @@ export const signUp = (firstname, lastname, email, password, confirmPassword, de
             phone: phone
         }
         console.log(traderSignUpData)
-            taskstechApi.post('users/tradesperson', traderSignUpData)
-                .then((res) => {
-                    console.log(res)
-                    alert("Your account has been successfully created. \n\nWelcome!")
-                    dispatch(push('/login'))
-                }). catch ((error)=> {
-                     console.log(error.response)
-                     alert(error.response.data.message)
-        })
+        taskstechApi.post('users/tradesperson', traderSignUpData)
+            .then((res) => {
+                console.log(res)
+                alert("Your account has been successfully created. \n\nWelcome!")
+                dispatch(push('/login'))
+            }).catch((error) => {
+                console.log(error.response)
+                alert(error.response.data.message)
+            })
     }
 }
 
 export const signIn = (email, password) => {
     return async (dispatch) => {
-            taskstechApi.post(`/tokens`, {},
-                {
-                    auth: {
-                        username: email,
-                        password: password,
-                    }
+        taskstechApi.post(`/tokens`, {},
+            {
+                auth: {
+                    username: email,
+                    password: password,
                 }
-            )
-                .then(res => {
-                    localStorage.setItem("token", res.data.token)
-                    localStorage.setItem("id", res.data.user_id)
-                    dispatch(signInAction({
-                        isSignedIn: true,
-                        id: res.data.user_id,
-                    }))
-                    getTraderData()
-                    dispatch(push('/view/jobs'))
-                }). catch ((error)=> {
-                    console.log(error.response)
-                    alert("Email and Password does not match. \n\nPlease try again.")
-        })
+            }
+        )
+            .then(res => {
+                localStorage.setItem("token", res.data.token)
+                localStorage.setItem("id", res.data.user_id)
+                dispatch(signInAction({
+                    isSignedIn: true,
+                    id: res.data.user_id,
+                }))
+                getTraderData()
+                dispatch(push('/view/jobs'))
+            }).catch((error) => {
+                console.log(error.response)
+                alert("Email and Password does not match. \n\nPlease try again.")
+            })
     }
 }
 

@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import InfoIcon from '@mui/icons-material/Info';
 import { makeStyles } from '@material-ui/core/styles';
-import * as History from 'history';
-export const history = History.createBrowserHistory();
+//import * as History from 'history';
+//export const history = History.createBrowserHistory();
 
 import './viewjobs.css';
 
@@ -41,27 +42,52 @@ export default function DataTable(props) {
   const classes = useStyles();
   const rows = jobs.payload;
 
-  const handleClick = (event, cellValues) => {
+  const handleDiaryClick = (event, cellValues) => {
     const params = {
       cellValues,
-      isClicked: true,
-      history
+      //isClicked: true,
+      componentType: 'diary',
+      path: "/view/jobs/diary"
     };
-    console.log(params)
+    
     parentCallback(params);
   };
 
+  const renderDiaryElement = params => {
 
-  const renderReactElement = params => {
     return (
       <Button
         variant="contained"
         color="primary"
         onClick={(event) => {
-          handleClick(event, params);
+          handleDiaryClick(event, params);
         }}
       >
         <MenuBookIcon />
+      </Button>
+    );
+  }
+
+  const handleJobDetailsClick = (event, cellValues) => {
+    const params = {
+      cellValues,
+      componentType: 'jobDetails',
+      path: `/view/jobs/details/${cellValues.id}`
+    };
+    
+    parentCallback(params);
+  };
+
+  const renderJobDetailsElement = params => {
+    return (
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(event) => {
+          handleJobDetailsClick(event, params);
+        }}
+      >
+        <InfoIcon />
       </Button>
     );
   }
@@ -94,8 +120,15 @@ export default function DataTable(props) {
       headerName: 'View Diary',
       sortable: false,
       width: 120,
-      renderCell: renderReactElement
+      renderCell: renderDiaryElement
     },
+    {
+      field: 'details',
+      headerName: 'Details',
+      sortable: false,
+      width: 120,
+      renderCell: renderJobDetailsElement
+    }
   ];
 
   useEffect(() => {
@@ -113,7 +146,7 @@ export default function DataTable(props) {
         rows={rows}
         columns={columns}
         pageSize={5}
-        checkboxSelection
+        //checkboxSelection
         disableSelectionOnClick
       />
     </div>

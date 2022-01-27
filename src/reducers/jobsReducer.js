@@ -21,7 +21,18 @@ function jobsReducer(state = initialState, action) {
                 loading: false,
                 showModal: true
             };
-        
+        case actions.UPDATE_JOB_STARTED:
+            return {
+                ...state,
+                loading: true,
+                showModal: false
+            };
+        case actions.UPDATE_JOB_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                showModal: true
+            };
         case actions.GET_ALL_JOBS_STARTED:
             return {
                 ...state,

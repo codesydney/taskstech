@@ -3,14 +3,17 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Auth from "./components/Auth";
 import NewInventory from "./components/inventory/NewInventory";
+
 import CreateJob from "./components/Jobs/CreateJob/CreateJob";
+import JobDetails from "./components/Jobs/JobDetails/JobDetails";
+import JobDiary from "./components/Jobs/JobDiary/JobDiary";
+
 import Header from "./components/Header/Header";
 import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 import InventoryList from "./components/inventory/InventoryList";
 import RightSideBar from "./components/rightSideBar/RightSideBar";
 
 import TradieProfileForm from "./components/Trader/TradieProfileForm";
-import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import InventoryDetail from "./components/inventory/InventoryDetail";
 
 import * as Pages from "../src/pages/Pages";
@@ -75,6 +78,10 @@ function App() {
                     <Route 
                         exact path="/view/jobs/diary" 
                         component={JobDiary} 
+                    />
+                    <Route 
+                        exact path="/view/jobs/details/id" 
+                        component={JobDetails} 
                     />
                 </Auth>
             </Switch>

@@ -14,6 +14,7 @@ import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs } from '../../../actions/action';
 import JobDiary from '../JobDiary/JobDiary';
+import JobDetails from '../JobDetails/JobDetails';
 import * as History from 'history';
 export const history = History.createBrowserHistory();
 
@@ -61,18 +62,18 @@ export default function FullWidthTabs() {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = useState(0);
-    const [isClicked, setIsClicked] = useState(false);
+    const [type, setType] = useState('');
     const [params, setParams] = useState({});
     const { job } = useSelector((state) => state);
 
     const dispatch = useDispatch();
 
-    const callback = ({ cellValues, isClicked, history }) => {
-        setIsClicked(isClicked);
+    const callback = ({ cellValues, componentType, path }) => {
+        setType(componentType);
         setParams(cellValues)
-        history.push("/view/jobs/diary");
+        history.push(path);
     };
-
+    
     const completedJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
@@ -95,19 +96,13 @@ export default function FullWidthTabs() {
         setValue(newValue);
     };
 
-
-    /*
-    const handleChangeIndex = (index) => {
-        setValue(index);
-    };
-
-    */
     const renderDataTable = () => {
-        return isClicked === true
-            ? (
-                <JobDiary rows={params} />
-            )
-            : (
+        if (type === 'diary') {
+            return <JobDiary rows={params} />
+        } else if (type === 'jobDetails') {
+            return <JobDetails rows={params} />
+        } else {
+            return (
                 <React.Fragment>
                     <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
                         Jobs
@@ -127,35 +122,36 @@ export default function FullWidthTabs() {
                         </Tabs>
                     </AppBar>
                     <TabPanel value={value} index={0} dir={theme.direction} >
-                            <DataTable
-                                jobs={job}
-                                title='All'
-                                parentCallback={callback}
-                            />
-                        </TabPanel>
-                        <TabPanel value={value} index={1} dir={theme.direction}>
-                            <DataTable
-                                jobs={completedJobs}
-                                title='Completed'
-                                parentCallback={callback}
-                            />
-                        </TabPanel>
-                        <TabPanel value={value} index={2} dir={theme.direction}>
-                            <DataTable
-                                jobs={activeJobs}
-                                title='Active'
-                                parentCallback={callback}
-                            />
-                        </TabPanel>
+                        <DataTable
+                            jobs={job}
+                            title='All'
+                            parentCallback={callback}
+                        />
+                    </TabPanel>
+                    <TabPanel value={value} index={1} dir={theme.direction}>
+                        <DataTable
+                            jobs={completedJobs}
+                            title='Completed'
+                            parentCallback={callback}
+                        />
+                    </TabPanel>
+                    <TabPanel value={value} index={2} dir={theme.direction}>
+                        <DataTable
+                            jobs={activeJobs}
+                            title='Active'
+                            parentCallback={callback}
+                        />
+                    </TabPanel>
                 </React.Fragment>
             );
+        }
     };
 
     return (
         <>
             <Container maxWidth="lg" className={classes.root}>
                 {renderDataTable()}
-                
+
                 <SimpleBackdrop loading={job.loading} />
             </Container>
         </>

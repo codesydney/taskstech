@@ -31,7 +31,7 @@ export default function MultipleSelect({
   customerName,
   handleDropdownChange,
 }) {
-  const [customers, setCustomers] = useState([]); //
+  const [customers, setCustomers] = useState([]); 
   const theme = useTheme();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function MultipleSelect({
 
   return (
     <div className='Lookup'>
-      <FormControl sx={{ m: 1, width: '90%', mt: 1 }}>
+      <FormControl sx={{ m: 1, width: '22vw', mt: 1 }}>
         <Select
           displayEmpty
           value={customerName}

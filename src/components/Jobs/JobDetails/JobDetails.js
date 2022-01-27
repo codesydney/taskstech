@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AlertModal from '../../../common/AlertModal';
 
@@ -13,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
 import { getCustomers } from "../../../actions/customerActions";
-import { createJob } from '../../../actions/action';
+import { updateJob } from '../../../actions/action';
 import { useState } from "react";
 
 
@@ -26,13 +25,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const CreateJob = () => {
-    const [jobName, setJobName] = useState('');
-    const [description, setDescription] = useState('');
-
-    const [jobNameIsValid, setJobNameIsValid] = useState(false);
-    const [descriptionIsValid, setDescriptionIsValid] = useState(false);
-    const [customerNameIsValid, setCustomerNameIsValid] = useState(false);
+const JobDetails = ({ rows }) => {
+    const jobs = rows === undefined ? {} : rows;
+    const jobId = jobs.id;
+    const custId = jobs.row.customer.user_id;
+    const [jobName, setJobName] = useState(jobs.row.name);
+    const [description, setDescription] = useState(jobs.row.description);
 
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
@@ -41,10 +39,10 @@ const CreateJob = () => {
         customer_id: { helperText: '', fieldError: false },
     });
 
-    const [customerName, setCustomerName] = useState('');
-    const [customerId, setCustomerId] = useState(0);
-    const [jobStatus, setJobStatus] = useState('Not yet started');
-    const [jobStatusId, setJobStatusId] = useState(1);
+    const [customerName, setCustomerName] = useState(`${jobs.row.customer.first_name} ${jobs.row.customer.last_name}`);
+    const [customerId, setCustomerId] = useState(custId);
+    const [jobStatus, setJobStatus] = useState(jobs.row.job_status.name);
+    const [jobStatusId, setJobStatusId] = useState(jobs.row.job_status.id);
     const status = useSelector((state) => state.status.job);
     const { customers, job } = useSelector((state) => state);
     const indicator = useSelector((state) => state.job.loading);
@@ -52,15 +50,13 @@ const CreateJob = () => {
 
     const dispatch = useDispatch();
 
-    useSelector((state) => console.log(state));
-
     useEffect(() => {
         dispatch(getStatus());
-        dispatch(getCustomers())
-        //dispatch to get job
+        dispatch(getCustomers());
     }, [indicator]);
 
     let jobObject = {
+        id: jobId,
         name: jobName,
         description: description,
         job_status_id: jobStatusId,
@@ -75,11 +71,9 @@ const CreateJob = () => {
             setJobName(value);
             switch (fieldError) {
                 case false:
-                    setJobNameIsValid(true);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 case true:
-                    setJobNameIsValid(false);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 default:
@@ -91,11 +85,9 @@ const CreateJob = () => {
 
             switch (fieldError) {
                 case false:
-                    setDescriptionIsValid(true);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 case true:
-                    setDescriptionIsValid(false);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 default:
@@ -106,7 +98,6 @@ const CreateJob = () => {
 
     };
 
-    console.log(`showModal: ${job.showModal}`)
 
     const fieldValidator = (field, fieldName) => {
         const fieldLimitReach = fieldName === 'jobName' ? /^.{29,30}$/ : /^.{99,100}$/;
@@ -155,12 +146,9 @@ const CreateJob = () => {
 
                     if (fieldError === false) {
                         setCustomerName(value);
-                        setCustomerNameIsValid(true);
                         setErrors({ [name]: { helperText, fieldError } });
-                        console.log(errors)
                     }
                     if (fieldError === true) {
-                        setCustomerNameIsValid(false);
                         setErrors({ [name]: { helperText, fieldError } });
                         console.log(errors)
                     }
@@ -173,28 +161,14 @@ const CreateJob = () => {
         }
     };
 
-    const isNotValid = () => {
-        if (jobNameIsValid &&
-            descriptionIsValid &&
-            customerNameIsValid) {
-            console.log('valid')
-            return false;
-        }
-        else {
-            console.log('not valid')
-            return true;
-        }
-    };
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(createJob(jobObject));
+        dispatch(updateJob(jobObject));
         resetFields();
-        console.log(jobObject)
     };
 
     const resetFields = () => {
-
         jobObject = {
             customer_id: '',
             description: '',
@@ -219,7 +193,7 @@ const CreateJob = () => {
                 },
             }}
         >
-            {/* <FormNav /> */}
+
             <Paper
                 elevation={3}
                 component="form"
@@ -231,17 +205,21 @@ const CreateJob = () => {
                 onSubmit={handleSubmit}
             >
                 <Item>
-                    <Typography component="div" variant="h4">
-                        Create New Job
-                    </Typography>
-                    <Typography sx={{ margin: '0' }} gutterBottom variant="span">
-                        Please fill the job details
-                    </Typography>
-                    <Typography variant="subtitle2" gutterBottom>
-                        *Required
-                    </Typography>
+                    <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
+                        Job Details
+                    </p>
                 </Item>
                 <Item>
+                    <div>
+                        <TextField
+                            value={jobId}
+                            name='jobId'
+                            disabled
+                            id="outlined-error-helper-text"
+                            label="Job ID"
+                            variant="outlined"
+                        />
+                    </div>
                     <div>
                         <TextField
                             error={errors.jobName === undefined ? false : errors.jobName.fieldError}
@@ -302,16 +280,15 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <Button
-                            disabled={isNotValid()}
                             variant="contained"
                             color="primary"
                             onClick={handleSubmit}
                         >
-                            Create
+                            Update
                         </Button>
                         {
                             job.showModal === true
-                                ? <AlertModal showModal={job.showModal} text='created' />
+                                ? <AlertModal showModal={job.showModal} text='updated' />
                                 : null
                         }
 
@@ -325,4 +302,4 @@ const CreateJob = () => {
     );
 }
 
-export default CreateJob;
+export default JobDetails;

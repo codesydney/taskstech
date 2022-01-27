@@ -19,9 +19,8 @@ const style = {
   pb: 2,
 };
 
-export default function AlertModal({ showModal }) {
+export default function AlertModal({ showModal, text }) {
   const [open, setOpen] = React.useState(showModal);
-
   const handleClose = () => {
     setOpen(false);
     history.push("/view/jobs"),
@@ -39,7 +38,7 @@ export default function AlertModal({ showModal }) {
         <Box sx={{ ...style, width: '250' }}>
           <h2 id="parent-modal-title" style={{ textAlign: 'center' }}>Success</h2>
           <p id="parent-modal-description">
-            The job has been created succesfully.
+            The job has been {text} succesfully.
           </p>
           <Button onClick={handleClose}>Close</Button>
         </Box>

@@ -28,12 +28,9 @@ const Item = styled(Paper)(({ theme }) => ({
 const JobDetails = ({ rows }) => {
     const jobs = rows === undefined ? {} : rows;
     const jobId = jobs.id;
+    const custId = jobs.row.customer.user_id;
     const [jobName, setJobName] = useState(jobs.row.name);
     const [description, setDescription] = useState(jobs.row.description);
-
-    const [jobNameIsValid, setJobNameIsValid] = useState(false);
-    const [descriptionIsValid, setDescriptionIsValid] = useState(false);
-    const [customerNameIsValid, setCustomerNameIsValid] = useState(false);
 
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
@@ -43,7 +40,7 @@ const JobDetails = ({ rows }) => {
     });
 
     const [customerName, setCustomerName] = useState(`${jobs.row.customer.first_name} ${jobs.row.customer.last_name}`);
-    const [customerId, setCustomerId] = useState(jobs.row.customer.id);
+    const [customerId, setCustomerId] = useState(custId);
     const [jobStatus, setJobStatus] = useState(jobs.row.job_status.name);
     const [jobStatusId, setJobStatusId] = useState(jobs.row.job_status.id);
     const status = useSelector((state) => state.status.job);
@@ -74,11 +71,9 @@ const JobDetails = ({ rows }) => {
             setJobName(value);
             switch (fieldError) {
                 case false:
-                    setJobNameIsValid(true);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 case true:
-                    setJobNameIsValid(false);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 default:
@@ -90,11 +85,9 @@ const JobDetails = ({ rows }) => {
 
             switch (fieldError) {
                 case false:
-                    setDescriptionIsValid(true);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 case true:
-                    setDescriptionIsValid(false);
                     setErrors({ [name]: { helperText, fieldError } });
                     break;
                 default:
@@ -153,11 +146,9 @@ const JobDetails = ({ rows }) => {
 
                     if (fieldError === false) {
                         setCustomerName(value);
-                        setCustomerNameIsValid(true);
                         setErrors({ [name]: { helperText, fieldError } });
                     }
                     if (fieldError === true) {
-                        setCustomerNameIsValid(false);
                         setErrors({ [name]: { helperText, fieldError } });
                         console.log(errors)
                     }
@@ -170,16 +161,6 @@ const JobDetails = ({ rows }) => {
         }
     };
 
-    const isValid = () => {
-        if (jobNameIsValid &&
-            descriptionIsValid &&
-            customerNameIsValid) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -299,7 +280,6 @@ const JobDetails = ({ rows }) => {
                 <Item>
                     <div>
                         <Button
-                            disabled={!isValid()}
                             variant="contained"
                             color="primary"
                             onClick={handleSubmit}

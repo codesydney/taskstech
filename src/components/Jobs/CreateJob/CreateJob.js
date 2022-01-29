@@ -57,7 +57,6 @@ const CreateJob = () => {
     useEffect(() => {
         dispatch(getStatus());
         dispatch(getCustomers())
-        //dispatch to get job
     }, [indicator]);
 
     let jobObject = {
@@ -219,14 +218,12 @@ const CreateJob = () => {
                 },
             }}
         >
-            {/* <FormNav /> */}
             <Paper
                 elevation={3}
                 component="form"
                 sx={{
                     width: matches === false ? '40vw' : '80vw',
                     margin: '0 auto',
-                    padding: '10px'
                 }}
                 onSubmit={handleSubmit}
             >
@@ -234,7 +231,7 @@ const CreateJob = () => {
                     <Typography component="div" variant="h4">
                         Create New Job
                     </Typography>
-                    <Typography sx={{ margin: '0' }} gutterBottom variant="span">
+                    <Typography sx={{ margin: '0' }} variant="subtitle2" gutterBottom>
                         Please fill the job details
                     </Typography>
                     <Typography variant="subtitle2" gutterBottom>

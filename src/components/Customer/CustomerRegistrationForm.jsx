@@ -122,7 +122,7 @@ export default function CustomerRegistrationForm () {
                         style={{ padding: "5px", lineHeight: "1.235" }}
                         variant='h4'
                     >
-                        Create New Inventory
+                        Customer Registration
                     </Typography>
                     <Typography
                         sx={{ margin: "0" }}

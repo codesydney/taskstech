@@ -17,6 +17,7 @@ export const getActivities = (loading = true, id) => async dispatch => {
                     loading: loading
                 });
                 if (res.data) {
+                    //console.log(res.data)
                     dispatch({
                         type: actions.GET_ACTIVITIES,
                         payload: res.data,

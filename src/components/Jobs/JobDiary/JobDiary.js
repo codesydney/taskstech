@@ -1,9 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Button from "@material-ui/core/Button";
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
-
 import JobDiaryDataTable from '../JobDiary/JobDiaryDataTable';
 import FormDialog from '../../../common/FormDialog';
 import './jobdiary.css';
@@ -11,15 +8,9 @@ import './jobdiary.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 600,
+    margin: '0 auto'
   },
-  diary: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-
-  },
+  
 }));
 
 export default function JobDiary({ rows }) {
@@ -35,31 +26,28 @@ export default function JobDiary({ rows }) {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCloseForm = () => {
     setOpen(false);
   };
 
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <div>
-
-
-        <div id='add-section'>
-
-          <div id='add-content'>
-            <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
-              Job Diary
-            </p>
-            <Button variant="outlined" onClick={handleClickOpen}>
-              <NoteAddIcon />
-            </Button>
-          </div>
-        </div>
-
-        <JobDiaryDataTable reload={reload} handleReload={handleReload} diary={rows} />
-      </div>
-      {open === true ? <FormDialog open={open} jobId={rows?.id} handleClose={handleClose} handleReload={handleReload} /> : null}
-
+    <Container className={classes.root}> 
+      <JobDiaryDataTable
+        reload={reload}
+        handleReload={handleReload}
+        diary={rows}
+        handleClickOpen={handleClickOpen}
+      />
+      {
+        open === true
+          ? <FormDialog
+            open={open}
+            jobId={rows?.id}
+            handleClose={handleCloseForm}
+            handleReload={handleReload}
+          />
+          : null
+      }
     </Container>
   );
 }

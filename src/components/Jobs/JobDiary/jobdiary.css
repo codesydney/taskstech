@@ -11,15 +11,27 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
     border: 1px solid rgba(0, 0, 0, 0.23);
     padding: 5px 15px;
     min-width: 10px;
-    height: 53px;
-    background-color: orange;
-    border-radius: 50px;
+    height: 30px;
+    background-color: #ffffff;
     border: none;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    top: 1rem;
     left: 2rem;
 }
 
+svg#icon {
+    font-size: 400px;
+    padding: 0 5%;
+    margin: 0 5%;
+}
+
 button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined:hover {
-    background-color: goldenrod;
+    background-color: rgb(117, 117, 115);
+}
+
+@media screen and (max-width: 600px) {
+    svg#icon {
+        font-size: 250px;
+        padding: 0;
+        margin: 0;
+    }
 }

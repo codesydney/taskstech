@@ -14,7 +14,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getActivities } from '../../../actions/activityAction';
 import PhotoUploadDialog from '../../../common/PhotoUploadDialog';
 import DetailsDialog from '../../../common/DetailsDialog';
-import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
+import { getPhoto } from '../../../actions/photosActions';
+//import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
+//import reptile from '../../../common/assets/images/contemplative-reptile.jpg';
 
 //MultiActionAreaCard PhotoUploadDialog
 
@@ -32,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     padding: theme.spacing(3),
-    color: "#1a1a1a", 
-    fontFamily: "Poppins", 
-    textAlign:'right'
+    color: "#1a1a1a",
+    fontFamily: "Poppins",
+    textAlign: 'right'
   },
   activityButtonWide: {
     position: 'relative',
@@ -62,14 +64,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '1.10rem !important'
   },
   id: {
-    border: '1px solid rgba(0, 0, 0, 0.23)',
+    //border: '1px solid rgba(0, 0, 0, 0.23)',
     padding: '5px 15px',
     minWidth: '10px',
     height: '30px',
     marginLeft: '1rem',
     fontSize: '17px',
     color: '#ffffff',
-    boxShadow: '0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)',
     left: '4.50rem !important'
   }
 }));
@@ -79,11 +80,12 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
   const dispatch = useDispatch();
   const [openPhotoUploadDialog, setOpenPhotoUploadDialog] = React.useState(false);
   const [openDetailsDialog, setOpenDetailsDialog] = React.useState(false);
-  //const [hasUploaded, setHasUploaded] = React.useState(false); //
+  const [hasUploaded, setHasUploaded] = React.useState(false); //
+  const [photoFile, setPhotoFile] = React.useState(''); //
   const [param, setParam] = React.useState({}); //
   const [type, setType] = React.useState('');
   const [actId, setActId] = React.useState(null);
-  const { activity } = useSelector(state => state); //, photo
+  const { activity, photo } = useSelector(state => state);
 
   const id = diary === undefined ? 0 : diary.id;
   const classes = useStyles();
@@ -94,7 +96,7 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
     setActId(id);
     setType('photoUpload');
   };
-  
+
   const handleCloseUploadForm = () => {
     setOpenPhotoUploadDialog(false);
   };
@@ -115,22 +117,24 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
 
     if (reload) handleReload(false);
 
-    
+    if (hasUploaded && photo.payload?.filename !== undefined) {
+      setPhotoFile(photo.payload.filename);
+      dispatch(getPhoto(actId, photo.payload.filename));
+    }
 
-  }, [reload, /* hasUploaded */]);
+  }, [reload, hasUploaded /**/]);
+
+  console.log(photo)
 
   /* 
   const setPhoto = (activityId) => {
-    if (hasUploaded && photo.payload?.filename !== undefined) {
-      console.log(hasUploaded)
-      console.log(activityId)
-      console.log(photo.payload.filename)
-      dispatch(getPhoto(activityId, photo.payload.filename));
-      setHasUploaded(false);
-      return photo.payload.filename;
-    } else return unknownPhoto;
-  };
-  */
+    //dispatch(getPhoto(activityId, photoFile));
+    //setHasUploaded(false);
+    console.log(actId)
+  };*/
+  
+  //console.log(actId)
+  console.log(photoFile)
 
   const activityDetails = activity.payload.map((act) => {
     return (
@@ -138,14 +142,14 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
         <Card sx={{
           maxWidth: 345,
         }}>
-          <CardActionArea>
+          <CardActionArea onClick={() => handleDetailsForm(act)} >
             <CardMedia
               component="img"
               height="140"
-              image={unknownPhoto}
-              //act.id === actId ? photo.payload.filename : unknownPhoto
+              image={`https://taskstech2.pythonanywhere.com/api/v1/photos/${actId}/${photoFile}`} //2 photo_2_FmN2L.jpg
+            //act.id === actId ? photo.payload.filename : unknownPhoto
             />
-            <CardContent style={{ backgroundColor: '#050439' }}>
+            <CardContent style={{ backgroundColor: '#4e4af2' }}> {/* #050439 */}
               <Typography gutterBottom variant="h5" component="div" color="#ffffff">
                 {act.description}
               </Typography>
@@ -155,15 +159,12 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions style={{ backgroundColor: '#050439' }} >
-            <Button size="small" color="primary" onClick={() => handleDetailsForm(act)}>
-              Details
-            </Button>
+          <CardActions style={{ backgroundColor: '#4e4af2' }} > {/* #050439 */}
             <Button variant="outlined" className={classes.uploadButton}>
               <UploadIcon className={classes.iconColor} onClick={() => handleOpenUploadForm(act.id)} />
             </Button>
             <Typography variant="outlined" className={classes.id}>
-              <span style={{ paddingTop: '22px' }}>Activity: {act.id}</span>
+              <span style={{ paddingTop: '22px' }}>Activity Id: {act.id}</span>
             </Typography>
 
           </CardActions>
@@ -180,35 +181,35 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
           actId={actId}
           handleClose={handleCloseUploadForm}
           handleReload={handleReload}
-          //setHasUploaded={setHasUploaded}
+          setHasUploaded={setHasUploaded}
         />
       );
     } else if (type === 'jobDetails') {
       return (
         <DetailsDialog
-          activity={param} 
-          open={openDetailsDialog} 
-          handleClose={handleCloseDetailsForm} 
+          activity={param}
+          open={openDetailsDialog}
+          handleClose={handleCloseDetailsForm}
         />
       );
     } else null;
   }
 
   return (
-    <Box 
-      sx={{ 
+    <Box
+      sx={{
         width: matches === true
-          ? '80vw' : '55vw' 
-        }}
-       className={classes.root} 
+          ? '80vw' : '55vw'
+      }}
+      className={classes.root}
     >
       <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={matches === true ? 10 : 8} >
-          <p 
-            className={classes.title} 
-            style={{ 
-              fontSize:  matches === true 
-                ? '38px' : '48px' 
+          <p
+            className={classes.title}
+            style={{
+              fontSize: matches === true
+                ? '38px' : '48px'
             }}
           >
             Job Diary
@@ -216,29 +217,29 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
         </Grid>
         <Grid item xs={matches === true ? 12 : 4} >
           <Button
-            className={ 
+            className={
               matches === true
                 ? classes.activityButtonMobile
                 : classes.activityButtonWide
-            } 
-            variant="outlined" 
+            }
+            variant="outlined"
           >
-            <NoteAddIcon 
-              style={{ 
-                color: 'black', 
+            <NoteAddIcon
+              style={{
+                color: 'black',
                 fontSize: matches === true
-                  ? '58px' : '48px' 
-              }} 
-              onClick={handleClickOpen} 
+                  ? '58px' : '48px'
+              }}
+              onClick={handleClickOpen}
             />
           </Button>
         </Grid>
       </Grid>
 
-      <Grid 
-        container 
-        rowSpacing={4} 
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}  
+      <Grid
+        container
+        rowSpacing={4}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         {activityDetails}
         {renderDialog()}

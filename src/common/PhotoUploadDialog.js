@@ -14,7 +14,7 @@ export default function PhotoUploadForm({
   open, actId,
   handleClose, 
   handleReload, 
-  //setHasUploaded,
+  setHasUploaded,
 }) {
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
@@ -30,7 +30,7 @@ export default function PhotoUploadForm({
       dispatch(addPhoto(formData));
       handleReload(true);
       handleClear();
-      //setHasUploaded(true);
+      setHasUploaded(true);
     } else console.log('File is empty')
   };
 

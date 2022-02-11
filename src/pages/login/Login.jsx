@@ -6,49 +6,37 @@ import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
-        height: "100vh",
-    },
-    image: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#4e4af2",
-        paddingRight: "4%",
+        height: "80vh",
     },
     paper: {
-        marginTop: theme.spacing(12),
+        margin: theme.spacing(8, 4),
         display: "flex",
         flexDirection: "column",
-        alignItems: "start",
-        padding: "8%",
+        alignItems: "center",
     },
-
-    form: {
-        width: "100%",
-        marginTop: theme.spacing(1),
+    buttonContainer: {
+        display: "flex",
+        flexDirection: "row-reverse",
+        //paddingTop: "15vh",
     },
-
     links: {
         display: "flex",
         flexDirection: "column",
         alignItems: "start",
         marginBottom: theme.spacing(1),
     },
-
-    buttonContainer: {
-        display: "flex",
-        flexDirection: "row-reverse",
-        paddingTop: "15vh",
+    form: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
     },
-
     submit: {
         color: "#fff",
         backgroundColor: "hsl(241, 87%, 62%)",
@@ -57,10 +45,11 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: "hsl(241, 87%, 52%)",
             boxShadow: "none",
         },
+        width: '25vw'
     },
 }));
 
-const Login = () => {
+export default function Login () {
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -68,18 +57,19 @@ const Login = () => {
         [password, setPassword] = useState("");
 
     const inputEmail = useCallback(
-        (event) => {
+        event => {
             setEmail(event.target.value);
         },
         [setEmail]
     );
 
     const inputPassword = useCallback(
-        (event) => {
+        event => {
             setPassword(event.target.value);
         },
         [setPassword]
     );
+
     const handleSubmit = () => {
         if (email === "" || password === "") {
             alert("Please fill in the form.");
@@ -88,18 +78,16 @@ const Login = () => {
         dispatch(signIn(email, password));
     };
 
-    const onKeyEnter = (event)=>{
-        if(event.key === "Enter"){
+    const onKeyEnter = event => {
+        if (event.key === "Enter") {
             handleSubmit();
         }
-    }
+    };
 
     return (
-        <Grid container component="main" className={classes.root}>
+        <Grid container component='main' className={classes.root}>
             <CssBaseline />
-            <Grid item xs={false} sm={5} md={5} className={classes.image}>
-                <Logo />
-            </Grid>
+            <Logo />
             <Grid
                 item
                 xs={12}
@@ -109,66 +97,82 @@ const Login = () => {
                 elevation={6}
                 square
             >
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div className={classes.paper}>
-                        <Typography component="h1" variant="h5">
-                            Login to TasksTech
-                        </Typography>
-                        <p>*Required</p>
-                        <div className={classes.form}>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Enter your Email"
-                                name="email"
-                                placeholder="youremail@mail.com"
-                                value={email}
-                                onChange={inputEmail}
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                label="Enter your password"
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                value={password}
-                                onChange={inputPassword}
-                                autoComplete="password"
-                                onKeyPress={(event)=>onKeyEnter(event)}
-                            />
-                            <div className={classes.links}>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                                <Link href="/signup" variant="body2">
-                                    {"Don't have an account? Sign up"}
-                                </Link>
-                            </div>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                className={classes.submit}
-                                onClick={() => handleSubmit()}
-                            >
-                                Next
-                            </Button>
-                        </div>
+                <div className={classes.paper}>
+                    <div className={classes.form}>
+                        <Container component='main' maxWidth='xs'>
+                            <Grid container spacing={3}>
+                                <Grid item>
+                                    <Typography component='h1' variant='h5'>
+                                        Login to TasksTech
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={10} style={{ textAlign: 'left', padding: '0 12px !important' }}>
+                                    <p>*Required</p>
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant='outlined'
+                                        margin='normal'
+                                        required
+                                        fullWidth
+                                        id='email'
+                                        label='Enter your Email'
+                                        name='email'
+                                        placeholder='youremail@mail.com'
+                                        value={email}
+                                        onChange={inputEmail}
+                                        autoComplete='email'
+                                        autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant='outlined'
+                                        margin='normal'
+                                        required
+                                        fullWidth
+                                        label='Enter your password'
+                                        type='password'
+                                        id='password'
+                                        name='password'
+                                        placeholder='Enter your password'
+                                        value={password}
+                                        onChange={inputPassword}
+                                        autoComplete='password'
+                                        onKeyPress={event => onKeyEnter(event)}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <div className={classes.links}>
+                                        <Link href='#' variant='body2'>
+                                            Forgot password?
+                                        </Link>
+                                        <Link href='/signup' variant='body2'>
+                                            {"Don't have an account? Sign up"}
+                                        </Link>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                            <Grid container className={classes.buttonContainer}>
+                                <Grid item xs={12}>
+                                    <Button
+                                        type='submit'
+                                        fullWidth
+                                        variant='contained'
+                                        className={classes.submit}
+                                        onClick={() => handleSubmit()}
+                                    >
+                                        Next
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Container>
+
+                        {/* </form> */}
                     </div>
-                </Container>
+                </div>
             </Grid>
         </Grid>
     );
-};
-
-export default Login;
+}

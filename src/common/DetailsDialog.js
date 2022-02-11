@@ -5,13 +5,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function DetailsDialog({ activity, open, handleClose }) {
+  const matches = useMediaQuery('(max-width:400px)');
 
   const renderDetails = () => {
     return (
       <Dialog open={open} onClose={handleClose} >
-        <div style={{ width: '25vw' }}>
+        <div style={{ width: matches === true ? '81vw' : '25vw' }}>
           <DialogTitle style={{ textAlign: 'center' }}>Activity: {activity.description}</DialogTitle>
           <DialogContent dividers>
             <TextField
@@ -68,7 +70,7 @@ export default function DetailsDialog({ activity, open, handleClose }) {
     );
   };
 
-  console.log(activity);
+  //console.log(activity);
   return (
     <>
       {renderDetails()}

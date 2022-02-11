@@ -1,6 +1,7 @@
 import taskstechApi from '../api/taskstechApi';
 import * as actions from './actionTypes';
 
+
 export const addPhoto = (photoData) => async dispatch => {
     const token = localStorage.getItem('token');
 

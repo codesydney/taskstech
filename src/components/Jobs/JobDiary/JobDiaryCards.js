@@ -14,8 +14,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getActivities } from '../../../actions/activityAction';
 import PhotoUploadDialog from '../../../common/PhotoUploadDialog';
 import DetailsDialog from '../../../common/DetailsDialog';
-import { getPhoto } from '../../../actions/photosActions';
-//import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
+//import { getPhoto } from '../../../actions/photosActions';
+import Container from '@material-ui/core/Container';
+import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
 //import reptile from '../../../common/assets/images/contemplative-reptile.jpg';
 
 //MultiActionAreaCard PhotoUploadDialog
@@ -64,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '1.10rem !important'
   },
   id: {
-    //border: '1px solid rgba(0, 0, 0, 0.23)',
     padding: '5px 15px',
     minWidth: '10px',
     height: '30px',
@@ -75,17 +75,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload, reload }) {
+export default function JobDiaryCards({ handleClickOpen, diary, handleReload, reload }) {
 
   const dispatch = useDispatch();
   const [openPhotoUploadDialog, setOpenPhotoUploadDialog] = React.useState(false);
   const [openDetailsDialog, setOpenDetailsDialog] = React.useState(false);
-  const [hasUploaded, setHasUploaded] = React.useState(false); //
-  const [photoFile, setPhotoFile] = React.useState(''); //
+
   const [param, setParam] = React.useState({}); //
   const [type, setType] = React.useState('');
   const [actId, setActId] = React.useState(null);
-  const { activity, photo } = useSelector(state => state);
+  const { activity /*, photo  */ } = useSelector(state => state);
 
   const id = diary === undefined ? 0 : diary.id;
   const classes = useStyles();
@@ -117,26 +116,18 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
 
     if (reload) handleReload(false);
 
-    if (hasUploaded && photo.payload?.filename !== undefined) {
-      setPhotoFile(photo.payload.filename);
-      dispatch(getPhoto(actId, photo.payload.filename));
+  }, [reload]);
+
+  const setPhoto = (id, image) => {
+    if (image[0] !== undefined) {
+      return `https://taskstech2.pythonanywhere.com/api/v1/photos/${id}/${image[0].filename}`;
     }
+    else return unknownPhoto;
+  };
 
-  }, [reload, hasUploaded /**/]);
-
-  console.log(photo)
-
-  /* 
-  const setPhoto = (activityId) => {
-    //dispatch(getPhoto(activityId, photoFile));
-    //setHasUploaded(false);
-    console.log(actId)
-  };*/
-  
-  //console.log(actId)
-  console.log(photoFile)
 
   const activityDetails = activity.payload.map((act) => {
+    let dateObj = new Date(act.create_date);
     return (
       <Grid key={act.id} item xs={matches === true ? 12 : 4} >
         <Card sx={{
@@ -146,20 +137,21 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
             <CardMedia
               component="img"
               height="140"
-              image={`https://taskstech2.pythonanywhere.com/api/v1/photos/${actId}/${photoFile}`} //2 photo_2_FmN2L.jpg
-            //act.id === actId ? photo.payload.filename : unknownPhoto
+              image={setPhoto(act.id, act.upload_photos)}
             />
-            <CardContent style={{ backgroundColor: '#4e4af2' }}> {/* #050439 */}
+            <CardContent style={{ backgroundColor: '#4e4af2' }}>
               <Typography gutterBottom variant="h5" component="div" color="#ffffff">
                 {act.description}
               </Typography>
-              <Typography variant="body2" color="#ffffff">
-                Lizards are a widespread group of squamate reptiles, with over 6,000
-                species, ranging across all continents except Antarctica
-              </Typography>
+              <Container>
+                <Typography variant="body2" color="#ffffff">
+                  Created on {dateObj.toDateString()}
+                </Typography>
+                
+              </Container>
             </CardContent>
           </CardActionArea>
-          <CardActions style={{ backgroundColor: '#4e4af2' }} > {/* #050439 */}
+          <CardActions style={{ backgroundColor: '#4e4af2' }} >
             <Button variant="outlined" className={classes.uploadButton}>
               <UploadIcon className={classes.iconColor} onClick={() => handleOpenUploadForm(act.id)} />
             </Button>
@@ -181,7 +173,7 @@ export default function JobDiaryDataTable({ handleClickOpen, diary, handleReload
           actId={actId}
           handleClose={handleCloseUploadForm}
           handleReload={handleReload}
-          setHasUploaded={setHasUploaded}
+        //setHasUploaded={setHasUploaded}
         />
       );
     } else if (type === 'jobDetails') {

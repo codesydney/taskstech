@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import JobDiaryDataTable from '../JobDiary/JobDiaryDataTable';
+import JobDiaryCards from './JobDiaryCards';
 import FormDialog from '../../../common/FormDialog';
 import './jobdiary.css';
 
@@ -32,7 +32,7 @@ export default function JobDiary({ rows }) {
 
   return (
     <Container className={classes.root}> 
-      <JobDiaryDataTable
+      <JobDiaryCards
         reload={reload}
         handleReload={handleReload}
         diary={rows}

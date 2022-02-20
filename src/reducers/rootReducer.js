@@ -14,7 +14,7 @@ const rootReducer = history => combineReducers({
     trader:traderReducer,
     status: jobStatusReducer,
     job: jobsReducer,
-    photo: photosReducer,
+    photos: photosReducer,
     activity: activityReducer,
     customers: customersReducer,
     inventory:inventoryReducer

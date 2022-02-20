@@ -9,13 +9,21 @@ export const createJob = (job) => async dispatch => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
-        dispatch({ type: actions.CREATE_JOB_STARTED, loading: true, showModal: false });        
+        dispatch({ 
+            type: actions.CREATE_JOB_STARTED, 
+            loading: true, 
+            showModal: false 
+        });        
         
         await taskstechApi
             .post('/job', job, config)
             .then((res) => {
                 console.log(res)
-                dispatch({ type: actions.CREATE_JOB_SUCCESS, loading: false, showModal: true });        
+                dispatch({ 
+                    type: actions.CREATE_JOB_SUCCESS, 
+                    loading: false, 
+                    showModal: true 
+                });        
             }).catch(e => {
                 console.log(e)
             });

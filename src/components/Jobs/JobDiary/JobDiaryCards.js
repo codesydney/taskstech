@@ -17,9 +17,7 @@ import DetailsDialog from '../../../common/DetailsDialog';
 //import { getPhoto } from '../../../actions/photosActions';
 import Container from '@material-ui/core/Container';
 import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
-//import reptile from '../../../common/assets/images/contemplative-reptile.jpg';
 
-//MultiActionAreaCard PhotoUploadDialog
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,11 +79,11 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
   const [openPhotoUploadDialog, setOpenPhotoUploadDialog] = React.useState(false);
   const [openDetailsDialog, setOpenDetailsDialog] = React.useState(false);
 
-  const [param, setParam] = React.useState({}); //
+  const [param, setParam] = React.useState({}); 
   const [type, setType] = React.useState('');
   const [actId, setActId] = React.useState(null);
-  const { activity /*, photo  */ } = useSelector(state => state);
-
+  const { activity } = useSelector(state => state); // , photos
+  
   const id = diary === undefined ? 0 : diary.id;
   const classes = useStyles();
   const matches = useMediaQuery('(max-width:400px)');
@@ -113,14 +111,17 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
 
   useEffect(() => {
     dispatch(getActivities(true, id));
-
+    
     if (reload) handleReload(false);
 
   }, [reload]);
 
+  
   const setPhoto = (id, image) => {
-    if (image[0] !== undefined) {
-      return `https://taskstech2.pythonanywhere.com/api/v1/photos/${id}/${image[0].filename}`;
+    let len = image.length - 1;
+
+    if (image[len] !== undefined) {
+      return `https://taskstech2.pythonanywhere.com/api/v1/photos/${id}/${image[len].filename}`;
     }
     else return unknownPhoto;
   };
@@ -128,6 +129,7 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
 
   const activityDetails = activity.payload.map((act) => {
     let dateObj = new Date(act.create_date);
+
     return (
       <Grid key={act.id} item xs={matches === true ? 12 : 4} >
         <Card sx={{
@@ -147,7 +149,7 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
                 <Typography variant="body2" color="#ffffff">
                   Created on {dateObj.toDateString()}
                 </Typography>
-                
+
               </Container>
             </CardContent>
           </CardActionArea>
@@ -173,7 +175,6 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
           actId={actId}
           handleClose={handleCloseUploadForm}
           handleReload={handleReload}
-        //setHasUploaded={setHasUploaded}
         />
       );
     } else if (type === 'jobDetails') {

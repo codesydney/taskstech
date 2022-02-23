@@ -121,7 +121,7 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
     let len = image.length - 1;
 
     if (image[len] !== undefined) {
-      return `https://taskstech2.pythonanywhere.com/api/v1/photos/${id}/${image[len].filename}`;
+      return `https://www.taskstech-core.com/api/v1/photos/${id}/${image[len].filename}`;
     }
     else return unknownPhoto;
   };

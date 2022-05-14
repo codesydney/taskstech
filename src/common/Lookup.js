@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from "@mui/material/useMediaQuery";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,6 +9,7 @@ import Select from '@mui/material/Select';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
+
 const MenuProps = {
   PaperProps: {
     style: {
@@ -33,6 +35,7 @@ export default function MultipleSelect({
 }) {
   const [customers, setCustomers] = useState([]); 
   const theme = useTheme();
+  const matches = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
     setCustomers(data);  // should be generic
@@ -40,7 +43,11 @@ export default function MultipleSelect({
 
   return (
     <div className='Lookup'>
-      <FormControl sx={{ m: 1, width: '22vw', mt: 1 }}>
+      <FormControl 
+        sx={{ 
+          m: 1, mt: 1, 
+          width: matches ? '70vw' : '22vw' 
+        }}> {/* 70vw mobile 22vw' */}
         <Select
           displayEmpty
           value={customerName}

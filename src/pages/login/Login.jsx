@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
@@ -11,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,19 +41,19 @@ const useStyles = makeStyles(theme => ({
     },
     submit: {
         color: "#fff",
-        backgroundColor: "hsl(241, 87%, 62%)",
+        backgroundColor: "#000000",
         margin: theme.spacing(3, 2, 3, 0),
         "&:hover": {
             backgroundColor: "hsl(241, 87%, 52%)",
             boxShadow: "none",
         },
-        width: '25vw'
     },
 }));
 
 export default function Login () {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const matches = useMediaQuery('(max-width:600px)');
 
     const [email, setEmail] = useState(""),
         [password, setPassword] = useState("");
@@ -161,9 +163,13 @@ export default function Login () {
                                         fullWidth
                                         variant='contained'
                                         className={classes.submit}
+                                        style={{ 
+                                            width:  matches ? '78vw' : '38vw',
+                                            height: '7vh'
+                                        }}
                                         onClick={() => handleSubmit()}
                                     >
-                                        Next
+                                        Log in
                                     </Button>
                                 </Grid>
                             </Grid>

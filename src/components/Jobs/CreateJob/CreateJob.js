@@ -300,8 +300,16 @@ const CreateJob = () => {
                     <div>
                         <Button
                             disabled={isNotValid()}
+                            
                             variant="contained"
                             color="primary"
+                            style={{ 
+                                backgroundColor: (() => {
+                                    if(isNotValid() == false) return "#000000"
+                                })(),
+                                width: matches ? "65vw" : "22vw",
+                                height: "7vh"
+                            }}
                             onClick={handleSubmit}
                         >
                             Create

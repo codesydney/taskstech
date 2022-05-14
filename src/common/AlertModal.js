@@ -40,7 +40,7 @@ export default function AlertModal({ showModal, text }) {
           <p id="parent-modal-description">
             The job has been {text} succesfully.
           </p>
-          <Button onClick={handleClose}>Close</Button>
+          <Button style={{ color: '#000' }} onClick={handleClose}>Close</Button>
         </Box>
       </Modal>
     </div>

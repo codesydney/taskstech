@@ -59,6 +59,7 @@ export default function DataTable(props) {
       <Button
         variant="contained"
         color="primary"
+        style={{ backgroundColor: "#000000" }}
         onClick={(event) => {
           handleDiaryClick(event, params);
         }}
@@ -83,6 +84,7 @@ export default function DataTable(props) {
       <Button
         variant="contained"
         color="primary"
+        style={{ backgroundColor: "#000000" }}
         onClick={(event) => {
           handleJobDetailsClick(event, params);
         }}

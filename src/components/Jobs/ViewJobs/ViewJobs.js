@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-//import SwipeableViews from 'react-swipeable-views';
+import Button from '@mui/material/Button';
 import Container from '@material-ui/core/Container';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles'; 
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -17,6 +17,7 @@ import JobDiary from '../JobDiary/JobDiary';
 import JobDetails from '../JobDetails/JobDetails';
 import * as History from 'history';
 export const history = History.createBrowserHistory();
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -56,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         width: '60vw', //55rem
     },
+    
 }));
 
 export default function FullWidthTabs() {
@@ -73,7 +75,7 @@ export default function FullWidthTabs() {
         setParams(cellValues)
         history.push(path);
     };
-    
+
     const completedJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
@@ -104,15 +106,42 @@ export default function FullWidthTabs() {
         } else {
             return (
                 <React.Fragment>
-                    <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
-                        Jobs
-                    </p>
+                    <header>
+                        <p style={
+                            { 
+                                color: "#1a1a1a", 
+                                fontFamily: "Comfortaa", 
+                                fontSize: "32px" , 
+                                textAlign: 'left',
+                                marginTop: '1rem',
+                                marginBottom: '1rem',
+                            }
+                        }>
+                            Jobs
+                        </p>
+                        
+                        <Button
+                            type='submit'
+                            fullWidth
+                            size="large"
+                            variant='contained'
+                            style={{ 
+                                marginTop: '1rem', 
+                                marginBottom: '1rem', 
+                                backgroundColor: '#000000'
+                            }}
+                        >
+                            New Job
+                        </Button>
+                    </header>
+
                     <AppBar position="static" color="default">
                         <Tabs
                             value={value}
                             onChange={handleChange}
-                            indicatorColor="primary"
-                            textColor="primary"
+                            TabIndicatorProps={{
+                                style: {background:'#000', color:'#000'}
+                            }}
                             variant="fullWidth"
                             aria-label="full width tabs example"
                         >

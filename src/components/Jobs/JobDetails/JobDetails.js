@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import Button from '@mui/material/Button';
 import AlertModal from '../../../common/AlertModal';
 
 import Lookup from '../../../common/Lookup';
@@ -281,7 +281,7 @@ const JobDetails = ({ rows }) => {
                     <div>
                         <Button
                             variant="contained"
-                            color="primary"
+                            style={{ backgroundColor: "#000" }}
                             onClick={handleSubmit}
                         >
                             Update

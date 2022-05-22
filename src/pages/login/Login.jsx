@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#000000",
         margin: theme.spacing(3, 2, 3, 0),
         "&:hover": {
-            backgroundColor: "hsl(241, 87%, 52%)",
+            backgroundColor: "#36454F",
             boxShadow: "none",
         },
     },

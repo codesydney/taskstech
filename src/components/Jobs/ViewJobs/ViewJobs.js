@@ -15,8 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs } from '../../../actions/action';
 import JobDiary from '../JobDiary/JobDiary';
 import JobDetails from '../JobDetails/JobDetails';
-import * as History from 'history';
-export const history = History.createBrowserHistory();
+//import * as History from 'history';
+
+//export const history = History.createBrowserHistory({ forceRefresh: true });
 
 
 function TabPanel(props) {
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     
 }));
 
-export default function FullWidthTabs() {
+export default function ViewJobs({history}) {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = useState(0);
@@ -82,6 +83,7 @@ export default function FullWidthTabs() {
         })
     };
 
+    console.log(history)
 
     const activeJobs = {
         payload: job.payload.filter(job => {
@@ -125,6 +127,7 @@ export default function FullWidthTabs() {
                             fullWidth
                             size="large"
                             variant='contained'
+                            onClick={() => history.push("/create/job")}
                             style={{ 
                                 marginTop: '1rem', 
                                 marginBottom: '1rem', 

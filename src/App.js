@@ -17,6 +17,9 @@ import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import InventoryDetail from "./components/inventory/InventoryDetail";
 
 import * as Pages from "../src/pages/Pages";
+import * as History from 'history';
+
+export const history = History.createBrowserHistory();
 
 function App() {
     return (
@@ -27,7 +30,7 @@ function App() {
                 <Route exact path="/login" component={Pages.Login} />
                 <Route exact path="/signup" component={Pages.SignUp} />
 
-                <Auth>
+                <Auth history={history}>
                     {/* Inventory Routes */}
                     <Route
                         exact={true}
@@ -68,13 +71,15 @@ function App() {
                     />
                     {/* Job Routes */}
                     <Route 
-                        exact path="/view/jobs" 
-                        component={ViewJobs} 
-                     />
-                    <Route 
                         exact path="/create/job" 
                         component={CreateJob} 
                      />
+                     
+                    <Route 
+                        exact path="/view/jobs" 
+                        component={ViewJobs} 
+                     />
+                    
                     <Route 
                         exact path="/view/jobs/diary" 
                         component={JobDiary} 

@@ -45,7 +45,6 @@ export default function DataTable(props) {
   const handleDiaryClick = (event, cellValues) => {
     const params = {
       cellValues,
-      //isClicked: true,
       componentType: 'diary',
       path: "/view/jobs/diary"
     };

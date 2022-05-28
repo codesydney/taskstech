@@ -15,9 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs } from '../../../actions/action';
 import JobDiary from '../JobDiary/JobDiary';
 import JobDetails from '../JobDetails/JobDetails';
-//import * as History from 'history';
-
-//export const history = History.createBrowserHistory({ forceRefresh: true });
+import SearchBar from '../../../common/SearchBar';
 
 
 function TabPanel(props) {
@@ -83,14 +81,11 @@ export default function ViewJobs({history}) {
         })
     };
 
-    console.log(history)
-
     const activeJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'In progress';
         })
     };
-
 
     useEffect(() => {
         dispatch(getAllJobs(job?.loading));
@@ -121,7 +116,7 @@ export default function ViewJobs({history}) {
                         }>
                             Jobs
                         </p>
-                        
+                        <SearchBar />
                         <Button
                             type='submit'
                             fullWidth

@@ -55,7 +55,7 @@ const CustomButton = styled(Button)(() => ({
   backgroundColor: 'black',
   position: 'absolute', //
   left: '0',
-  height: '5vh',//
+  height: '100%',//
   '&:hover': {
     backgroundColor: 'black',
   },

@@ -82,9 +82,9 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
   const [param, setParam] = React.useState({}); 
   const [type, setType] = React.useState('');
   const [actId, setActId] = React.useState(null);
-  const { activity } = useSelector(state => state); // , photos
+  const { activity } = useSelector(state => state);
   
-  const id = diary === undefined ? 0 : diary.id;
+  const id = diary === undefined ? 0 : diary.rows.id;
   const classes = useStyles();
   const matches = useMediaQuery('(max-width:400px)');
 

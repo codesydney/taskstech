@@ -42,11 +42,20 @@ export default function DataTable(props) {
   const classes = useStyles();
   const rows = jobs.payload;
 
-  const handleDiaryClick = (event, cellValues) => {
+  const handleDiaryClick = (event, rows) => {
     const params = {
-      cellValues,
+      rows,
       componentType: 'diary',
-      path: "/view/jobs/diary"
+    };
+    
+    parentCallback(params);
+  };
+
+  const handleJobDetailsClick = (event, rows) => {
+    const params = {
+      rows,
+      componentType: 'jobDetails',
+      detailsPath: `/view/jobs/details/${rows.row.id}`
     };
     
     parentCallback(params);
@@ -67,16 +76,6 @@ export default function DataTable(props) {
       </Button>
     );
   }
-
-  const handleJobDetailsClick = (event, cellValues) => {
-    const params = {
-      cellValues,
-      componentType: 'jobDetails',
-      path: `/view/jobs/details/${cellValues.id}`
-    };
-    
-    parentCallback(params);
-  };
 
   const renderJobDetailsElement = params => {
     return (

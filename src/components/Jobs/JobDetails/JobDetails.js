@@ -26,11 +26,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const JobDetails = ({ rows }) => {
-    const jobs = rows === undefined ? {} : rows;
-    const jobId = jobs.id;
-    const custId = jobs.row.customer.user_id;
-    const [jobName, setJobName] = useState(jobs.row.name);
-    const [description, setDescription] = useState(jobs.row.description);
+    const jobs = rows === undefined ? {} : rows.rows;
+    const jobId = jobs.row.id;
+    const custId = jobs.row === undefined ? {} : jobs.row.customer.user_id;
+    const [jobName, setJobName] = useState(jobs.row === undefined ? {} : jobs.row.name);
+    const [description, setDescription] = useState(jobs.row === undefined ? {} : jobs.row.description);
 
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
@@ -38,11 +38,14 @@ const JobDetails = ({ rows }) => {
         tradesperson_id: { helperText: '', fieldError: false },
         customer_id: { helperText: '', fieldError: false },
     });
+    
+    const name = jobs.row === undefined ? {} : jobs.row.customer;
+    const jstatus = jobs.row === undefined ? {} : jobs.row.job_status;
 
-    const [customerName, setCustomerName] = useState(`${jobs.row.customer.first_name} ${jobs.row.customer.last_name}`);
+    const [customerName, setCustomerName] = useState(`${name.first_name} ${name.last_name}`);
     const [customerId, setCustomerId] = useState(custId);
-    const [jobStatus, setJobStatus] = useState(jobs.row.job_status.name);
-    const [jobStatusId, setJobStatusId] = useState(jobs.row.job_status.id);
+    const [jobStatus, setJobStatus] = useState(jstatus.name);
+    const [jobStatusId, setJobStatusId] = useState(jstatus.id);
     const status = useSelector((state) => state.status.job);
     const { customers, job } = useSelector((state) => state);
     const indicator = useSelector((state) => state.job.loading);
@@ -94,8 +97,6 @@ const JobDetails = ({ rows }) => {
                     break;
             }
         }
-
-
     };
 
 
@@ -193,7 +194,6 @@ const JobDetails = ({ rows }) => {
                 },
             }}
         >
-
             <Paper
                 elevation={3}
                 component="form"
@@ -205,7 +205,7 @@ const JobDetails = ({ rows }) => {
                 onSubmit={handleSubmit}
             >
                 <Item>
-                    <p style={{ color: "#1a1a1a", fontFamily: "Poppins", fontSize: "28px" }}>
+                    <p className='title' style={{ color: "#1a1a1a", fontSize: "38px" }}>
                         Job Details
                     </p>
                 </Item>

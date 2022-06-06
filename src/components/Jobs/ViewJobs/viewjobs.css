@@ -7,6 +7,14 @@ tr.MuiTableRow-root.MuiTableRow-hover {
     height: 12vh;
 }
 
+.title {
+    color: "#1a1a1a";
+    font-family: "Comfortaa";
+    font-size: "32px";
+    text-align: 'left';
+    margin-top: '1rem';
+    margin-bottom: '1rem';
+}
 
 @media screen and (max-width: 600px) {
     .makeStyles-root-4 { width: 100% !important; }

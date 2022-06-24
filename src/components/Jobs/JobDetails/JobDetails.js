@@ -14,7 +14,7 @@ import { getStatus } from "../../../actions/action";
 import { getCustomers } from "../../../actions/customerActions";
 import { updateJob } from '../../../actions/action';
 import { useState } from "react";
-
+import './jobdetails.css';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -197,17 +197,11 @@ const JobDetails = ({ rows }) => {
             <Paper
                 elevation={3}
                 component="form"
-                sx={{
-                    width: matches === false ? '40vw' : '80vw',
-                    margin: '0 auto',
-                    padding: '10px'
-                }}
+                
                 onSubmit={handleSubmit}
             >
                 <Item>
-                    <p className='title' style={{ color: "#1a1a1a", fontSize: "38px" }}>
-                        Job Details
-                    </p>
+                    <p className='title'>Job Details</p>
                 </Item>
                 <Item>
                     <div>
@@ -280,8 +274,9 @@ const JobDetails = ({ rows }) => {
                 <Item>
                     <div>
                         <Button
+                            disabled
                             variant="contained"
-                            style={{ backgroundColor: "#000" }}
+                            style={{  color: 'white' }}
                             onClick={handleSubmit}
                         >
                             Update

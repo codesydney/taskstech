@@ -50,7 +50,6 @@ export default function ControlledAccordions(props) {
         key={row.id}
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
-        sx={{ margin: '1%' }}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -115,7 +114,7 @@ export default function ControlledAccordions(props) {
 
 
   return (
-    <div>
+    <div style={{ marginBottom: '25%' }}>
       {listRows()}
     </div>
   );

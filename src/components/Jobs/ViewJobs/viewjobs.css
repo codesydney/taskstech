@@ -10,7 +10,8 @@ tr.MuiTableRow-root.MuiTableRow-hover {
 .title {
     color: "#1a1a1a";
     font-family: "Comfortaa";
-    font-size: "32px";
+    font-size: 32px !important;
+    font-weight: 700;
     text-align: 'left';
     margin-top: '1rem';
     margin-bottom: '1rem';

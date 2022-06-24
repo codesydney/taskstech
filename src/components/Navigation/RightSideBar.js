@@ -9,14 +9,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CreateIcon from "@material-ui/icons/Create";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+//import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SelectAllIcon from "@material-ui/icons/SelectAll";
 import SettingsPowerIcon from "@material-ui/icons/SettingsPower";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import PostAddIcon from "@material-ui/icons/PostAdd";
-import WorkIcon from "@material-ui/icons/Work";
+//import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+//import PostAddIcon from "@material-ui/icons/PostAdd";
+//import WorkIcon from "@material-ui/icons/Work";
 import { withRouter } from "react-router-dom";
-import { useDispatch} from 'react-redux'
+import { useDispatch} from 'react-redux';
 import { signOut } from "../../actions/action";
 
 
@@ -64,10 +64,12 @@ function RightSideBar({history}) {
             text: "Jobs",
             icon: <SelectAllIcon />,
             onClick: () => {
-                history.push("/view/jobs"),
-                window.location.reload()
+                history.push("/view/jobs")
+                //window.location.reload()
             }
         },
+        /* 
+        ,
         {
             text: "New Customer",
             icon: <PersonAddIcon />,
@@ -88,6 +90,7 @@ function RightSideBar({history}) {
             icon: <WorkIcon />,
             onClick: () => history.push("/list/inventory"),
         },
+        */
         {
             text: "Logout",
             icon: <SettingsPowerIcon />,

@@ -11,21 +11,23 @@ import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import Header from "./components/Header/Header";
 import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 import InventoryList from "./components/inventory/InventoryList";
-import RightSideBar from "./components/rightSideBar/RightSideBar";
-
+//import RightSideBar from "./components/Navigation/RightSideBar";
+//import SwipeableEdgeDrawer from "./components/Navigation/SwipeableEdgeDrawer";
+import Navigation from "./components/Navigation/Navigation";
 import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import InventoryDetail from "./components/inventory/InventoryDetail";
-
 import * as Pages from "../src/pages/Pages";
 import * as History from 'history';
 
 export const history = History.createBrowserHistory();
 
 function App() {
+
     return (
         <div className="App">
             <Header />
-            <RightSideBar />
+            <Navigation />
+            
             <Switch>
                 <Route exact path="/login" component={Pages.Login} />
                 <Route exact path="/signup" component={Pages.SignUp} />

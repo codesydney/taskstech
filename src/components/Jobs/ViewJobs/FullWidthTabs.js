@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '60vw', //55rem
   },
+  stv: {}
 }));
 
 
@@ -103,7 +104,7 @@ export const FullWidthTabs = ({ history, callback }) => {
               title='All'
               parentCallback={callback}
             />
-            : <ControlledAccordions
+            : <ControlledAccordions 
               jobs={job}
               parentCallback={callback}
             />

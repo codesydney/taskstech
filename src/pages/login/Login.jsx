@@ -8,15 +8,14 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+//import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
 
-
 const useStyles = makeStyles(theme => ({
     root: {
-        height: "80vh",
+        height: "100vh",
     },
     paper: {
         margin: theme.spacing(8, 4),
@@ -53,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 export default function Login () {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const matches = useMediaQuery('(max-width:600px)');
+    const matches = useMediaQuery("(max-width:600px)");
 
     const [email, setEmail] = useState(""),
         [password, setPassword] = useState("");
@@ -89,7 +88,8 @@ export default function Login () {
     return (
         <Grid container component='main' className={classes.root}>
             <CssBaseline />
-            <Logo />
+            {/* <Logo /> */}
+            {matches === true ? <></> : <Logo />}
             <Grid
                 item
                 xs={12}
@@ -104,14 +104,8 @@ export default function Login () {
                         <Container component='main' maxWidth='xs'>
                             <Grid container spacing={3}>
                                 <Grid item>
-                                    <Typography component='h1' variant='h5'>
-                                        Login to TasksTech
-                                    </Typography>
+                                    <p className='title'>Login</p>
                                 </Grid>
-                                <Grid item xs={10} style={{ textAlign: 'left', padding: '0 12px !important' }}>
-                                    <p>*Required</p>
-                                </Grid>
-
                                 <Grid item xs={12}>
                                     <TextField
                                         variant='outlined'
@@ -127,8 +121,6 @@ export default function Login () {
                                         autoComplete='email'
                                         autoFocus
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
                                     <TextField
                                         variant='outlined'
                                         margin='normal'
@@ -145,6 +137,7 @@ export default function Login () {
                                         onKeyPress={event => onKeyEnter(event)}
                                     />
                                 </Grid>
+                                
                                 <Grid item xs={12}>
                                     <div className={classes.links}>
                                         <Link href='#' variant='body2'>
@@ -163,9 +156,9 @@ export default function Login () {
                                         fullWidth
                                         variant='contained'
                                         className={classes.submit}
-                                        style={{ 
-                                            width:  matches ? '78vw' : '38vw',
-                                            height: '7vh'
+                                        style={{
+                                            width: matches ? "78vw" : "38vw",
+                                            height: "7vh",
                                         }}
                                         onClick={() => handleSubmit()}
                                     >

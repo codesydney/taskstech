@@ -89,11 +89,13 @@ export const getStatus = () => async dispatch => {
 }
 
 // Authentication Action
-export const listenAuthState = () => {
+export const listenAuthState = (matches) => {
+    const renderedInMobile = matches ? '/mobile-login-menu' : '/login';
+    
     return async (dispatch) => {
         const token = localStorage.getItem('token')
         if (!token) {
-            dispatch(push('/login'))
+            dispatch(push(renderedInMobile))
         }
         dispatch(signInAction({
             isSignedIn: true,
@@ -304,12 +306,14 @@ export const updateTrader = (firstname, lastname, email, password, description, 
 }
 
 
-export const signOut = () => {
+export const signOut = (matches) => {
+    const renderedInMobile = matches ? '/mobile-login-menu' : '/login';
+
     return async (dispatch) => {
         dispatch(signOutAction());
         localStorage.removeItem('token')
         localStorage.removeItem('id')
-        dispatch(push('/login'));
+        dispatch(push(renderedInMobile));
     }
 }
 

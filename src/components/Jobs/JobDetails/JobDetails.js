@@ -197,7 +197,6 @@ const JobDetails = ({ rows }) => {
             <Paper
                 elevation={3}
                 component="form"
-                
                 onSubmit={handleSubmit}
             >
                 <Item>

@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { grey } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import useMediaQuery from "@mui/material/useMediaQuery";
 //import Skeleton from '@mui/material/Skeleton';
 //import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -48,12 +49,13 @@ function SwipeableEdgeDrawer(props) {
   const { window, history } = props;
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const matches = useMediaQuery("(max-width:600px)");
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(!newOpen);
   };
 
-
+  //console.log(`SwipeableEdge: ${matches}`)
 
   // This is used only for the example
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -75,7 +77,7 @@ function SwipeableEdgeDrawer(props) {
     {
       text: "Logout",
       icon: <SettingsPowerIcon />,
-      onClick: (() => dispatch(signOut())),
+      onClick: (() => dispatch(signOut(matches))),
     },
   ];
 

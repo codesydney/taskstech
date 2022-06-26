@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Auth from "./components/Auth";
@@ -11,6 +11,7 @@ import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import Header from "./components/Header/Header";
 import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 import InventoryList from "./components/inventory/InventoryList";
+import useMediaQuery from "@mui/material/useMediaQuery";
 //import RightSideBar from "./components/Navigation/RightSideBar";
 //import SwipeableEdgeDrawer from "./components/Navigation/SwipeableEdgeDrawer";
 import Navigation from "./components/Navigation/Navigation";
@@ -22,17 +23,32 @@ import * as History from 'history';
 export const history = History.createBrowserHistory();
 
 function App() {
+    const matches = useMediaQuery("(max-width:600px)");
+    //const mobileRoute = "";
+
+    useEffect(() => { 
+        //if(matches === true) 
+
+    }, []);
+
+    console.log(`previous: ${document.referrer}`)
 
     return (
         <div className="App">
-            <Header />
+            {matches === true ? <></> : <Header />}
             <Navigation />
-            
+
             <Switch>
-                <Route exact path="/login" component={Pages.Login} />
+                {
+                    matches === true
+                        ? <Route exact path="/mobile-login-menu" component={Pages.LoginIndex} /> : 
+                          <Route exact path="/login" component={Pages.Login} />
+                }
+                
+                <Route exact path="/mobile-login" component={Pages.Login} /> 
                 <Route exact path="/signup" component={Pages.SignUp} />
 
-                <Auth history={history}>
+                <Auth history={history} matches={matches}>
                     {/* Inventory Routes */}
                     <Route
                         exact={true}
@@ -72,23 +88,23 @@ function App() {
                         component={Pages.CustomerProfileUpdate}
                     />
                     {/* Job Routes */}
-                    <Route 
-                        exact path="/create/job" 
-                        component={CreateJob} 
-                     />
-                     
-                    <Route 
-                        exact path="/view/jobs" 
-                        component={ViewJobs} 
-                     />
-                    
-                    <Route 
-                        exact path="/view/jobs/diary" 
-                        component={JobDiary} 
+                    <Route
+                        exact path="/create/job"
+                        component={CreateJob}
                     />
-                    <Route 
-                        exact path="/view/jobs/details/id" 
-                        component={JobDetails} 
+
+                    <Route
+                        exact path="/view/jobs"
+                        component={ViewJobs}
+                    />
+
+                    <Route
+                        exact path="/view/jobs/diary"
+                        component={JobDiary}
+                    />
+                    <Route
+                        exact path="/view/jobs/details/id"
+                        component={JobDetails}
                     />
                 </Auth>
             </Switch>

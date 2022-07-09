@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 import AlertModal from '../../../common/AlertModal';
 
@@ -30,15 +30,17 @@ const JobDetails = ({ rows }) => {
     const jobId = jobs.row.id;
     const custId = jobs.row === undefined ? {} : jobs.row.customer.user_id;
     const [jobName, setJobName] = useState(jobs.row === undefined ? {} : jobs.row.name);
+    const [jobAddress, setJobAddress] = useState(jobs.row === undefined ? {} : jobs.row.address);
     const [description, setDescription] = useState(jobs.row === undefined ? {} : jobs.row.description);
-
+    const [notes, setNotes] = useState(jobs.row === undefined ? {} : jobs.row.notes);
+    
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
         description: { helperText: '', fieldError: false },
         tradesperson_id: { helperText: '', fieldError: false },
         customer_id: { helperText: '', fieldError: false },
     });
-    
+
     const name = jobs.row === undefined ? {} : jobs.row.customer;
     const jstatus = jobs.row === undefined ? {} : jobs.row.job_status;
 
@@ -59,11 +61,12 @@ const JobDetails = ({ rows }) => {
     }, [indicator]);
 
     let jobObject = {
-        id: jobId,
         name: jobName,
+        address: jobAddress,
         description: description,
         job_status_id: jobStatusId,
-        customer_id: customerId
+        customer_id: customerId,
+        notes: notes
     }
 
     const handleUserInput = event => {
@@ -97,6 +100,36 @@ const JobDetails = ({ rows }) => {
                     break;
             }
         }
+
+        /**/
+        if (name === "address") {
+            setJobAddress(value);
+            switch (fieldError) {
+                case false:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
+        }
+        /**/
+        if (name === "notes") {
+            setNotes(value);
+            switch (fieldError) {
+                case false:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
     };
 
 
@@ -194,88 +227,102 @@ const JobDetails = ({ rows }) => {
                 },
             }}
         >
+            <p className='title'>Job Details</p>
             <Paper
                 elevation={3}
                 component="form"
                 onSubmit={handleSubmit}
             >
-                <Item>
-                    <p className='title'>Job Details</p>
-                </Item>
-                <Item>
-                    <div>
-                        <TextField
-                            value={jobId}
-                            name='jobId'
-                            disabled
-                            id="outlined-error-helper-text"
-                            label="Job ID"
-                            variant="outlined"
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            error={errors.jobName === undefined ? false : errors.jobName.fieldError}
-                            helperText={errors.jobName === undefined ? false : errors.jobName.helperText}
-                            value={jobName}
-                            name='jobName'
-                            required
-                            id="outlined-error-helper-text"
-                            label="Job Name"
-                            variant="outlined"
-                            onBlur={handleUserInput}
-                            onChange={handleUserInput}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            error={errors.description === undefined ? '' : errors.description.fieldError}
-                            helperText={errors.description === undefined ? '' : errors.description.helperText}
-                            value={description}
-                            name='description'
-                            id="outlined-error-helper-text"
-                            label="Description"
-                            variant="outlined"
-                            onBlur={handleUserInput}
-                            onChange={handleUserInput}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            required
-                            id="outlined-select-currency-native"
-                            select
-                            name='job_status_id'
-                            value={jobStatus}
-                            onChange={handleDropdownChange}
-                            SelectProps={{
-                                native: true,
-                            }}
-                            variant="outlined"
-                        >
-                            {status.map((option, key) => (
-                                <option key={key} value={option.name} id={option.id}>
-                                    {option.name}
-                                </option>
-                            ))}
-                        </TextField>
-                    </div>
-                    <div>
-                        <Lookup
-                            data={customers.payload}
-                            customerName={customerName}
-                            handleDropdownChange={handleDropdownChange}
-                            errors={errors}
-                        />
-                    </div>
+                {/* <Item></Item> */}
+                <Item className="item">
+                    <TextField
+                        value={jobId}
+                        name='jobId'
+                        disabled
+                        id="outlined-error-helper-text"
+                        label="Job ID"
+                        variant="outlined"
+                    />
+                    <TextField
+                        error={errors.jobName === undefined ? false : errors.jobName.fieldError}
+                        helperText={errors.jobName === undefined ? false : errors.jobName.helperText}
+                        value={jobName}
+                        name='jobName'
+                        required
+                        id="outlined-error-helper-text"
+                        label="Job Name"
+                        variant="outlined"
+                        onBlur={handleUserInput}
+                        onChange={handleUserInput}
+                    />
+                    <TextField
+                        //error={errors.jobName === undefined ? false : errors.jobName.fieldError}
+                        //helperText={errors.jobName === undefined ? false : errors.jobName.helperText}
+                        value={jobAddress}
+                        name='jobAddress'
+                        required
+                        id="outlined-error-helper-text"
+                        label="Job Address"
+                        variant="outlined"
+                        onBlur={handleUserInput}
+                        onChange={handleUserInput}
+                    />
 
+                    <TextField
+                        error={errors.description === undefined ? '' : errors.description.fieldError}
+                        helperText={errors.description === undefined ? '' : errors.description.helperText}
+                        value={description}
+                        name='description'
+                        id="outlined-error-helper-text"
+                        label="Description"
+                        variant="outlined"
+                        onBlur={handleUserInput}
+                        onChange={handleUserInput}
+                    />
+
+                    <TextField
+                        required
+                        id="outlined-select-currency-native"
+                        select
+                        name='job_status_id'
+                        value={jobStatus}
+                        onChange={handleDropdownChange}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        variant="outlined"
+                    >
+                        {status.map((option, key) => (
+                            <option key={key} value={option.name} id={option.id}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </TextField>
+
+                    <Lookup
+                        data={customers.payload}
+                        customerName={customerName}
+                        handleDropdownChange={handleDropdownChange}
+                        errors={errors}
+                    />
+
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Notes"
+                        name='notes'
+                        multiline
+                        rows={6}
+                        value={notes}
+                        onBlur={handleUserInput}
+                        onChange={handleUserInput}
+                    />
                 </Item>
                 <Item>
                     <div>
                         <Button
                             disabled
                             variant="contained"
-                            style={{  color: 'white' }}
+                            style={{ color: 'white' }}
                             onClick={handleSubmit}
                         >
                             Update
@@ -292,7 +339,7 @@ const JobDetails = ({ rows }) => {
 
             <SimpleBackdrop loading={indicator} /> {/**/}
 
-        </Box>
+        </Box >
     );
 }
 

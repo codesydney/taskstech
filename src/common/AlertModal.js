@@ -19,6 +19,7 @@ const style = {
   pb: 2,
 };
 
+
 export default function AlertModal({ showModal, text }) {
   const [open, setOpen] = React.useState(showModal);
   const handleClose = () => {
@@ -37,10 +38,10 @@ export default function AlertModal({ showModal, text }) {
       >
         <Box sx={{ ...style, width: '250' }}>
           <h2 id="parent-modal-title" style={{ textAlign: 'center' }}>Success</h2>
-          <p id="parent-modal-description">
+          <p id="parent-modal-description" style={{ textAlign: 'center' }}>
             The job has been {text} succesfully.
           </p>
-          <Button style={{ color: '#000' }} onClick={handleClose}>Close</Button>
+          <Button style={{ color: '#000', position: 'relative',left: '3.5rem' }} onClick={handleClose}>Close</Button>
         </Box>
       </Modal>
     </div>

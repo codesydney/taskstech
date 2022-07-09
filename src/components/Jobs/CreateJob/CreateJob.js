@@ -3,7 +3,8 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import TextField from "@material-ui/core/TextField";
+//import TextField from "@material-ui/core/TextField";
+import TextField from '@mui/material/TextField';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AlertModal from '../../../common/AlertModal';
@@ -33,6 +34,8 @@ const CreateJob = () => {
     const [jobNameIsValid, setJobNameIsValid] = useState(false);
     const [descriptionIsValid, setDescriptionIsValid] = useState(false);
     const [customerNameIsValid, setCustomerNameIsValid] = useState(false);
+    const [jobAddress, setJobAddress] = useState('');
+    const [notes, setNotes] = useState('');
 
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
@@ -61,9 +64,11 @@ const CreateJob = () => {
 
     let jobObject = {
         name: jobName,
+        address: jobAddress,
         description: description,
         job_status_id: jobStatusId,
-        customer_id: customerId
+        customer_id: customerId,
+        notes: notes
     }
 
     const handleUserInput = event => {
@@ -101,11 +106,38 @@ const CreateJob = () => {
                     break;
             }
         }
-
+        
+        if (name === "address") {
+            setJobAddress(value);
+            switch (fieldError) {
+                case false:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
+        }
+       
+        if (name === "notes") {
+            console.log(value)
+            setNotes(value);
+            switch (fieldError) {
+                case false:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                case true:
+                    setErrors({ [name]: { helperText, fieldError } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
     };
 
-    console.log(`showModal: ${job.showModal}`)
 
     const fieldValidator = (field, fieldName) => {
         const fieldLimitReach = fieldName === 'jobName' ? /^.{29,30}$/ : /^.{99,100}$/;
@@ -255,6 +287,20 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
+                            error={errors.jobName === undefined ? false : errors.jobName.fieldError}
+                            helperText={errors.jobName === undefined ? false : errors.jobName.helperText}
+                            value={jobAddress}
+                            name='address'
+                            required
+                            id="outlined-error-helper-text"
+                            label="Job Address"
+                            variant="outlined"
+                            onBlur={handleUserInput}
+                            onChange={handleUserInput}
+                        />
+                    </div>
+                    <div>
+                        <TextField
                             error={errors.description === undefined ? '' : errors.description.fieldError}
                             helperText={errors.description === undefined ? '' : errors.description.helperText}
                             value={description}
@@ -294,18 +340,30 @@ const CreateJob = () => {
                             errors={errors}
                         />
                     </div>
+                    <div>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="Notes"
+                            name='notes'
+                            multiline
+                            rows={6}
+                            value={notes}
+                            onBlur={handleUserInput}
+                            onChange={handleUserInput}
+                        />
 
+                    </div>
                 </Item>
                 <Item>
                     <div>
                         <Button
                             disabled={isNotValid()}
-                            
+
                             variant="contained"
                             color="primary"
-                            style={{ 
+                            style={{
                                 backgroundColor: (() => {
-                                    if(isNotValid() == false) return "#000000"
+                                    if (isNotValid() == false) return "#000000"
                                 })(),
                                 width: matches ? "65vw" : "22vw",
                                 height: "7vh"

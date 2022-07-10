@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
-//import TextField from "@material-ui/core/TextField";
 import TextField from '@mui/material/TextField';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -225,7 +224,6 @@ const CreateJob = () => {
     };
 
     const resetFields = () => {
-
         jobObject = {
             customer_id: '',
             description: '',

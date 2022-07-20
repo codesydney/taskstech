@@ -2,10 +2,12 @@ div#add-section {
     margin-bottom: 2%;
 }
 
+/* For removal
 div#add-content {
     display: flex;
     justify-content: center;
 }
+*/
 
 button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
     border: 1px solid rgba(0, 0, 0, 0.23);

@@ -16,6 +16,7 @@ import PhotoUploadDialog from '../../../common/PhotoUploadDialog';
 import DetailsDialog from '../../../common/DetailsDialog';
 //import { getPhoto } from '../../../actions/photosActions';
 import Container from '@material-ui/core/Container';
+//import Container from '@mui/material/Container';
 import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
 
 

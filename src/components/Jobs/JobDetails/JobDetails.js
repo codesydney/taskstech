@@ -33,7 +33,7 @@ const JobDetails = ({ rows }) => {
     const [jobAddress, setJobAddress] = useState(jobs.row === undefined ? {} : jobs.row.address);
     const [description, setDescription] = useState(jobs.row === undefined ? {} : jobs.row.description);
     const [notes, setNotes] = useState(jobs.row === undefined ? {} : jobs.row.notes);
-    
+
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
         description: { helperText: '', fieldError: false },
@@ -269,18 +269,6 @@ const JobDetails = ({ rows }) => {
                     />
 
                     <TextField
-                        error={errors.description === undefined ? '' : errors.description.fieldError}
-                        helperText={errors.description === undefined ? '' : errors.description.helperText}
-                        value={description}
-                        name='description'
-                        id="outlined-error-helper-text"
-                        label="Description"
-                        variant="outlined"
-                        onBlur={handleUserInput}
-                        onChange={handleUserInput}
-                    />
-
-                    <TextField
                         required
                         id="outlined-select-currency-native"
                         select
@@ -307,6 +295,19 @@ const JobDetails = ({ rows }) => {
                     />
 
                     <TextField
+                        error={errors.description === undefined ? '' : errors.description.fieldError}
+                        helperText={errors.description === undefined ? '' : errors.description.helperText}
+                        value={description}
+                        name='description'
+                        multiline
+                        id="outlined-error-helper-text"
+                        label="Description"
+                        variant="outlined"
+                        onBlur={handleUserInput}
+                        onChange={handleUserInput}
+                    />
+
+                    <TextField
                         id="outlined-multiline-static"
                         label="Notes"
                         name='notes'
@@ -320,9 +321,8 @@ const JobDetails = ({ rows }) => {
                 <Item>
                     <div>
                         <Button
-                            disabled
                             variant="contained"
-                            style={{ color: 'white' }}
+                            style={{ color: 'white', backgroundColor: '#000000' }}
                             onClick={handleSubmit}
                         >
                             Update

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '60vw', //55rem
   },
-  stv: {}
 }));
 
 
@@ -57,7 +56,6 @@ export const FullWidthTabs = ({ history, callback }) => {
 
   return (
     <Container maxWidth="lg" className={classes.root}>
-
       <header>
         <p className='title'>
           Jobs

@@ -1,16 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 import Container from '@material-ui/core/Container';
-import JobDiaryCards from './JobDiaryCards';
+//import JobDiaryCards from './JobDiaryCards';
+import JobDiaryAccordions from './JobDiaryAccordions';
 import FormDialog from '../../../common/FormDialog';
 import './jobdiary.css';
 
-const useStyles = makeStyles((theme) => ({
+const theme = createTheme();
+const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    margin: '0 auto'
+    marginTop: '5rem',
   },
-  
+
 }));
 
 export default function JobDiary({ rows }) {
@@ -22,32 +24,43 @@ export default function JobDiary({ rows }) {
     setReload(arg);
   };
 
-  const handleClickOpen = () => {
+  /*const handleClickOpen = () => {
     setOpen(true);
-  };
+  };*/
 
   const handleCloseForm = () => {
     setOpen(false);
   };
-
   return (
-    <Container className={classes.root}> 
-      <JobDiaryCards
-        reload={reload}
-        handleReload={handleReload}
-        diary={rows}
-        handleClickOpen={handleClickOpen}
-      />
-      {
-        open === true
-          ? <FormDialog
-            open={open}
-            jobId={rows?.id}
-            handleClose={handleCloseForm}
+    <ThemeProvider theme={theme}>
+      <Container className={classes.root}>
+        {
+          /* 
+          <JobDiaryCards 
+            reload={reload}
             handleReload={handleReload}
+            diary={rows}
+            handleClickOpen={handleClickOpen}
           />
-          : null
-      }
-    </Container>
+          */
+        }
+        <JobDiaryAccordions
+          diary={rows}
+          reload={reload}
+          handleReload={handleReload}
+        //handleClickOpen={handleClickOpen}
+        />
+        {
+          open === true
+            ? <FormDialog
+              open={open}
+              jobId={rows?.id}
+              handleClose={handleCloseForm}
+              handleReload={handleReload}
+            />
+            : null
+        }
+      </Container>
+    </ThemeProvider>
   );
 }

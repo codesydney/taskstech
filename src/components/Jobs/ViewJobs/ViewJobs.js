@@ -21,7 +21,6 @@ export default function ViewJobs({ history }) {
             case 'diary':
                 return <JobDiary rows={params} />
             case 'jobDetails':
-                
                 return <JobDetails rows={params} path={path} />
             default: 
                 return <FullWidthTabs history={history} callback={callback} />

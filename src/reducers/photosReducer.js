@@ -23,8 +23,8 @@ function photosReducer(state = initialState, action) {
         case actions.GET_PHOTO_SUCCESS: 
             return {
                 ...state,
-                filename: action.payload?.filename,
-                filename_thumb: action.payload?.thumbnail,
+                filename: action.filename,
+                
             };
         default:
             return state;

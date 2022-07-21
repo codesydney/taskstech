@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -8,7 +8,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPhoto } from '../actions/photosActions'; 
+
+/*
+  Todo:
+  1. Pass photo object from JobDiaryAccordion to PhotoViewerDialog.
+  2. Make a GET Request to getPhoto action and pass the activity id and photo filename.
+  3. Get the photo from the photos state.
+*/
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -48,40 +56,33 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PhotoViewerDialog({open, setOpen}) {
-  //onClick={handleClickOpen}
+export default function PhotoViewerDialog({ open, setOpen, actId, photo,desc }) {
+  const dispatch = useDispatch();
+  const { photos } = useSelector(state => state);
 
-  
+  useEffect(() => {
+    dispatch(getPhoto(actId, photo[0].filename));
+
+  }, []);
+
+  console.log(photos.filename)
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <div>
-      
+
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+          {desc}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-            magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-            ullamcorper nulla non metus auctor fringilla.
-          </Typography>
+          <img src={`data:image/jpeg;charset=utf-8;base64,${photos.filename}`} style={{ width: '100%' }}/>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

@@ -54,8 +54,8 @@ export default function JobDiaryAccordions(props) {
 
 
   const activityDetails = activity.payload.map((act) => {
-    console.log(`act.id: ${act.id}`);
-    console.log(act.upload_photos);
+    //console.log(`act.id: ${act.id}`);
+    //console.log(act.upload_photos);
     return (
       <Accordion
         key={act.id}
@@ -113,14 +113,13 @@ export default function JobDiaryAccordions(props) {
             >
               <PreviewIcon />
             </Button>
-
-
           </Container>
         </AccordionDetails>
+        <PhotoViewerDialog setOpen={setOpen} open={open} actId={act.id} photo={act.upload_photos} desc={act.description}/>
       </Accordion>
     );
   });
-  
+
   return (
     <Container maxWidth="lg" className={classes.root}>
       <p
@@ -133,7 +132,6 @@ export default function JobDiaryAccordions(props) {
         Job Diary
       </p>
       {activityDetails}
-      {<PhotoViewerDialog setOpen={setOpen} open={open} />}
     </Container>
   );
 }

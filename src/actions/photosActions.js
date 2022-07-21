@@ -1,7 +1,6 @@
 import taskstechApi from '../api/taskstechApi';
 import * as actions from './actionTypes';
 
-
 export const addPhoto = (photoData) => async dispatch => {
     const token = localStorage.getItem('token');
 
@@ -38,13 +37,14 @@ export const addPhoto = (photoData) => async dispatch => {
 export const getPhoto = (activity_id, filename) => async dispatch => {
     try {
         await taskstechApi
-            .get(`/photos/${activity_id}/${filename}`)
+            .get(`/photos/${activity_id}/${filename}`, {
+                responseType: "arraybuffer"
+              })
             .then(res => {
                 if (res.data) {
-                    //console.log(res)
                     dispatch({
                         type: actions.GET_PHOTO_SUCCESS,
-                        filename: JSON.parse(res.data.filename),
+                        filename: Buffer.from(res.data, "binary").toString("base64"),
                         filename_thumb: res.data.thumbnail,
                     });
                 }

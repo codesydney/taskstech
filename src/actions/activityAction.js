@@ -2,6 +2,7 @@ import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
 import { push } from 'connected-react-router';
 
+
 export const getActivities = (loading = true, id) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -35,7 +36,7 @@ export const getActivity = (loading = true) => async dispatch => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
-        taskstechApi.get(`/activity/1`, config)
+        taskstechApi.get(`/activity/11`, config) 
             .then(res => {
                 dispatch({
                     type: actions.GET_ACTIVITY_STARTED,

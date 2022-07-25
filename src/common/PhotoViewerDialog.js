@@ -9,7 +9,8 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPhoto } from '../actions/photosActions'; 
+import { getPhoto } from '../actions/photosActions';
+//import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
 
 /*
   Todo:
@@ -56,37 +57,40 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PhotoViewerDialog({ open, setOpen, actId, photo,desc }) {
+export default function PhotoViewerDialog({ open, setOpen, actId, photo }) { //, desc
   const dispatch = useDispatch();
   const { photos } = useSelector(state => state);
+  const filename = photo !== [] ? photo[0]?.filename : '';
 
   useEffect(() => {
-    dispatch(getPhoto(actId, photo[0].filename));
-
-  }, []);
-
-  console.log(photos.filename)
+    if (photo !== undefined) {
+      dispatch(getPhoto(actId, filename)); 
+    } 
+  }, [filename]);
+  
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <div>
-
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {desc}
+          {actId}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <img src={`data:image/jpeg;charset=utf-8;base64,${photos.filename}`} style={{ width: '100%' }}/>
+          <img 
+            src={`${photos.filename}`} 
+            style={{ width: '100%' }}
+          />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            Save changes
+            Upload Photo
           </Button>
         </DialogActions>
       </BootstrapDialog>

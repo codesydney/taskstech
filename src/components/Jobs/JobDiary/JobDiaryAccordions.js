@@ -14,6 +14,8 @@ import { getActivities } from '../../../actions/activityAction';
 //import Box from '@mui/material/Box';
 import PreviewIcon from '@mui/icons-material/Preview';
 import Button from '@mui/material/Button';
+
+///common/assets/images/blank-profile-picture.png
 //import { Container } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
@@ -34,14 +36,18 @@ export default function JobDiaryAccordions(props) {
   const { activity } = useSelector(state => state);
   const { diary, handleReload, reload } = props; // parentCallback
   const [open, setOpen] = React.useState(false);
-
+  const [actId, setActId] = React.useState(0);
+  const [photos, setPhotos] = React.useState([]);
   const id = diary === undefined ? 0 : diary.rows.id;
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id,photos) => {
+    console.log(`id: ${id}`)
+    setActId(id);
+    setPhotos(photos);
     setOpen(true);
   };
 
@@ -68,25 +74,26 @@ export default function JobDiaryAccordions(props) {
           id="panel1bh-header"
         >
           <Container>
-            <Typography sx={{ width: '31%', flexShrink: 0 }}>
-              Created on
+            <Typography sx={{ width: '44%', flexShrink: 0, marginLeft: '-1.5rem' }}>
+              Description
             </Typography>
-            <Typography sx={{ color: 'text.secondary', marginLeft: '-2rem' }}>
-              {act.create_date}
+            <Typography
+              id='content'
+              sx={{ fontSize: 15, marginLeft: '-7rem' }}
+              color="text.secondary" gutterBottom
+            >
+              {act.description}
             </Typography>
+
           </Container>
         </AccordionSummary>
         <AccordionDetails >
           <Container className={classes.content}>
-            <Typography sx={{ width: '44%', flexShrink: 0, marginLeft: '-1.5rem' }}>
-              Diary Entry
+            <Typography sx={{ width: '31%', flexShrink: 0, marginLeft: '-0.7rem' }}>
+              Created on
             </Typography>
-            <Typography
-              id='content'
-              sx={{ fontSize: 15, marginLeft: '-8rem' }}
-              color="text.secondary" gutterBottom
-            >
-              {act.description}
+            <Typography sx={{ color: 'text.secondary', marginLeft: '-3.5rem' }}>
+              {act.create_date}
             </Typography>
             <Typography id='stat' sx={{ width: '44%', flexShrink: 0, marginLeft: '-.90rem' }}>
               Last Updated
@@ -109,13 +116,13 @@ export default function JobDiaryAccordions(props) {
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '50%' }}
-              onClick={handleClickOpen}
+              onClick={() => handleClickOpen(act.id, act.upload_photos)}
             >
               <PreviewIcon />
             </Button>
           </Container>
         </AccordionDetails>
-        <PhotoViewerDialog setOpen={setOpen} open={open} actId={act.id} photo={act.upload_photos} desc={act.description}/>
+        
       </Accordion>
     );
   });
@@ -132,6 +139,17 @@ export default function JobDiaryAccordions(props) {
         Job Diary
       </p>
       {activityDetails}
+      {/* 
+        get the id of the selected accordion 
+        set the activity id state with the id of the selected accordion
+        pass the activity id state to the PhotoViewerDialog
+      */}
+      <PhotoViewerDialog 
+        setOpen={setOpen} open={open} 
+        actId={actId} 
+        photo={photos} 
+        //desc={act.description} 
+      />
     </Container>
   );
 }

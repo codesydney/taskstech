@@ -1,5 +1,6 @@
 import taskstechApi from '../api/taskstechApi';
 import * as actions from './actionTypes';
+import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
 
 export const addPhoto = (photoData) => async dispatch => {
     const token = localStorage.getItem('token');
@@ -34,24 +35,24 @@ export const addPhoto = (photoData) => async dispatch => {
 }
 
 
-export const getPhoto = (activity_id, filename) => async dispatch => {
+export const getPhoto = (activity_id, filename = '') => async dispatch => {
     try {
+        const base64 = 'data:image/jpeg;charset=utf-8;base64,';
+        const config = { responseType: "arraybuffer" };
+
         await taskstechApi
-            .get(`/photos/${activity_id}/${filename}`, {
-                responseType: "arraybuffer"
-              })
-            .then(res => {
-                if (res.data) {
-                    dispatch({
-                        type: actions.GET_PHOTO_SUCCESS,
-                        filename: Buffer.from(res.data, "binary").toString("base64"),
-                        filename_thumb: res.data.thumbnail,
-                    });
-                }
-            });
-
-
+            .get(`/photos/${activity_id}/${filename}`, config)
+            .then(res => { 
+                dispatch({
+                    type: actions.GET_PHOTO_SUCCESS,
+                    filename: `${base64}${Buffer.from(res.data, "binary").toString("base64")}`,
+                    filename_thumb: res.data.thumbnail,});
+                });
     } catch (error) {
         console.log(error.message)
+        dispatch({
+            type: actions.GET_PHOTO_FAILED,
+            filename: unknownPhoto
+        }); /**/
     }
 }

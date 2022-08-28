@@ -7,7 +7,7 @@ import traderReducer from '../reducers/traderReducer';
 import inventoryReducer from './inventoryReducer';
 import customersReducer from './customersReducer';
 import photosReducer from './photosReducer';
-
+import searchReducer from './searchReducer';
 
 const rootReducer = history => combineReducers({
     router:connectRouter(history),
@@ -17,7 +17,8 @@ const rootReducer = history => combineReducers({
     photos: photosReducer,
     activity: activityReducer,
     customers: customersReducer,
-    inventory:inventoryReducer
+    inventory:inventoryReducer,
+    searchResult: searchReducer
 });
 
 export default rootReducer;

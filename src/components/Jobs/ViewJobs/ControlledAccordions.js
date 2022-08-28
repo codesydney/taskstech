@@ -14,7 +14,7 @@ import { Container } from '@mui/material';
 
 export default function ControlledAccordions(props) {
   const [expanded, setExpanded] = React.useState('panel1');
-  const { jobs, parentCallback } = props;
+  const { jobs, parentCallback,searchTerm } = props;
 
   const rows = jobs.payload;
 
@@ -43,8 +43,11 @@ export default function ControlledAccordions(props) {
 
   };
 
+  console.log(`searchTerm: ${searchTerm} at Controlled Accordion`);
 
+  
   const listRows = () => rows.map(row => {
+    // Add filter
     return (
       <Accordion
         key={row.id}

@@ -1,11 +1,13 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import { useDispatch } from 'react-redux';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { search } from '../actions/searchAction';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -61,17 +63,30 @@ const CustomButton = styled(Button)(() => ({
   },
 }));
 
-const BtnOnClick = () => {
-  console.log('stv')
-}
 
-export default function SearchAppBar() {
+
+export default function SearchAppBar({setSearchInitiated}) { //  { setSearchTerm }
+  const [field, setField] = useState('');
+  const dispatch = useDispatch();
+
+  const FieldOnChange = (event) => {
+    setField(event.target.value)
+  }
+
+  const ButtonOnClick = () => {
+    if(field !== "") {
+      setSearchInitiated(true);
+      dispatch(search(field));
+    }
+    else setSearchInitiated(false)
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar style={{ backgroundColor: 'black' }}>
           <Search>
-            <CustomButton onClick={BtnOnClick} variant="contained">
+            <CustomButton onClick={ButtonOnClick} variant="contained">
               <SearchIconWrapper>
                 <SearchIcon style={{ color: 'white' }} />
               </SearchIconWrapper>
@@ -81,6 +96,7 @@ export default function SearchAppBar() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
               style={{ left: '40px' }}
+              onChange={FieldOnChange}
             />
           </Search>
         </Toolbar>

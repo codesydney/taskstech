@@ -29,8 +29,9 @@ export const FullWidthTabs = ({ history, callback }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
-
-  const { job } = useSelector((state) => state);
+  const [searchInitiated, setSearchInitiated] = useState(false);
+  const { job, searchResult } = useSelector((state) => state);
+  useSelector((state) => console.log(state));
   const matches = useMediaQuery('(max-width:600px)');
   const dispatch = useDispatch();
 
@@ -54,13 +55,14 @@ export const FullWidthTabs = ({ history, callback }) => {
     })
   };
 
+  console.log(searchInitiated);
   return (
     <Container maxWidth="lg" className={classes.root}>
       <header>
         <p className='title'>
           Jobs
         </p>
-        <SearchBar />
+        <SearchBar setSearchInitiated={setSearchInitiated} />
         <Button
           type='submit'
           fullWidth
@@ -103,7 +105,7 @@ export const FullWidthTabs = ({ history, callback }) => {
               parentCallback={callback}
             />
             : <ControlledAccordions 
-              jobs={job}
+              jobs={searchInitiated === true ? searchResult : job }
               parentCallback={callback}
             />
         }
@@ -113,7 +115,7 @@ export const FullWidthTabs = ({ history, callback }) => {
         {
           matches === false
             ? <DataTable
-              jobs={completedJobs}
+              jobs={searchInitiated === true ? searchResult : completedJobs}
               title='All'
               parentCallback={callback}
             />
@@ -134,6 +136,7 @@ export const FullWidthTabs = ({ history, callback }) => {
             : <ControlledAccordions
                 jobs={activeJobs}
                 parentCallback={callback}
+                
               />
         }
       </TabPanel>

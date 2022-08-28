@@ -38,16 +38,18 @@ export default function JobDiaryAccordions(props) {
   const [open, setOpen] = React.useState(false);
   const [actId, setActId] = React.useState(0);
   const [photos, setPhotos] = React.useState([]);
+  const [description, setDescription] = React.useState('');
   const id = diary === undefined ? 0 : diary.rows.id;
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleClickOpen = (id,photos) => {
+  const handleClickOpen = (id,photos, description) => {
     console.log(`id: ${id}`)
     setActId(id);
     setPhotos(photos);
+    setDescription(description)
     setOpen(true);
   };
 
@@ -116,7 +118,7 @@ export default function JobDiaryAccordions(props) {
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '50%' }}
-              onClick={() => handleClickOpen(act.id, act.upload_photos)}
+              onClick={() => handleClickOpen(act.id, act.upload_photos, act.description)}
             >
               <PreviewIcon />
             </Button>
@@ -148,7 +150,7 @@ export default function JobDiaryAccordions(props) {
         setOpen={setOpen} open={open} 
         actId={actId} 
         photo={photos} 
-        //desc={act.description} 
+        description={description} 
       />
     </Container>
   );

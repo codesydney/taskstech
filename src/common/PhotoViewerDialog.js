@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPhoto } from '../actions/photosActions';
-//import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
+import SimpleBackdrop from '../components/Loading/SimpleBackdrop';
 
 /*
   Todo:
@@ -57,34 +57,44 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PhotoViewerDialog({ open, setOpen, actId, photo }) { //, desc
+export default function PhotoViewerDialog({ open, setOpen, actId, photo, description }) {
   const dispatch = useDispatch();
   const { photos } = useSelector(state => state);
   const filename = photo !== [] ? photo[0]?.filename : '';
 
   useEffect(() => {
-    if (photo !== undefined) {
-      dispatch(getPhoto(actId, filename)); 
-    } 
+    if (photo !== undefined) { //photo !== undefined
+      dispatch(getPhoto(actId, filename));
+    }
   }, [filename]);
-  
+
   const handleClose = () => {
     setOpen(false);
   };
 
-  return (
-    <div>
+  console.log(photos)
+
+  const photoViewer = () => {
+    return (
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {actId}
+          {description}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <img 
-            src={`${photos.filename}`} 
+          {
+            photos.filename 
+              ? <SimpleBackdrop loading={photos.loading} /> 
+              : <img
+                  src={`${photos.filename}`}
+                  style={{ width: '100%' }}
+                />
+          }
+          <img
+            src={`${photos.filename}`}
             style={{ width: '100%' }}
           />
         </DialogContent>
@@ -94,6 +104,11 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo }) { //,
           </Button>
         </DialogActions>
       </BootstrapDialog>
+    );
+  }
+  return (
+    <div>
+      {photoViewer()}
     </div>
   );
 }

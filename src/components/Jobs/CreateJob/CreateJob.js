@@ -380,7 +380,7 @@ const CreateJob = () => {
                 </Item>
             </Paper>
 
-            <SimpleBackdrop loading={indicator} /> {/**/}
+            <SimpleBackdrop loading={indicator} /> 
 
         </Box>
     );

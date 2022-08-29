@@ -76,7 +76,7 @@ export default function SearchAppBar({setSearchInitiated}) { //  { setSearchTerm
   const ButtonOnClick = () => {
     if(field !== "") {
       setSearchInitiated(true);
-      dispatch(search(field));
+      dispatch(search('job',field));
     }
     else setSearchInitiated(false)
   }

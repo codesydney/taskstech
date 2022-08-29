@@ -15,7 +15,6 @@ export const search = (type = 'job',search_term = '') => async dispatch => {
                     loading: true
                 });
                 if (res.data) {
-                    
                     dispatch({
                         type: actions.GET_SEARCHED_JOB,
                         payload: res.data,

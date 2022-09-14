@@ -5,6 +5,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import PhotoViewerDialog from '../../../common/PhotoViewerDialog';
 import { makeStyles } from '@mui/styles';
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -20,33 +22,49 @@ import Button from '@mui/material/Button';
 
 const useStyles = makeStyles(() => ({
   root: { width: '60vw' },
+  iconColor: { color: 'black'},
+
   content: {
     marginBottom: '10%',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: '-10px'
   },
+  activityButtonMobile: {
+    position: 'relative',
+    top: '2rem',
+    left: '1rem ',
+    height: '35% !important',
+    width: '35% !important',
+    backgroundColor: 'white !important',
+    borderRadius: '50px',
+    "border-style": 'solid !important',
+    "border-color": 'black !important',
+    boxShadow: '0 6px #999 !important',
+  }, 
+  
 }));
+
 
 export default function JobDiaryAccordions(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState('panel1');
-  const matches = useMediaQuery('(max-width:400px)');
+  //const matches = useMediaQuery('(max-width:400px)');
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
-  const { diary, handleReload, reload } = props; // parentCallback
+  const { diary, handleReload, reload, handleClickOpenForm } = props; // parentCallback
   const [open, setOpen] = React.useState(false);
   const [actId, setActId] = React.useState(0);
   const [photos, setPhotos] = React.useState([]);
   const [description, setDescription] = React.useState('');
   const id = diary === undefined ? 0 : diary.rows.id;
+  const matches = useMediaQuery('(max-width:400px)');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleClickOpen = (id,photos, description) => {
-    console.log(`id: ${id}`)
+  const handleClickOpenAccordion = (id, photos, description) => {
     setActId(id);
     setPhotos(photos);
     setDescription(description)
@@ -62,8 +80,7 @@ export default function JobDiaryAccordions(props) {
 
 
   const activityDetails = activity.payload.map((act) => {
-    //console.log(`act.id: ${act.id}`);
-    //console.log(act.upload_photos);
+    
     return (
       <Accordion
         key={act.id}
@@ -118,39 +135,51 @@ export default function JobDiaryAccordions(props) {
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '50%' }}
-              onClick={() => handleClickOpen(act.id, act.upload_photos, act.description)}
+              onClick={() => handleClickOpenAccordion(act.id, act.upload_photos, act.description)}
             >
               <PreviewIcon />
             </Button>
           </Container>
         </AccordionDetails>
-        
+
       </Accordion>
     );
   });
 
   return (
     <Container maxWidth="lg" className={classes.root}>
-      <p
-        className='title'
-        style={{
-          fontSize: matches === true
-            ? '38px' : '48px'
-        }}
-      >
-        Job Diary
-      </p>
+      <Grid container spacing={0}>
+        <Grid item xs={8}>
+          <p
+            className='title'
+            style={{
+              fontSize: matches === true
+                ? '38px' : '48px',
+              height: '100% !important',
+              width: '80% !important',
+              textAlign: 'right'
+            }}
+          >
+            Job Diary
+          </p>
+        </Grid>
+        <Grid item xs={4}>
+          <Button 
+            variant="outlined" 
+            className={classes.activityButtonMobile} 
+            onMouseUp={handleClickOpenForm}
+          >
+            <NoteAddIcon className={classes.iconColor} />
+          </Button>
+        </Grid>
+      </Grid>
+
       {activityDetails}
-      {/* 
-        get the id of the selected accordion 
-        set the activity id state with the id of the selected accordion
-        pass the activity id state to the PhotoViewerDialog
-      */}
-      <PhotoViewerDialog 
-        setOpen={setOpen} open={open} 
-        actId={actId} 
-        photo={photos} 
-        description={description} 
+      <PhotoViewerDialog
+        setOpen={setOpen} open={open}
+        actId={actId}
+        photo={photos}
+        description={description}
       />
     </Container>
   );

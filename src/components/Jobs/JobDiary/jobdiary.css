@@ -36,4 +36,21 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined:hover {
         padding: 0;
         margin: 0;
     }
+
+    button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
+        border: 1px solid rgba(0, 0, 0, 0.23);
+        padding: 5px 15px;
+        min-width: 10px;
+        height: 80%;
+        background-color: #ffffff;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        left: 1rem;
+    }
+
+    button:active {
+        background-color: rgb(207, 206, 206) !important;
+        box-shadow: 0 5px #666  !important;
+        transform: translateY(4px) !important;
+    }
 }

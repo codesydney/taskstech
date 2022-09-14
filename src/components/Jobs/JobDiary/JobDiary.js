@@ -24,9 +24,9 @@ export default function JobDiary({ rows }) {
     setReload(arg);
   };
 
-  /*const handleClickOpen = () => {
+  const handleClickOpenForm = () => {
     setOpen(true);
-  };*/
+  };
 
   const handleCloseForm = () => {
     setOpen(false);
@@ -40,21 +40,25 @@ export default function JobDiary({ rows }) {
             reload={reload}
             handleReload={handleReload}
             diary={rows}
-            handleClickOpen={handleClickOpen}
+            handleClickOpenForm={handleClickOpenForm}
           />
           */
         }
-        <JobDiaryAccordions
+        {
+          /* */
+          <JobDiaryAccordions
           diary={rows}
           reload={reload}
           handleReload={handleReload}
-        //handleClickOpen={handleClickOpen}
+          handleClickOpenForm={handleClickOpenForm}
         />
+          
+        }
         {
           open === true
             ? <FormDialog
               open={open}
-              jobId={rows?.id}
+              jobId={rows.rows.id}/* displays empty id */
               handleClose={handleCloseForm}
               handleReload={handleReload}
             />

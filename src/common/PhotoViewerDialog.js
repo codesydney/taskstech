@@ -12,12 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPhoto } from '../actions/photosActions';
 import SimpleBackdrop from '../components/Loading/SimpleBackdrop';
 
-/*
-  Todo:
-  1. Pass photo object from JobDiaryAccordion to PhotoViewerDialog.
-  2. Make a GET Request to getPhoto action and pass the activity id and photo filename.
-  3. Get the photo from the photos state.
-*/
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {

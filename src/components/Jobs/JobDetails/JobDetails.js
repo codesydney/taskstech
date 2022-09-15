@@ -61,6 +61,7 @@ const JobDetails = ({ rows }) => {
     }, [indicator]);
 
     let jobObject = {
+        id: jobId,
         name: jobName,
         address: jobAddress,
         description: description,

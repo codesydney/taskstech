@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import Container from '@material-ui/core/Container';
 //import JobDiaryCards from './JobDiaryCards';
 import JobDiaryAccordions from './JobDiaryAccordions';
+import JobDiaryDetails from './JobDiaryDetails';
 import FormDialog from '../../../common/FormDialog';
 import './jobdiary.css';
 
@@ -17,20 +18,36 @@ const useStyles = makeStyles(() => ({
 
 export default function JobDiary({ rows }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [openActivityForm, setOpenActivityForm] = React.useState(false);
+  const [openActivityDetailsForm, setOpenActivityDetailsForm] = React.useState(false);
+  const [createdDate, setCreatedDate] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [lastUpdatedDate, setLastUpdatedDate] = React.useState('');
+  const [lastUpdatedBy, setLastUpdatedBy] = React.useState('');
   const [reload, setReload] = React.useState(false);
 
   const handleReload = (arg) => {
     setReload(arg);
   };
+console.log(rows.rows.id)
+  const handleClickOpenActivityDetailsForm = (activityDescription,creationDate, dateLastUpdated, updatedBy) => {
+    setOpenActivityDetailsForm(true);
+    setDescription(activityDescription);
+    setCreatedDate(creationDate);
+    setLastUpdatedDate(dateLastUpdated);
+    setLastUpdatedBy(updatedBy);
+  }
+  const handleClickCloseActivityDetailsForm = () => setOpenActivityDetailsForm(false);
 
-  const handleClickOpenForm = () => {
-    setOpen(true);
+  const handleClickOpenCreateForm = () => {
+    setOpenActivityForm(true);
   };
 
   const handleCloseForm = () => {
-    setOpen(false);
+    setOpenActivityForm(false);
   };
+
+  console.log(rows)
   return (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
@@ -40,27 +57,41 @@ export default function JobDiary({ rows }) {
             reload={reload}
             handleReload={handleReload}
             diary={rows}
-            handleClickOpenForm={handleClickOpenForm}
+            handleClickOpenCreateForm={handleClickOpenCreateForm}
           />
           */
         }
         {
           /* */
           <JobDiaryAccordions
-          diary={rows}
-          reload={reload}
-          handleReload={handleReload}
-          handleClickOpenForm={handleClickOpenForm}
-        />
-          
+            diary={rows}
+            reload={reload}
+            handleReload={handleReload}
+            handleClickOpenCreateForm={handleClickOpenCreateForm}
+            handleClickOpenActivityDetailsForm={handleClickOpenActivityDetailsForm}
+          />
+
         }
         {
-          open === true
+          openActivityForm === true
             ? <FormDialog
-              open={open}
-              jobId={rows.rows.id}/* displays empty id */
+              open={openActivityForm}
+              jobId={rows.rows.id}
               handleClose={handleCloseForm}
               handleReload={handleReload}
+            />
+            : null
+        }
+        {
+            openActivityDetailsForm === true
+            ? <JobDiaryDetails
+              activityId={rows.rows.id}
+              description={description}
+              createdDate={createdDate}
+              lastUpdatedDate={lastUpdatedDate}
+              lastUpdatedBy={lastUpdatedBy}
+              open={openActivityDetailsForm}
+              handleClose={handleClickCloseActivityDetailsForm}
             />
             : null
         }

@@ -22,7 +22,7 @@ export const history = History.createBrowserHistory();
 function App() {
     const matches = useMediaQuery("(max-width:600px)");
 
-    console.log(`previous: ${document.referrer}`)
+    //console.log(`previous: ${document.referrer}`)
 
     return (
         <div className="App">
@@ -83,7 +83,6 @@ function App() {
                         exact path="/create/job"
                         component={CreateJob}
                     />
-
                     <Route
                         exact path="/view/jobs"
                         component={ViewJobs}

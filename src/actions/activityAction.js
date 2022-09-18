@@ -6,7 +6,7 @@ import { push } from 'connected-react-router';
 export const getActivities = (loading = true, id) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const job = { // temp
+    const job = { 
         "job_id": id
     };
 
@@ -70,6 +70,32 @@ export const addActivity = (activity) => async dispatch => {
             .then(res => {
                 dispatch({
                     type: actions.ADD_ACTIVITY_STARTED,
+                    loading: true
+                });
+                if (res.data) {
+                    dispatch(push('/view/jobs'));
+                }
+            })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const updateActivity = (activity) => async dispatch => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    const job = {
+        "description": activity.description,
+        //"upload_photo": activity.image,
+        "job_id": activity.id
+    };
+    
+    try {
+        taskstechApi.put(`/activity/${activity.id}`, job, config)
+            .then(res => {
+                dispatch({
+                    type: actions.UPDATE_ACTIVITY_STARTED,
                     loading: true
                 });
                 if (res.data) {

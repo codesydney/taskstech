@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -57,12 +57,12 @@ export default function JobDiaryAccordions(props) {
     diary, handleReload, 
     reload, handleClickOpenCreateForm, 
     handleClickOpenActivityDetailsForm 
-  } = props; // parentCallback
-  const [open, setOpen] = React.useState(false);
-  const [actId, setActId] = React.useState(0);
-  const [photos, setPhotos] = React.useState([]);
+  } = props; 
+  const [open, setOpen] = useState(false);
+  const [actId, setActId] = useState(0);
+  const [photos, setPhotos] = useState([]);
   
-  const [description, setDescription] = React.useState('');
+  const [description, setDescription] = useState('');
   const id = diary === undefined ? 0 : diary.rows.id;
   const matches = useMediaQuery('(max-width:400px)');
 
@@ -109,7 +109,6 @@ export default function JobDiaryAccordions(props) {
             >
               {act.description}
             </Typography>
-
           </Container>
         </AccordionSummary>
         <AccordionDetails >
@@ -133,15 +132,13 @@ export default function JobDiaryAccordions(props) {
             <Typography sx={{ fontSize: 14, marginLeft: '-5rem' }} color="text.secondary" gutterBottom>
               {act.update_by}
             </Typography>
-
-
           </Container>
           <Container>
             <Button
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '25%', margin: '1% 3%' }}
-              onClick={() => handleClickOpenActivityDetailsForm(act.description,act.create_date,act.update_date,act.update_by)} // act.create_date setCreatedDate
+              onClick={() => handleClickOpenActivityDetailsForm(act.description,act.create_date,act.update_date,act.update_by)} 
             >
               <EditIcon />
             </Button>
@@ -199,4 +196,3 @@ export default function JobDiaryAccordions(props) {
     </Container>
   );
 }
-//

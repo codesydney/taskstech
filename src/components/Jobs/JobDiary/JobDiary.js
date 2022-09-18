@@ -29,7 +29,7 @@ export default function JobDiary({ rows }) {
   const handleReload = (arg) => {
     setReload(arg);
   };
-
+console.log(rows.rows.id)
   const handleClickOpenActivityDetailsForm = (activityDescription,creationDate, dateLastUpdated, updatedBy) => {
     setOpenActivityDetailsForm(true);
     setDescription(activityDescription);
@@ -76,7 +76,7 @@ export default function JobDiary({ rows }) {
           openActivityForm === true
             ? <FormDialog
               open={openActivityForm}
-              jobId={rows.rows.id}/* displays empty id */
+              jobId={rows.rows.id}
               handleClose={handleCloseForm}
               handleReload={handleReload}
             />
@@ -85,6 +85,7 @@ export default function JobDiary({ rows }) {
         {
             openActivityDetailsForm === true
             ? <JobDiaryDetails
+              activityId={rows.rows.id}
               description={description}
               createdDate={createdDate}
               lastUpdatedDate={lastUpdatedDate}

@@ -1,14 +1,29 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { updateActivity } from '../../../actions/activityAction';
+import { useDispatch } from 'react-redux';
 
+export default function JobDiaryDetails({ 
+  open, handleClose,activityId,
+  description,lastUpdatedDate, 
+  lastUpdatedBy 
+}) { 
+  const [desc, setDesc] = useState(description);
+  const dispatch = useDispatch();
 
-export default function JobDiaryDetails({ open, handleClose,description,lastUpdatedDate, lastUpdatedBy }) { // pass diary as prop
+  const activity = {
+    id: activityId,
+    description: desc
+  };
   
+  const handleOnChange = ({ target }) => setDesc(target.value);
+  const handleUpdate = () => dispatch(updateActivity(activity));
+
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
@@ -19,15 +34,15 @@ export default function JobDiaryDetails({ open, handleClose,description,lastUpda
             margin="dense"
             id="name"
             label="Description"
-            value={description}
+            value={desc}
             fullWidth
             variant="standard"
+            onChange={handleOnChange}
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            // display date. Update this date in the action creator
             label="Last Updated Date"
             value={lastUpdatedDate}
             fullWidth
@@ -47,7 +62,7 @@ export default function JobDiaryDetails({ open, handleClose,description,lastUpda
         </DialogContent>
         <DialogActions>
           <Button style={{ color: 'black' }} onClick={handleClose}>Cancel</Button>
-          <Button style={{ color: 'black' }} onClick={handleClose}>Update</Button>
+          <Button style={{ color: 'black' }} onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
     </div>

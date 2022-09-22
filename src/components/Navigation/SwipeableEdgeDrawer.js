@@ -7,8 +7,6 @@ import { grey } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import useMediaQuery from "@mui/material/useMediaQuery";
-//import Skeleton from '@mui/material/Skeleton';
-//import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Typography from '@mui/material/Typography';
 import CreateIcon from "@material-ui/icons/Create";
@@ -55,9 +53,6 @@ function SwipeableEdgeDrawer(props) {
     setOpen(!newOpen);
   };
 
-  //console.log(`SwipeableEdge: ${matches}`)
-
-  // This is used only for the example
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const rightSideData = [
@@ -69,10 +64,7 @@ function SwipeableEdgeDrawer(props) {
     {
       text: "Jobs",
       icon: <SelectAllIcon />,
-      onClick: () => {
-        history.push("/view/jobs")
-        //window.location.reload()
-      }
+      onClick: () => history.push("/view/jobs"),
     },
     {
       text: "Logout",

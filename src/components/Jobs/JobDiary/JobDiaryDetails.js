@@ -17,10 +17,10 @@ export default function JobDiaryDetails({
   const dispatch = useDispatch();
 
   const activity = {
-    id: activityId,
+    id: activityId,//
     description: desc
   };
-  
+  console.log(activityId);
   const handleOnChange = ({ target }) => setDesc(target.value);
   const handleUpdate = () => dispatch(updateActivity(activity));
 

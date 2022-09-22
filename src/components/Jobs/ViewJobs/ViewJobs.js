@@ -13,13 +13,18 @@ export default function ViewJobs({ history }) {
         setType(props.componentType);
         setParams(props)
         setPath(props.detailsPath)
+        
     };
     
 
     const renderDataTable = () => {
         switch (type) {
             case 'diary':
-                return <JobDiary rows={params} />
+                return <JobDiary rows={params} path={path} onClick={history.push({
+                    pathname: "/view/jobs/diary",
+                    state: { rows: params }
+                })} 
+                />
             case 'jobDetails':
                 return <JobDetails rows={params} path={path} />
             default: 

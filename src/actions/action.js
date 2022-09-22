@@ -306,14 +306,14 @@ export const updateTrader = (firstname, lastname, email, password, description, 
 }
 
 
-export const signOut = (matches) => {
-    const renderedInMobile = matches ? '/mobile-login-menu' : '/login';
-
+export const signOut = () => { // matches
+    //const renderedInMobile = matches ? '/mobile-login-menu' : '/login';
+    const logout = "/login";
     return async (dispatch) => {
         dispatch(signOutAction());
         localStorage.removeItem('token')
         localStorage.removeItem('id')
-        dispatch(push(renderedInMobile));
+        dispatch(push(logout)); //renderedInMobile
     }
 }
 

@@ -14,24 +14,23 @@ import { Container } from '@mui/material';
 
 export default function ControlledAccordions(props) {
   const [expanded, setExpanded] = React.useState('panel1');
-  const { jobs, parentCallback,searchTerm } = props;
+  const { jobs, parentCallback } = props; 
 
   const rows = jobs.payload;
 
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  const handleChange = (panel) => (event, isExpanded) => setExpanded(isExpanded ? panel : false);
 
   const handleDiaryClick = (event, rows) => {
     const params = {
       rows,
+      jobDetailsPath: `/view/jobs/diary/details/${rows.id}`,
       componentType: 'diary',
     };
-
+    
     parentCallback(params);
   };
-
+  
   const handleJobDetailsClick = (event, row) => {
     const params = {
       componentType: 'jobDetails',
@@ -40,14 +39,12 @@ export default function ControlledAccordions(props) {
     };
     
     parentCallback(params);
-
   };
 
-  console.log(`searchTerm: ${searchTerm} at Controlled Accordion`);
-
+  
+  
   
   const listRows = () => rows.map(row => {
-    // Add filter
     return (
       <Accordion
         key={row.id}
@@ -114,7 +111,6 @@ export default function ControlledAccordions(props) {
       </Accordion>
     );
   })
-
 
   return (
     <div style={{ marginBottom: '25%' }}>

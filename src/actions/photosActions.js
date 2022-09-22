@@ -58,7 +58,7 @@ export const getPhoto = (activity_id, filename = '') => async dispatch => {
 
             });
     } catch (error) {
-        console.log(error.message)
+        //console.log(error.message)
     }
 }
 

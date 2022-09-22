@@ -10,18 +10,17 @@ import './jobdiary.css';
 
 const theme = createTheme();
 const useStyles = makeStyles(() => ({
-  root: {
-    marginTop: '5rem',
-  },
-
+  root: { marginTop: '5rem', },
 }));
 
-export default function JobDiary({ rows }) {
+export default function JobDiary(props) { 
   const classes = useStyles();
+  const { rows } = props;
   const [openActivityForm, setOpenActivityForm] = React.useState(false);
   const [openActivityDetailsForm, setOpenActivityDetailsForm] = React.useState(false);
   const [createdDate, setCreatedDate] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [activityId, setActivityId] = React.useState('');
   const [lastUpdatedDate, setLastUpdatedDate] = React.useState('');
   const [lastUpdatedBy, setLastUpdatedBy] = React.useState('');
   const [reload, setReload] = React.useState(false);
@@ -29,25 +28,25 @@ export default function JobDiary({ rows }) {
   const handleReload = (arg) => {
     setReload(arg);
   };
-console.log(rows.rows.id)
-  const handleClickOpenActivityDetailsForm = (activityDescription,creationDate, dateLastUpdated, updatedBy) => {
+  
+  const handleClickOpenActivityDetailsForm = (
+    id,activityDescription,creationDate, 
+    dateLastUpdated, updatedBy
+  ) => {
     setOpenActivityDetailsForm(true);
+    setActivityId(id);
     setDescription(activityDescription);
     setCreatedDate(creationDate);
     setLastUpdatedDate(dateLastUpdated);
     setLastUpdatedBy(updatedBy);
   }
+
   const handleClickCloseActivityDetailsForm = () => setOpenActivityDetailsForm(false);
+  const handleClickOpenCreateForm = () => setOpenActivityForm(true);
+  const handleCloseForm = () => setOpenActivityForm(false);
 
-  const handleClickOpenCreateForm = () => {
-    setOpenActivityForm(true);
-  };
-
-  const handleCloseForm = () => {
-    setOpenActivityForm(false);
-  };
-
-  console.log(rows)
+  console.log(rows);
+  
   return (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
@@ -62,7 +61,6 @@ console.log(rows.rows.id)
           */
         }
         {
-          /* */
           <JobDiaryAccordions
             diary={rows}
             reload={reload}
@@ -70,7 +68,6 @@ console.log(rows.rows.id)
             handleClickOpenCreateForm={handleClickOpenCreateForm}
             handleClickOpenActivityDetailsForm={handleClickOpenActivityDetailsForm}
           />
-
         }
         {
           openActivityForm === true
@@ -85,13 +82,13 @@ console.log(rows.rows.id)
         {
             openActivityDetailsForm === true
             ? <JobDiaryDetails
-              activityId={rows.rows.id}
-              description={description}
-              createdDate={createdDate}
-              lastUpdatedDate={lastUpdatedDate}
-              lastUpdatedBy={lastUpdatedBy}
-              open={openActivityDetailsForm}
-              handleClose={handleClickCloseActivityDetailsForm}
+                activityId={activityId}
+                description={description}
+                createdDate={createdDate}
+                lastUpdatedDate={lastUpdatedDate}
+                lastUpdatedBy={lastUpdatedBy}
+                open={openActivityDetailsForm}
+                handleClose={handleClickCloseActivityDetailsForm}
             />
             : null
         }

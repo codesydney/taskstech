@@ -31,7 +31,7 @@ export const FullWidthTabs = ({ history, callback }) => {
   const [value, setValue] = useState(0);
   const [searchInitiated, setSearchInitiated] = useState(false);
   const { job, searchResult } = useSelector((state) => state);
-  useSelector((state) => console.log(state));
+  
   const matches = useMediaQuery('(max-width:600px)');
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ export const FullWidthTabs = ({ history, callback }) => {
     })
   };
 
-  console.log(searchInitiated);
+  //console.log(history);
   return (
     <Container maxWidth="lg" className={classes.root}>
       <header>
@@ -107,6 +107,7 @@ export const FullWidthTabs = ({ history, callback }) => {
             : <ControlledAccordions 
               jobs={searchInitiated === true ? searchResult : job }
               parentCallback={callback}
+              history={history} // added
             />
         }
       </TabPanel>

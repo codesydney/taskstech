@@ -17,7 +17,7 @@ export const getActivities = (loading = true, id) => async dispatch => {
                     type: actions.GET_ACTIVITIES_STARTED,
                     loading: loading
                 });
-                if (res.data) {
+                if (res.data.length !== 0) { // res.data
                     //console.log(res.data)
                     dispatch({
                         type: actions.GET_ACTIVITIES,
@@ -92,7 +92,8 @@ export const updateActivity = (activity) => async dispatch => {
     };
     
     try {
-        taskstechApi.put(`/activity/${activity.id}`, job, config)
+        taskstechApi
+            .put(`/activity/${activity.id}`, job, config)
             .then(res => {
                 dispatch({
                     type: actions.UPDATE_ACTIVITY_STARTED,

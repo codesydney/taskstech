@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 export default function LoginIndex({ history }) {
     const classes = useStyles();
     const matches = useMediaQuery("(max-width:600px)");
-    console.log(history)
+    
     return (
         <Grid container component='main' className={classes.root}>
             <CssBaseline />

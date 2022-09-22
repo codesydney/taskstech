@@ -66,8 +66,6 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
     setOpen(false);
   };
 
-  console.log(photos)
-
   const photoViewer = () => {
     return (
       <BootstrapDialog

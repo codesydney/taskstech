@@ -24,11 +24,11 @@ const useStyles = makeStyles({
   }
 });
 
-export default function FormDialog({ open, handleClose, handleReload, jobId = '' }) {
+export default function FormDialog({ open, handleClose, handleReload, jobId }) {
   const [description, setDescription] = useState('');
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  
   const handleSubmit = () => {
     const activity = { description, jobId };
     dispatch(addActivity(activity));
@@ -61,7 +61,7 @@ export default function FormDialog({ open, handleClose, handleReload, jobId = ''
             type="number"
             fullWidth
             variant="standard"
-            value={jobId}
+            value={jobId} 
             disabled
           />
         </DialogContent>

@@ -2,7 +2,6 @@ import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import Container from '@material-ui/core/Container';
-//import JobDiaryCards from './JobDiaryCards';
 import JobDiaryAccordions from './JobDiaryAccordions';
 import JobDiaryDetails from './JobDiaryDetails';
 import FormDialog from '../../../common/FormDialog';
@@ -15,7 +14,8 @@ const useStyles = makeStyles(() => ({
 
 export default function JobDiary(props) { 
   const classes = useStyles();
-  const { rows } = props;
+  const { rows, history } = props;
+
   const [openActivityForm, setOpenActivityForm] = React.useState(false);
   const [openActivityDetailsForm, setOpenActivityDetailsForm] = React.useState(false);
   const [createdDate, setCreatedDate] = React.useState('');
@@ -44,22 +44,10 @@ export default function JobDiary(props) {
   const handleClickCloseActivityDetailsForm = () => setOpenActivityDetailsForm(false);
   const handleClickOpenCreateForm = () => setOpenActivityForm(true);
   const handleCloseForm = () => setOpenActivityForm(false);
-
-  console.log(rows);
   
   return (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
-        {
-          /* 
-          <JobDiaryCards 
-            reload={reload}
-            handleReload={handleReload}
-            diary={rows}
-            handleClickOpenCreateForm={handleClickOpenCreateForm}
-          />
-          */
-        }
         {
           <JobDiaryAccordions
             diary={rows}
@@ -73,7 +61,7 @@ export default function JobDiary(props) {
           openActivityForm === true
             ? <FormDialog
               open={openActivityForm}
-              jobId={rows.rows.id}
+              jobId={history?.location.state.rows.rows.id}
               handleClose={handleCloseForm}
               handleReload={handleReload}
             />

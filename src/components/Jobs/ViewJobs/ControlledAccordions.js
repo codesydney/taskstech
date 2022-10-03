@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Box from '@mui/material/Box';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import InfoIcon from '@mui/icons-material/Info';
+import EditIcon from '@mui/icons-material/Edit';
 
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
@@ -83,6 +83,17 @@ export default function ControlledAccordions(props) {
                 </div>
               </div>
               <div>
+              <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ backgroundColor: "#000000", margin: '2%' }}
+                  onClick={(event) => {
+                    handleJobDetailsClick(event, row);
+                  }}
+                >
+                  <EditIcon />
+                </Button>
+                
                 <Button
                   variant="contained"
                   color="primary"
@@ -94,16 +105,7 @@ export default function ControlledAccordions(props) {
                   <MenuBookIcon />
                 </Button>
 
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ backgroundColor: "#000000", margin: '2%' }}
-                  onClick={(event) => {
-                    handleJobDetailsClick(event, row);
-                  }}
-                >
-                  <InfoIcon />
-                </Button>
+                
               </div>
             </Container>
           </Box>

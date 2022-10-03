@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getActivities } from '../../../actions/activityAction';
 //import { createTheme, ThemeProvider } from '@mui/material/styles';
 //import Box from '@mui/material/Box';
-import PreviewIcon from '@mui/icons-material/Preview';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 
@@ -85,8 +85,14 @@ export default function JobDiaryAccordions(props) {
   }, [reload]);
 
 
+  const convertUTCTimeToLocalTime = (dateString) => {
+    let utcDate = new Date(dateString).toISOString();
+    const date = new Date(utcDate);
+    return date.toLocaleString();
+  };
+  
   const activityDetails = activity.payload.map((act) => {
-
+    
     return (
       <Accordion
         key={act.id}
@@ -117,14 +123,14 @@ export default function JobDiaryAccordions(props) {
               Created on
             </Typography>
             <Typography sx={{ color: 'text.secondary', marginLeft: '-3.5rem' }}>
-              {act.create_date}
+              {convertUTCTimeToLocalTime(act.update_date)}
             </Typography>
             <Typography id='stat' sx={{ width: '44%', flexShrink: 0, marginLeft: '-.90rem' }}>
               Last Updated
             </Typography>
             <Typography
               sx={{ fontSize: 15, marginLeft: '-5rem' }} color="text.secondary" gutterBottom>
-              {act.update_date}
+              {convertUTCTimeToLocalTime(act.update_date)}
             </Typography>
             <Typography sx={{ width: '50%', flexShrink: 0, marginLeft: '-.90rem' }}>
               Last Updated By
@@ -148,7 +154,7 @@ export default function JobDiaryAccordions(props) {
               style={{ backgroundColor: "#000000", width: '25%' }}
               onClick={() => handleClickOpenAccordion(act.id, act.upload_photos, act.description)}
             >
-              <PreviewIcon />
+              <CameraAltIcon />
             </Button>
           </Container>
         </AccordionDetails>

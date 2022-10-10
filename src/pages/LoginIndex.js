@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         height: "100vh",
     },
     paper: {
-        //margin: theme.spacing(8, 4),
+        //margin: theme.spacing(8, 4), fixes the layout issue but its better to hide the navigation in this part
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

@@ -24,7 +24,7 @@ import Button from '@mui/material/Button';
 const useStyles = makeStyles(() => ({
   root: { width: '60vw' },
   iconColor: { color: 'black' },
-
+  accordion: { marginBottom: '30%' },
   content: {
     marginBottom: '10%',
     marginLeft: 'auto',
@@ -43,7 +43,6 @@ const useStyles = makeStyles(() => ({
     "border-color": 'black !important',
     boxShadow: '0 6px #999 !important',
   },
-
 }));
 
 
@@ -53,15 +52,15 @@ export default function JobDiaryAccordions(props) {
   //const matches = useMediaQuery('(max-width:400px)');
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
-  const { 
-    diary, handleReload, 
-    reload, handleClickOpenCreateForm, 
-    handleClickOpenActivityDetailsForm 
-  } = props; 
+  const {
+    diary, handleReload,
+    reload, handleClickOpenCreateForm,
+    handleClickOpenActivityDetailsForm
+  } = props;
   const [open, setOpen] = useState(false);
   const [actId, setActId] = useState(0);
   const [photos, setPhotos] = useState([]);
-  
+
   const [description, setDescription] = useState('');
   const id = diary === undefined ? 0 : diary.rows.id;
   const matches = useMediaQuery('(max-width:400px)');
@@ -69,7 +68,7 @@ export default function JobDiaryAccordions(props) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  
+
   const handleClickOpenAccordion = (id, photos, description) => {
     setActId(id);
     setPhotos(photos);
@@ -90,9 +89,9 @@ export default function JobDiaryAccordions(props) {
     const date = new Date(utcDate);
     return date.toLocaleString();
   };
-  
+
   const activityDetails = activity.payload.map((act) => {
-    
+
     return (
       <Accordion
         key={act.id}
@@ -144,7 +143,7 @@ export default function JobDiaryAccordions(props) {
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '25%', margin: '1% 3%' }}
-              onClick={() => handleClickOpenActivityDetailsForm(act.id,act.description,act.create_date,act.update_date,act.update_by)} 
+              onClick={() => handleClickOpenActivityDetailsForm(act.id, act.description, act.create_date, act.update_date, act.update_by)}
             >
               <EditIcon />
             </Button>
@@ -164,7 +163,7 @@ export default function JobDiaryAccordions(props) {
 
   return (
     <Container maxWidth="lg" className={classes.root}>
-      <Grid container spacing={0}>
+      <Grid container spacing={0} className={classes.accordion}>
         <Grid item xs={8}>
           <p
             className='title'
@@ -186,19 +185,22 @@ export default function JobDiaryAccordions(props) {
             onMouseUp={handleClickOpenCreateForm}
           >
             <NoteAddIcon
-             className={classes.iconColor} />
+              className={classes.iconColor} />
           </Button>
         </Grid>
+        <Grid item xs={12}>
+          {activityDetails}
+        </Grid>
+        <Grid item xs={4}>
+          <PhotoViewerDialog
+            setOpen={setOpen}
+            open={open}
+            actId={actId}
+            photo={photos}
+            description={description}
+          />
+        </Grid>
       </Grid>
-
-      {activityDetails}
-      <PhotoViewerDialog
-        setOpen={setOpen} 
-        open={open}
-        actId={actId}
-        photo={photos}
-        description={description}
-      />
     </Container>
   );
 }

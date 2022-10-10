@@ -1,6 +1,5 @@
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
 import Container from '@material-ui/core/Container';
 import JobDiaryAccordions from './JobDiaryAccordions';
 import JobDiaryDetails from './JobDiaryDetails';
@@ -8,12 +7,8 @@ import FormDialog from '../../../common/FormDialog';
 import './jobdiary.css';
 
 const theme = createTheme();
-const useStyles = makeStyles(() => ({
-  root: { marginTop: '5rem', },
-}));
 
 export default function JobDiary(props) { 
-  const classes = useStyles();
   const { rows, history } = props;
 
   const [openActivityForm, setOpenActivityForm] = React.useState(false);
@@ -47,7 +42,7 @@ export default function JobDiary(props) {
   
   return (
     <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
+      <Container>
         {
           <JobDiaryAccordions
             diary={rows}

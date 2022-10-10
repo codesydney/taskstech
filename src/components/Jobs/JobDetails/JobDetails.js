@@ -9,6 +9,7 @@ import AlertModal from '../../../common/AlertModal';
 
 import Lookup from '../../../common/Lookup';
 import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from '@mui/styles';
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
 import { getCustomers } from "../../../actions/customerActions";
@@ -20,12 +21,16 @@ const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
+    //height: '10rem', //remove this
     color: theme.palette.text.secondary,
 }));
 
-
+const useStyles = makeStyles(() => ({
+    root: { height: '62rem', },
+  }));
 
 const JobDetails = ({ rows }) => {
+    const classes = useStyles();
     const jobs = rows === undefined ? {} : rows.rows;
     const jobId = jobs.row.id;
     const custId = jobs.row === undefined ? {} : jobs.row.customer.user_id;
@@ -225,16 +230,18 @@ const JobDetails = ({ rows }) => {
                     width: matches === false
                         ? '22vw'
                         : '70vw !important'
+                    
                 },
             }}
+            className={classes.root}
         >
             <p className='title'>Job Details</p>
             <Paper
                 elevation={3}
                 component="form"
+                
                 onSubmit={handleSubmit}
             >
-                {/* <Item></Item> */}
                 <Item className="item">
                     <TextField
                         value={jobId}
@@ -301,6 +308,7 @@ const JobDetails = ({ rows }) => {
                         value={description}
                         name='description'
                         multiline
+                        rows={6}
                         id="outlined-error-helper-text"
                         label="Description"
                         variant="outlined"
@@ -313,7 +321,7 @@ const JobDetails = ({ rows }) => {
                         label="Notes"
                         name='notes'
                         multiline
-                        rows={6}
+                        rows={6} // 6
                         value={notes}
                         onBlur={handleUserInput}
                         onChange={handleUserInput}

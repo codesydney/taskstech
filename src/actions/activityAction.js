@@ -88,7 +88,7 @@ export const updateActivity = (activity) => async dispatch => {
     const job = {
         "description": activity.description,
         //"upload_photo": activity.image,
-        "job_id": activity.id
+        "job_id": activity.job_id
     };
     
     try {

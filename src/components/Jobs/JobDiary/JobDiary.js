@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@material-ui/core/Container';
 import JobDiaryAccordions from './JobDiaryAccordions';
@@ -18,11 +18,16 @@ export default function JobDiary(props) {
   const [activityId, setActivityId] = React.useState('');
   const [lastUpdatedDate, setLastUpdatedDate] = React.useState('');
   const [lastUpdatedBy, setLastUpdatedBy] = React.useState('');
+  const [jobId, setJobId] = React.useState('');
   const [reload, setReload] = React.useState(false);
 
-  const handleReload = (arg) => {
-    setReload(arg);
-  };
+  useEffect(() => {
+    if(history !== undefined) {
+      setJobId(history?.location.state.rows.rows.id);
+    }
+  },[])
+  
+  const handleReload = (arg) => setReload(arg);
   
   const handleClickOpenActivityDetailsForm = (
     id,activityDescription,creationDate, 
@@ -65,6 +70,7 @@ export default function JobDiary(props) {
         {
             openActivityDetailsForm === true
             ? <JobDiaryDetails
+                jobId={jobId} 
                 activityId={activityId}
                 description={description}
                 createdDate={createdDate}

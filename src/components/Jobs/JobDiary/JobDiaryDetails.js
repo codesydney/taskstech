@@ -11,16 +11,17 @@ import { useDispatch } from 'react-redux';
 export default function JobDiaryDetails({ 
   open, handleClose,activityId,
   description,lastUpdatedDate, 
-  lastUpdatedBy 
+  lastUpdatedBy, jobId
 }) { 
   const [desc, setDesc] = useState(description);
   const dispatch = useDispatch();
 
   const activity = {
-    id: activityId,//
+    id: activityId, // activityId cause of issue. We should also pass the job id
+    job_id: jobId,
     description: desc
   };
-  console.log(activityId);
+  console.log(activity); 
   const handleOnChange = ({ target }) => setDesc(target.value);
   const handleUpdate = () => dispatch(updateActivity(activity));
 

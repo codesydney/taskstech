@@ -68,7 +68,7 @@ export default function JobDiaryAccordions(props) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
+  
   const handleClickOpenAccordion = (id, photos, description) => {
     setActId(id);
     setPhotos(photos);
@@ -143,7 +143,7 @@ export default function JobDiaryAccordions(props) {
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '25%', margin: '1% 3%' }}
-              onClick={() => handleClickOpenActivityDetailsForm(act.id, act.description, act.create_date, act.update_date, act.update_by)}
+              onClick={() => handleClickOpenActivityDetailsForm(act.id, act.description, act.create_date, act.update_date, act.update_by, id)}
             >
               <EditIcon />
             </Button>

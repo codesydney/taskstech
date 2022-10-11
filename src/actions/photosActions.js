@@ -1,6 +1,6 @@
 import taskstechApi from '../api/taskstechApi';
 import * as actions from './actionTypes';
-//import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
+import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
 
 export const addPhoto = (photoData) => async dispatch => {
     const token = localStorage.getItem('token');
@@ -42,6 +42,7 @@ export const getPhoto = (activity_id, filename = '') => async dispatch => {
 
         dispatch({
             type: actions.GET_PHOTO_STARTED,
+            filename: unknownPhoto, 
             loading: true
         });
 
@@ -53,12 +54,14 @@ export const getPhoto = (activity_id, filename = '') => async dispatch => {
                     filename: `${base64}${Buffer.from(res.data, "binary").toString("base64")}`,
                     filename_thumb: res.data.thumbnail,
                     loading: false
-                })
-                    ;
-
+                });
             });
     } catch (error) {
-        //console.log(error.message)
+        dispatch({
+            type: actions.GET_PHOTO_FAILED,
+            filename: unknownPhoto,
+            loading: false
+        });
     }
 }
 

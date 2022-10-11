@@ -57,14 +57,12 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
   const filename = photo !== [] ? photo[0]?.filename : '';
 
   useEffect(() => {
-    if (photo !== undefined) { //photo !== undefined
+    if (photo !== undefined) {
       dispatch(getPhoto(actId, filename));
     }
   }, [filename]);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
 
   const photoViewer = () => {
     return (
@@ -78,17 +76,21 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
         </BootstrapDialogTitle>
         <DialogContent dividers>
           {
-            photos.filename 
-              ? <SimpleBackdrop loading={photos.loading} /> 
-              : <img
-                  src={`${photos.filename}`}
-                  style={{ width: '100%' }}
-                />
+            photos.loading !== true
+              ? <img
+              src={`${photos.filename}`}
+              style={{ width: '100%' }}
+            />
+              : (
+                <>
+                  <SimpleBackdrop loading={photos.loading} />
+                  <img
+                    src={`${photos.filename}`}
+                    style={{ width: '100%' }}
+                  />
+                </>
+              )
           }
-          <img
-            src={`${photos.filename}`}
-            style={{ width: '100%' }}
-          />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

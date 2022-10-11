@@ -17,7 +17,7 @@ export default function JobDiaryDetails({
   const dispatch = useDispatch();
 
   const activity = {
-    id: activityId, // activityId cause of issue. We should also pass the job id
+    id: activityId, 
     job_id: jobId,
     description: desc
   };

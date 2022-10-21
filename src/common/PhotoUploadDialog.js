@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch } from 'react-redux';
+import { useDispatch /* , useSelector */ } from 'react-redux';
 import { addPhoto } from '../actions/photosActions';
 
 export default function PhotoUploadForm({
-  open, actId,
-  handleClose, 
-  handleReload, 
+  actId,
+  open,
+  setOpen,
 }) {
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
   const matches = useMediaQuery('(max-width:400px)');
+  //useSelector(state => console.log(state));
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
@@ -27,16 +27,19 @@ export default function PhotoUploadForm({
       formData.append('activity_id', actId);
 
       dispatch(addPhoto(formData));
-      handleReload(true);
+      //handleReload(true);
       handleClear();
     } else console.log('File is empty')
   };
 
+  const handleClose = () => setOpen(false);
+
   const handleClear = () => {
     setImage('');
     setPreview('');
-    handleClose();
   };
+
+ 
 
   const handleOnChange = evt => {
     if (evt.target.files.length !== 0) {
@@ -46,24 +49,12 @@ export default function PhotoUploadForm({
     }
   };
 
-
   return (
     <>
       <Dialog open={open} onClose={handleClose} >
         <DialogTitle style={{ textAlign: 'center' }}>Upload New Photo</DialogTitle>
         <DialogContent dividers>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="activity_id"
-            name='activity_id'
-            label="Activity Id"
-            type="text"
-            value={actId}
-            fullWidth
-            variant="standard"
-            disabled
-          />
+          
           <div id="img-upload">
             <div
               id='preview'
@@ -93,7 +84,7 @@ export default function PhotoUploadForm({
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClear}>Cancel</Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>

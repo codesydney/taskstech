@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPhoto } from '../actions/photosActions';
 import SimpleBackdrop from '../components/Loading/SimpleBackdrop';
+import PhotoUploadDialog from './PhotoUploadDialog';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -55,6 +56,8 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
   const dispatch = useDispatch();
   const { photos } = useSelector(state => state);
   const filename = photo !== [] ? photo[0]?.filename : '';
+  const [submitBtnIsClicked, setSubmitBtnIsClicked] = useState(false);
+  //const [setReload] = React.useState(false); // reload, 
 
   useEffect(() => {
     if (photo !== undefined) {
@@ -62,7 +65,13 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
     }
   }, [filename]);
 
+  //const handleReload = (arg) => setReload(arg);
   const handleClose = () => setOpen(false);
+  const handleSubmit = () => 
+  {
+    setSubmitBtnIsClicked(true);
+    setOpen(false); //
+  }
 
   const photoViewer = () => {
     return (
@@ -78,9 +87,9 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
           {
             photos.loading !== true
               ? <img
-              src={`${photos.filename}`}
-              style={{ width: '100%' }}
-            />
+                  src={`${photos.filename}`}
+                  style={{ width: '100%' }}
+                />
               : (
                 <>
                   <SimpleBackdrop loading={photos.loading} />
@@ -93,16 +102,22 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
           }
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={handleSubmit}>
             Upload Photo
           </Button>
         </DialogActions>
       </BootstrapDialog>
     );
   }
+  
   return (
     <div>
       {photoViewer()}
+      {
+        submitBtnIsClicked === true 
+          ? <PhotoUploadDialog open={open} setOpen={setOpen} actId={actId} /* handleReload={handleReload} */ /> 
+          : null
+      }
     </div>
   );
 }

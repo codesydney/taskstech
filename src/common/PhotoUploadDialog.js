@@ -6,8 +6,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch /* , useSelector */ } from 'react-redux';
+import { useDispatch, useSelector /* */ } from 'react-redux';
 import { addPhoto } from '../actions/photosActions';
+import SimpleBackdrop from '../components/Loading/SimpleBackdrop';
+import AlertModal from '../common/AlertModal';
 
 export default function PhotoUploadForm({
   actId,
@@ -17,7 +19,7 @@ export default function PhotoUploadForm({
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
   const matches = useMediaQuery('(max-width:400px)');
-  //useSelector(state => console.log(state));
+  const { photos } = useSelector(state => state);
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
@@ -39,8 +41,6 @@ export default function PhotoUploadForm({
     setPreview('');
   };
 
- 
-
   const handleOnChange = evt => {
     if (evt.target.files.length !== 0) {
       const file = evt.target.files[0];
@@ -48,13 +48,13 @@ export default function PhotoUploadForm({
       setPreview(URL.createObjectURL(file));
     }
   };
-
+  console.log(photos.showModal)
   return (
     <>
       <Dialog open={openPhotoUpload} onClose={handleClosePhotoUpload} >
         <DialogTitle style={{ textAlign: 'center' }}>Upload New Photo</DialogTitle>
         <DialogContent dividers>
-          
+
           <div id="img-upload">
             <div
               id='preview'
@@ -83,11 +83,18 @@ export default function PhotoUploadForm({
           </div>
 
         </DialogContent>
+        
         <DialogActions>
           <Button onClick={handleClosePhotoUpload}>Cancel</Button>
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
+        <SimpleBackdrop loading={photos.loading} />
       </Dialog>
+      {
+          photos.showModal == true 
+            ? <AlertModal showModal={photos.showModal} item="photo" text="uploaded" /> 
+            : null
+      }
     </>
   );
 }

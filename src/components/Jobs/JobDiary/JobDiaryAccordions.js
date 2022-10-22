@@ -74,6 +74,8 @@ export default function JobDiaryAccordions(props) {
     setPhotos(photos);
     setDescription(description)
     setOpenPhotoViewer(true); 
+    console.log(photos)
+    console.log(`length: ${photos.length}`)
   };
 
   useEffect(() => {
@@ -90,6 +92,7 @@ export default function JobDiaryAccordions(props) {
     return date.toLocaleString();
   };
 
+  
   const activityDetails = activity.payload.map((act) => {
 
     return (
@@ -196,7 +199,7 @@ export default function JobDiaryAccordions(props) {
             setOpenPhotoViewer={setOpenPhotoViewer}
             openPhotoViewer={openPhotoViewer}
             actId={actId}
-            photo={photos}
+            uploadedPhotos={photos}
             description={description}
           />
         </Grid>

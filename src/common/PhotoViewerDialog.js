@@ -54,17 +54,17 @@ BootstrapDialogTitle.propTypes = {
 
 export default function PhotoViewerDialog({ 
   openPhotoViewer, setOpenPhotoViewer,
-  actId, photo, description 
-}) { //setOpen,
+  actId, uploadedPhotos, description 
+}) { 
   const dispatch = useDispatch();
   const { photos } = useSelector(state => state);
-  const filename = photo !== [] ? photo[0]?.filename : '';
+  const filename = uploadedPhotos !== [] ? uploadedPhotos[uploadedPhotos.length-1]?.filename : '';
   const [submitBtnIsClicked, setSubmitBtnIsClicked] = useState(false);
   const [openPhotoUpload, setOpenPhotoUpload] = useState(false);
-  //const [setReload] = React.useState(false); // reload, 
+  
 
   useEffect(() => {
-    if (photo !== undefined) {
+    if (uploadedPhotos !== undefined) {
       dispatch(getPhoto(actId, filename));
     }
   }, [filename]);
@@ -121,8 +121,9 @@ export default function PhotoViewerDialog({
       {
         submitBtnIsClicked === true 
           ? <PhotoUploadDialog 
-              actId={actId} openPhotoUpload={openPhotoUpload} setOpenPhotoUpload={setOpenPhotoUpload}
-              /* open={open} setOpen={setOpen} handleReload={handleReload} */ /> 
+              actId={actId} openPhotoUpload={openPhotoUpload} 
+              setOpenPhotoUpload={setOpenPhotoUpload}
+            /> 
           : null
       }
     </div>

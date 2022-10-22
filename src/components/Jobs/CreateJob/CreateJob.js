@@ -54,8 +54,6 @@ const CreateJob = () => {
 
     const dispatch = useDispatch();
 
-    //useSelector((state) => console.log(state));
-
     useEffect(() => {
         dispatch(getStatus());
         dispatch(getCustomers())
@@ -372,16 +370,14 @@ const CreateJob = () => {
                         </Button>
                         {
                             job.showModal === true
-                                ? <AlertModal showModal={job.showModal} text='created' />
+                                ? <AlertModal showModal={job.showModal} item="job" text='created' />
                                 : null
                         }
 
                     </div>
                 </Item>
             </Paper>
-
             <SimpleBackdrop loading={indicator} /> 
-
         </Box>
     );
 }

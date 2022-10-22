@@ -11,8 +11,8 @@ import { addPhoto } from '../actions/photosActions';
 
 export default function PhotoUploadForm({
   actId,
-  open,
-  setOpen,
+  openPhotoUpload,
+  setOpenPhotoUpload,
 }) {
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
@@ -32,7 +32,7 @@ export default function PhotoUploadForm({
     } else console.log('File is empty')
   };
 
-  const handleClose = () => setOpen(false);
+  const handleClosePhotoUpload = () => setOpenPhotoUpload(false);
 
   const handleClear = () => {
     setImage('');
@@ -51,7 +51,7 @@ export default function PhotoUploadForm({
 
   return (
     <>
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={openPhotoUpload} onClose={handleClosePhotoUpload} >
         <DialogTitle style={{ textAlign: 'center' }}>Upload New Photo</DialogTitle>
         <DialogContent dividers>
           
@@ -84,7 +84,7 @@ export default function PhotoUploadForm({
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClosePhotoUpload}>Cancel</Button>
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>

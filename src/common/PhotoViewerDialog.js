@@ -52,11 +52,15 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PhotoViewerDialog({ open, setOpen, actId, photo, description }) {
+export default function PhotoViewerDialog({ 
+  openPhotoViewer, setOpenPhotoViewer,
+  actId, photo, description 
+}) { //setOpen,
   const dispatch = useDispatch();
   const { photos } = useSelector(state => state);
   const filename = photo !== [] ? photo[0]?.filename : '';
   const [submitBtnIsClicked, setSubmitBtnIsClicked] = useState(false);
+  const [openPhotoUpload, setOpenPhotoUpload] = useState(false);
   //const [setReload] = React.useState(false); // reload, 
 
   useEffect(() => {
@@ -66,21 +70,22 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
   }, [filename]);
 
   //const handleReload = (arg) => setReload(arg);
-  const handleClose = () => setOpen(false);
-  const handleSubmit = () => 
-  {
+  const handleClosePhotoViewer = () => setOpenPhotoViewer(false);
+
+  const handleSubmit = () => {
+    setOpenPhotoUpload(true); 
     setSubmitBtnIsClicked(true);
-    setOpen(false); //
   }
+
 
   const photoViewer = () => {
     return (
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={handleClosePhotoViewer}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={openPhotoViewer}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClosePhotoViewer}>
           {description}
         </BootstrapDialogTitle>
         <DialogContent dividers>
@@ -115,7 +120,9 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
       {photoViewer()}
       {
         submitBtnIsClicked === true 
-          ? <PhotoUploadDialog open={open} setOpen={setOpen} actId={actId} /* handleReload={handleReload} */ /> 
+          ? <PhotoUploadDialog 
+              actId={actId} openPhotoUpload={openPhotoUpload} setOpenPhotoUpload={setOpenPhotoUpload}
+              /* open={open} setOpen={setOpen} handleReload={handleReload} */ /> 
           : null
       }
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPhoto } from '../actions/photosActions';
 import SimpleBackdrop from '../components/Loading/SimpleBackdrop';
+import PhotoUploadDialog from './PhotoUploadDialog';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -51,36 +52,49 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function PhotoViewerDialog({ open, setOpen, actId, photo, description }) {
+export default function PhotoViewerDialog({ 
+  openPhotoViewer, setOpenPhotoViewer,
+  actId, uploadedPhotos, description 
+}) { 
   const dispatch = useDispatch();
   const { photos } = useSelector(state => state);
-  const filename = photo !== [] ? photo[0]?.filename : '';
+  const filename = uploadedPhotos !== [] ? uploadedPhotos[uploadedPhotos.length-1]?.filename : '';
+  const [submitBtnIsClicked, setSubmitBtnIsClicked] = useState(false);
+  const [openPhotoUpload, setOpenPhotoUpload] = useState(false);
+  
 
   useEffect(() => {
-    if (photo !== undefined) {
+    if (uploadedPhotos !== undefined) {
       dispatch(getPhoto(actId, filename));
     }
   }, [filename]);
 
-  const handleClose = () => setOpen(false);
+  //const handleReload = (arg) => setReload(arg);
+  const handleClosePhotoViewer = () => setOpenPhotoViewer(false);
+
+  const handleSubmit = () => {
+    setOpenPhotoUpload(true); 
+    setSubmitBtnIsClicked(true);
+  }
+
 
   const photoViewer = () => {
     return (
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={handleClosePhotoViewer}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={openPhotoViewer}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClosePhotoViewer}>
           {description}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           {
             photos.loading !== true
               ? <img
-              src={`${photos.filename}`}
-              style={{ width: '100%' }}
-            />
+                  src={`${photos.filename}`}
+                  style={{ width: '100%' }}
+                />
               : (
                 <>
                   <SimpleBackdrop loading={photos.loading} />
@@ -93,16 +107,25 @@ export default function PhotoViewerDialog({ open, setOpen, actId, photo, descrip
           }
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={handleSubmit}>
             Upload Photo
           </Button>
         </DialogActions>
       </BootstrapDialog>
     );
   }
+  
   return (
     <div>
       {photoViewer()}
+      {
+        submitBtnIsClicked === true 
+          ? <PhotoUploadDialog 
+              actId={actId} openPhotoUpload={openPhotoUpload} 
+              setOpenPhotoUpload={setOpenPhotoUpload}
+            /> 
+          : null
+      }
     </div>
   );
 }

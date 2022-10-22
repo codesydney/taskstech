@@ -57,7 +57,7 @@ export default function JobDiaryAccordions(props) {
     reload, handleClickOpenCreateForm,
     handleClickOpenActivityDetailsForm
   } = props;
-  const [open, setOpen] = useState(false);
+  const [openPhotoViewer, setOpenPhotoViewer] = useState(false);
   const [actId, setActId] = useState(0);
   const [photos, setPhotos] = useState([]);
 
@@ -69,11 +69,13 @@ export default function JobDiaryAccordions(props) {
     setExpanded(isExpanded ? panel : false);
   };
   
-  const handleClickOpenAccordion = (id, photos, description) => {
+  const handleClickOpenPhotoViewerDialog = (id, photos, description) => {
     setActId(id);
     setPhotos(photos);
     setDescription(description)
-    setOpen(true);
+    setOpenPhotoViewer(true); 
+    console.log(photos)
+    console.log(`length: ${photos.length}`)
   };
 
   useEffect(() => {
@@ -90,6 +92,7 @@ export default function JobDiaryAccordions(props) {
     return date.toLocaleString();
   };
 
+  
   const activityDetails = activity.payload.map((act) => {
 
     return (
@@ -151,7 +154,7 @@ export default function JobDiaryAccordions(props) {
               variant="contained"
               color="primary"
               style={{ backgroundColor: "#000000", width: '25%' }}
-              onClick={() => handleClickOpenAccordion(act.id, act.upload_photos, act.description)}
+              onClick={() => handleClickOpenPhotoViewerDialog(act.id, act.upload_photos, act.description)}
             >
               <CameraAltIcon />
             </Button>
@@ -193,10 +196,10 @@ export default function JobDiaryAccordions(props) {
         </Grid>
         <Grid item xs={4}>
           <PhotoViewerDialog
-            setOpen={setOpen}
-            open={open}
+            setOpenPhotoViewer={setOpenPhotoViewer}
+            openPhotoViewer={openPhotoViewer}
             actId={actId}
-            photo={photos}
+            uploadedPhotos={photos}
             description={description}
           />
         </Grid>

@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector /* */ } from 'react-redux';
 import { addPhoto } from '../actions/photosActions';
+import SimpleBackdrop from '../components/Loading/SimpleBackdrop';
+import AlertModal from '../common/AlertModal';
 
 export default function PhotoUploadForm({
-  open, actId,
-  handleClose, 
-  handleReload, 
+  actId,
+  openPhotoUpload,
+  setOpenPhotoUpload,
 }) {
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
   const matches = useMediaQuery('(max-width:400px)');
+  const { photos } = useSelector(state => state);
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
@@ -27,15 +29,16 @@ export default function PhotoUploadForm({
       formData.append('activity_id', actId);
 
       dispatch(addPhoto(formData));
-      handleReload(true);
+      //handleReload(true);
       handleClear();
     } else console.log('File is empty')
   };
 
+  const handleClosePhotoUpload = () => setOpenPhotoUpload(false);
+
   const handleClear = () => {
     setImage('');
     setPreview('');
-    handleClose();
   };
 
   const handleOnChange = evt => {
@@ -45,25 +48,13 @@ export default function PhotoUploadForm({
       setPreview(URL.createObjectURL(file));
     }
   };
-
-
+  console.log(photos.showModal)
   return (
     <>
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={openPhotoUpload} onClose={handleClosePhotoUpload} >
         <DialogTitle style={{ textAlign: 'center' }}>Upload New Photo</DialogTitle>
         <DialogContent dividers>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="activity_id"
-            name='activity_id'
-            label="Activity Id"
-            type="text"
-            value={actId}
-            fullWidth
-            variant="standard"
-            disabled
-          />
+
           <div id="img-upload">
             <div
               id='preview'
@@ -92,11 +83,18 @@ export default function PhotoUploadForm({
           </div>
 
         </DialogContent>
+        
         <DialogActions>
-          <Button onClick={handleClear}>Cancel</Button>
+          <Button onClick={handleClosePhotoUpload}>Cancel</Button>
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
+        <SimpleBackdrop loading={photos.loading} />
       </Dialog>
+      {
+          photos.showModal == true 
+            ? <AlertModal showModal={photos.showModal} item="photo" text="uploaded" /> 
+            : null
+      }
     </>
   );
 }

@@ -12,7 +12,8 @@ function photosReducer(state = initialState, action) {
         case actions.UPLOAD_PHOTO_STARTED:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                showModal: false
             };
         case actions.UPLOAD_PHOTO_SUCCESS:
             return {
@@ -20,7 +21,8 @@ function photosReducer(state = initialState, action) {
                 payload: action.payload,
                 filename: action.payload?.filename,
                 thumbnail: action.payload?.thumbnail,
-                loading: false
+                loading: false,
+                showModal: true
             };
         case actions.GET_PHOTO_STARTED:
             return {

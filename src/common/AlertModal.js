@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
@@ -20,8 +20,9 @@ const style = {
 };
 
 
-export default function AlertModal({ showModal, text }) {
-  const [open, setOpen] = React.useState(showModal);
+export default function AlertModal({ showModal,item, text }) {
+  const [open, setOpen] = useState(showModal);
+
   const handleClose = () => {
     setOpen(false);
     history.push("/view/jobs"),
@@ -37,11 +38,16 @@ export default function AlertModal({ showModal, text }) {
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: '250' }}>
-          <h2 id="parent-modal-title" style={{ textAlign: 'center' }}>Success</h2>
-          <p id="parent-modal-description" style={{ textAlign: 'center' }}>
-            The job has been {text} succesfully.
+          <h2 id="parent-modal-title" style={{ textAlign: 'center',textTransform: 'uppercase' }}>Success</h2>
+          <p id="parent-modal-description" style={{ textAlign: 'center', textTransform: 'capitalize' }}>
+            The {item} has been {text} succesfully.
           </p>
-          <Button style={{ color: '#000', position: 'relative',left: '3.5rem' }} onClick={handleClose}>Close</Button>
+          <Button 
+              style={{ color: '#000', position: 'relative',left: '3.5rem' }} 
+              onClick={handleClose}
+          >
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>

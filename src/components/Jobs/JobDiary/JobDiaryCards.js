@@ -174,7 +174,7 @@ export default function JobDiaryCards({ handleClickOpen, diary, handleReload, re
         <PhotoUploadDialog
           open={openPhotoUploadDialog}
           actId={actId}
-          handleClose={handleCloseUploadForm}
+          handleClose={handleCloseUploadForm} //handleCloseUploadForm
           handleReload={handleReload}
         />
       );

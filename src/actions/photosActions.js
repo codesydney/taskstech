@@ -9,6 +9,7 @@ export const addPhoto = (photoData) => async dispatch => {
         dispatch({
             type: actions.UPLOAD_PHOTO_STARTED,
             loading: true,
+            showModal: false
         });
 
         taskstechApi.post(`/photos`, photoData, {
@@ -20,12 +21,12 @@ export const addPhoto = (photoData) => async dispatch => {
             .then(res => {
                 if (res.data) {
                     console.log(res.data)
-                    alert("Photo uploaded successfully!")
                     dispatch({
                         type: actions.UPLOAD_PHOTO_SUCCESS,
                         filename: res.data.filename,
                         thumbnail: res.data.thumbnail,
-                        loading: false
+                        loading: false,
+                        showModal: true
                     });
                 }
             })

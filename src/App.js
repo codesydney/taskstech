@@ -9,7 +9,7 @@ import JobDetails from "./components/Jobs/JobDetails/JobDetails";
 import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import Header from "./components/Header/Header";
 import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
-import JobDiaryDetails from './components/Jobs/JobDiary/JobDiaryDetails';
+//import JobDiaryDetails from './components/Jobs/JobDiary/JobDiaryDetails';
 import InventoryList from "./components/inventory/InventoryList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Navigation from "./components/Navigation/Navigation";
@@ -54,8 +54,7 @@ function App() {
                     <Route exact path="/create/job" component={CreateJob} />
                     <Route exact path="/view/jobs" component={ViewJobs} />
                     <Route exact path="/view/jobs/diary" component={JobDiary} />
-                    <Route exact path="/view/jobs/diary/details/:id" component={JobDiaryDetails} />
-                    <Route exact path="/view/jobs/details" component={JobDetails} />
+                    <Route exact path="/view/jobs/details/:id" component={JobDetails} />
 
                 </Auth>
             </Switch>

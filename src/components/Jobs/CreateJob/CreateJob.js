@@ -205,11 +205,9 @@ const CreateJob = () => {
         if (jobNameIsValid &&
             descriptionIsValid &&
             customerNameIsValid) {
-            console.log('valid')
             return false;
         }
         else {
-            console.log('not valid')
             return true;
         }
     };

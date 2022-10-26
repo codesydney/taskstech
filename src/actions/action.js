@@ -4,6 +4,49 @@ import { fetchInventoryAction } from './inventoryActions'
 import { signInAction, signOutAction, setTraderData } from './traderActions';
 import { push } from 'connected-react-router';
 
+export const getJob = (id) => async dispatch => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    try {
+        dispatch({ type: actions.GET_JOB_STARTED, loading: true });
+        
+        await taskstechApi
+            .get(`/job/${id}`, config)
+            .then((res) => {
+                dispatch({ type: actions.GET_JOB, payload: res.data, loading: false });
+            }).catch(e => {
+                console.log(e)
+            });
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getAllJobs = () => async dispatch => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    try {
+        taskstechApi.get(`/job`, config)
+            .then(res => {
+                dispatch({
+                    type: actions.GET_ALL_JOBS_STARTED,
+                    loading: true
+                });
+                if (res.data) {
+                    dispatch({
+                        type: actions.GET_ALL_JOBS,
+                        payload: res.data,
+                        loading: false
+                    });
+                }
+            })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 export const createJob = (job) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -53,29 +96,7 @@ export const updateJob = (job) => async dispatch => {
 }
 
 
-export const getAllJobs = (loading = true) => async dispatch => {
-    const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: `Bearer ${token}` } };
 
-    try {
-        taskstechApi.get(`/job`, config)
-            .then(res => {
-                dispatch({
-                    type: actions.GET_ALL_JOBS_STARTED,
-                    loading: loading
-                });
-                if (res.data) {
-                    dispatch({
-                        type: actions.GET_ALL_JOBS,
-                        payload: res.data,
-                        loading: false
-                    });
-                }
-            })
-    } catch (error) {
-        console.log(error.message)
-    }
-}
 
 
 export const getStatus = () => async dispatch => {

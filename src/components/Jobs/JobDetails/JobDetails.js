@@ -13,7 +13,7 @@ import { makeStyles } from '@mui/styles';
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
 import { getCustomers } from "../../../actions/customerActions";
-import { updateJob } from '../../../actions/action';
+import { updateJob,getJob } from '../../../actions/action';
 import { useState } from "react";
 import './jobdetails.css';
 
@@ -29,16 +29,19 @@ const useStyles = makeStyles(() => ({
     root: { height: '62rem', },
   }));
 
-const JobDetails = ({ rows }) => {
+const JobDetails = (props) => { 
+    const { rows } = props;
     const classes = useStyles();
-    const jobs = rows === undefined ? {} : rows.rows;
-    const jobId = jobs.row.id;
-    const custId = jobs.row === undefined ? {} : jobs.row.customer.user_id;
-    const [jobName, setJobName] = useState(jobs.row === undefined ? {} : jobs.row.name);
-    const [jobAddress, setJobAddress] = useState(jobs.row === undefined ? {} : jobs.row.address);
-    const [description, setDescription] = useState(jobs.row === undefined ? {} : jobs.row.description);
-    const [notes, setNotes] = useState(jobs.row === undefined ? {} : jobs.row.notes);
+    const jobs = rows === undefined ? {} : rows.rows; 
+    const { customers, job } = useSelector((state) => state);
+    const custId = job.payload === undefined ? {} : job.payload.customer?.user_id;
 
+    const [jobId, setJobId] = useState({});
+    const [jobName, setJobName] = useState({});
+    const [jobAddress, setJobAddress] = useState({});
+    const [description, setDescription] = useState({});
+    const [notes, setNotes] = useState({});
+    
     const [errors, setErrors] = useState({
         jobName: { helperText: '', fieldError: false },
         description: { helperText: '', fieldError: false },
@@ -46,24 +49,32 @@ const JobDetails = ({ rows }) => {
         customer_id: { helperText: '', fieldError: false },
     });
 
-    const name = jobs.row === undefined ? {} : jobs.row.customer;
-    const jstatus = jobs.row === undefined ? {} : jobs.row.job_status;
+    const jstatus = jobs.payload === undefined ? {} : job.payload.job_status;
 
-    const [customerName, setCustomerName] = useState(`${name.first_name} ${name.last_name}`);
+    const [customerName, setCustomerName] = useState('');
     const [customerId, setCustomerId] = useState(custId);
-    const [jobStatus, setJobStatus] = useState(jstatus.name);
-    const [jobStatusId, setJobStatusId] = useState(jstatus.id);
+    const [jobStatus, setJobStatus] = useState(jstatus?.name); // put inside useeffect
+    const [jobStatusId, setJobStatusId] = useState(jstatus.id);// put inside useeffect
     const status = useSelector((state) => state.status.job);
-    const { customers, job } = useSelector((state) => state);
+    
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
 
     const dispatch = useDispatch();
-
+    //console.log(job.payload.customer)
     useEffect(() => {
         dispatch(getStatus());
         dispatch(getCustomers());
-    }, [indicator]);
+        if(jobs?.row?.id !== undefined) dispatch(getJob(jobs?.row?.id));
+        if(job.payload !== undefined) {
+            setJobId(job.payload.id);
+            setJobName(job.payload.name);
+            setJobAddress(job.payload.address);
+            setCustomerName(`${job.payload.customer?.first_name} ${job.payload.customer?.last_name}`);
+            setDescription(job.payload.description);
+            setNotes(job.payload.notes);
+        }
+    }, [indicator,job.payload]);
 
     let jobObject = {
         id: jobId,
@@ -321,7 +332,7 @@ const JobDetails = ({ rows }) => {
                         label="Notes"
                         name='notes'
                         multiline
-                        rows={6} // 6
+                        rows={6} 
                         value={notes}
                         onBlur={handleUserInput}
                         onChange={handleUserInput}

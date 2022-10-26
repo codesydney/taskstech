@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect,useState } from 'react'; // 
+//import { useLocation } from 'connected-react-router';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -6,8 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@mui/material/Tab';
 
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';  
 import { getAllJobs } from '../../../actions/action';
 
 import DataTable from './DataTable';
@@ -30,32 +30,27 @@ export const FullWidthTabs = ({ history, callback }) => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [searchInitiated, setSearchInitiated] = useState(false);
-  const { job, searchResult } = useSelector((state) => state);
-  
+  const { jobs, searchResult } = useSelector((state) => state);
   const matches = useMediaQuery('(max-width:600px)');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllJobs(job?.loading));
-  }, []);
+  useEffect(() => { dispatch(getAllJobs()) }, []);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  const handleChange = (event, newValue) => setValue(newValue);
+  
   const completedJobs = {
-    payload: job.payload.filter(job => {
+    payload: jobs.payload.filter(job => {
       return job.job_status.name === 'Completed';
     })
   };
 
   const activeJobs = {
-    payload: job.payload.filter(job => {
+    payload: jobs.payload.filter(job => {
       return job.job_status.name === 'In progress';
     })
   };
 
-  //console.log(history);
+
   return (
     <Container maxWidth="lg" className={classes.root}>
       <header>
@@ -100,14 +95,14 @@ export const FullWidthTabs = ({ history, callback }) => {
         {
           matches === false
             ? <DataTable
-              jobs={job}
+              jobs={jobs}
               title='All'
               parentCallback={callback}
             />
-            : <ControlledAccordions 
-              jobs={searchInitiated === true ? searchResult : job }
+            : <ControlledAccordions
+              jobs={searchInitiated === true ? searchResult : jobs}
               parentCallback={callback}
-              history={history} // added
+              history={history} 
             />
         }
       </TabPanel>
@@ -130,19 +125,19 @@ export const FullWidthTabs = ({ history, callback }) => {
         {
           matches === false
             ? <DataTable
-                jobs={activeJobs}
-                title='All'
-                parentCallback={callback}
-              />
+              jobs={activeJobs}
+              title='All'
+              parentCallback={callback}
+            />
             : <ControlledAccordions
-                jobs={activeJobs}
-                parentCallback={callback}
-                
-              />
+              jobs={activeJobs}
+              parentCallback={callback}
+
+            />
         }
       </TabPanel>
 
-      <SimpleBackdrop loading={job?.loading} />
+      <SimpleBackdrop loading={jobs?.loading} />
     </Container>
   );
 }

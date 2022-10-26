@@ -33,6 +33,18 @@ function jobsReducer(state = initialState, action) {
                 loading: false,
                 showModal: true
             };
+        case actions.GET_JOB_STARTED:
+            return {
+                ...state,
+                loading: true
+            };
+        case actions.GET_JOB:
+            return {
+                ...state,
+                payload: action.payload,
+                loading: false
+            };
+        /*
         case actions.GET_ALL_JOBS_STARTED:
             return {
                 ...state,
@@ -44,6 +56,7 @@ function jobsReducer(state = initialState, action) {
                 payload: action.payload,
                 loading: false
             };
+        */
         case actions.GET_COMPLETED_JOBS_STARTED:
             return {
                 ...state,

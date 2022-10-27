@@ -24,12 +24,11 @@ function App() {
     const matches = useMediaQuery("(max-width:600px)");
     let url = matches === true ? "/mobile-login" : "/login";
     let loginRenderer = matches === true ? Pages.LoginIndex : Pages.Login;
-    //console.log(`previous: ${document.referrer}`)
 
     return (
         <div className="App">
             {matches === true ? <></> : <Header />}
-            <Navigation />
+
 
             <Switch>
                 <Route exact path={"/login"} component={loginRenderer} />
@@ -37,13 +36,15 @@ function App() {
                 <Route exact path="/signup" component={Pages.SignUp} />
 
                 <Auth history={history} matches={matches}>
+                    <Navigation />
+                    
                     {/* Inventory Routes */}
                     <Route exact={true} path="/create/inventory" component={NewInventory} />
                     <Route exact={true} path="/list/inventory" component={InventoryList} />
                     <Route exact={true} path="/detail/inventory/:id" component={InventoryDetail} />
 
                     {/* Trader Routes */}
-                    <Route exact path="/tradie/profile" component={TradieProfileForm}/>
+                    <Route exact path="/tradie/profile" component={TradieProfileForm} />
 
                     {/* Customer Routes */}
                     <Route exact path="/create/customer" component={Pages.CustomerRegistration} />

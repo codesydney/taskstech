@@ -84,7 +84,7 @@ export default function LoginIndex({ history }) {
                                         style={{
                                             width: matches ? "34vw" : "38vw",
                                             height: "7vh",
-                                        }} //onClick={() => history.push("/create/job")}
+                                        }} 
                                         onClick={() => history.push("/mobile-login")}
                                     >
                                         Log in

@@ -145,4 +145,3 @@ SwipeableEdgeDrawer.propTypes = {
 };
 
 export default withRouter(SwipeableEdgeDrawer);
-//export default SwipeableEdgeDrawer;

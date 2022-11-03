@@ -216,7 +216,6 @@ const CreateJob = () => {
         event.preventDefault();
         dispatch(createJob(jobObject));
         resetFields();
-        console.log(jobObject)
     };
 
     const resetFields = () => {
@@ -249,7 +248,10 @@ const CreateJob = () => {
                 component="form"
                 sx={{
                     width: matches === false ? '40vw' : '80vw',
-                    margin: '0 auto',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    marginTop: '2.5rem',
+                    marginBottom: '5rem'
                 }}
                 onSubmit={handleSubmit}
             >

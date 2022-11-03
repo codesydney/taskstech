@@ -74,8 +74,6 @@ export default function JobDiaryAccordions(props) {
     setPhotos(photos);
     setDescription(description)
     setOpenPhotoViewer(true); 
-    console.log(photos)
-    console.log(`length: ${photos.length}`)
   };
 
   useEffect(() => {
@@ -107,12 +105,12 @@ export default function JobDiaryAccordions(props) {
           id="panel1bh-header"
         >
           <Container>
-            <Typography sx={{ width: '44%', flexShrink: 0, marginLeft: '-1.5rem' }}>
+            <Typography sx={{ width: '44%', flexShrink: 0, marginLeft: '-1.4rem' }}>
               Description
             </Typography>
             <Typography
               id='content'
-              sx={{ fontSize: 15, marginLeft: '-7rem' }}
+              sx={{ fontSize: 15, textAlign: 'left' }}
               color="text.secondary" gutterBottom
             >
               {act.description}
@@ -124,20 +122,20 @@ export default function JobDiaryAccordions(props) {
             <Typography sx={{ width: '31%', flexShrink: 0, marginLeft: '-0.7rem' }}>
               Created on
             </Typography>
-            <Typography sx={{ color: 'text.secondary', marginLeft: '-3.5rem' }}>
+            <Typography sx={{ color: 'text.secondary', textAlign: 'left' }}>
               {convertUTCTimeToLocalTime(act.update_date)}
             </Typography>
-            <Typography id='stat' sx={{ width: '44%', flexShrink: 0, marginLeft: '-.90rem' }}>
+            <Typography id='stat' sx={{ width: '43%', flexShrink: 0, marginLeft: '-.98rem' }}>
               Last Updated
             </Typography>
             <Typography
-              sx={{ fontSize: 15, marginLeft: '-5rem' }} color="text.secondary" gutterBottom>
+              sx={{ fontSize: 15, textAlign: 'left' }} color="text.secondary" gutterBottom>
               {convertUTCTimeToLocalTime(act.update_date)}
             </Typography>
             <Typography sx={{ width: '50%', flexShrink: 0, marginLeft: '-.90rem' }}>
               Last Updated By
             </Typography>
-            <Typography sx={{ fontSize: 14, marginLeft: '-5rem' }} color="text.secondary" gutterBottom>
+            <Typography sx={{ fontSize: 14, textAlign: 'left' }} color="text.secondary" gutterBottom>
               {act.update_by}
             </Typography>
           </Container>

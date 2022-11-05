@@ -39,7 +39,7 @@ export default function FormDialog({ open, handleClose, handleReload, jobId }) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose} >
-        <DialogTitle>Create New Activity</DialogTitle>
+        <DialogTitle>Create New Diary</DialogTitle>
         <DialogContent>
           <TextField
             focusColor='red'

@@ -8,10 +8,10 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-//import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
+import wave from'../../components/logo/wave.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,10 +23,14 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         alignItems: "center",
     },
+    wave: {
+        height: '100%',
+        position: 'absolute',
+        left: '21rem'
+    },
     buttonContainer: {
         display: "flex",
         flexDirection: "row-reverse",
-        //paddingTop: "15vh",
     },
     links: {
         display: "flex",
@@ -88,8 +92,13 @@ export default function Login () {
     return (
         <Grid container component='main' className={classes.root}>
             <CssBaseline />
-            {/* <Logo /> */}
-            {matches === true ? <></> : <Logo />}
+            {/* <img id="wave" src={wave} /> matches === true ? <></> : <Logo />*/}
+            {
+                matches === true 
+                    ? <></> 
+                    : <Logo />
+            }
+            <img id="wave" className={classes.wave} src={wave} />
             <Grid
                 item
                 xs={12}
@@ -99,6 +108,7 @@ export default function Login () {
                 elevation={6}
                 square
             >
+                
                 <div className={classes.paper}>
                     <div className={classes.form}>
                         <Container component='main' maxWidth='xs'>
@@ -157,7 +167,7 @@ export default function Login () {
                                         variant='contained'
                                         className={classes.submit}
                                         style={{
-                                            width: matches ? "78vw" : "38vw",
+                                            width: matches ? "78vw" : "25vw !important", /* 38 */
                                             height: "7vh",
                                         }}
                                         onClick={() => handleSubmit()}

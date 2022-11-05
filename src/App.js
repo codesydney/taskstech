@@ -7,7 +7,7 @@ import NewInventory from "./components/inventory/NewInventory";
 import CreateJob from "./components/Jobs/CreateJob/CreateJob";
 import JobDetails from "./components/Jobs/JobDetails/JobDetails";
 import JobDiary from "./components/Jobs/JobDiary/JobDiary";
-import Header from "./components/Header/Header";
+//import Header from "./components/Header/Header";
 import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 //import JobDiaryDetails from './components/Jobs/JobDiary/JobDiaryDetails';
 import InventoryList from "./components/inventory/InventoryList";
@@ -27,7 +27,7 @@ function App() {
 
     return (
         <div className="App">
-            {matches === true ? <></> : <Header />}
+            {/* matches === true ? <></> : <Header /> */}
 
 
             <Switch>

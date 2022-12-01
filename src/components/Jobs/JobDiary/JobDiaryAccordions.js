@@ -7,19 +7,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import PhotoViewerDialog from '../../../common/PhotoViewerDialog';
-import { makeStyles } from '@mui/styles';
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch, useSelector } from 'react-redux';
-import { getActivities } from '../../../actions/activityAction';
-//import { createTheme, ThemeProvider } from '@mui/material/styles';
-//import Box from '@mui/material/Box';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { makeStyles } from '@mui/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import PhotoViewerDialog from '../../../common/PhotoViewerDialog';
+import { getActivities } from '../../../actions/activityAction';
 
-///common/assets/images/blank-profile-picture.png
-//import { Container } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
   root: { width: '60vw' },
@@ -37,11 +33,14 @@ const useStyles = makeStyles(() => ({
     left: '1rem ',
     height: '35% !important',
     width: '35% !important',
-    backgroundColor: 'white !important',
-    borderRadius: '50px',
+    padding: '5px 15px',
+    minWidth: '10px',
+    backgroundColor: '#ffffff !important',
+    border: '1px solid rgb(105,105,105) !important',
+    borderRadius: '50px !important',
     "border-style": 'solid !important',
     "border-color": 'black !important',
-    boxShadow: '0 6px #999 !important',
+    boxShadow: '0 6px 5px #999 !important',
   },
 }));
 
@@ -49,7 +48,6 @@ const useStyles = makeStyles(() => ({
 export default function JobDiaryAccordions(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState('panel1');
-  //const matches = useMediaQuery('(max-width:400px)');
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
   const {

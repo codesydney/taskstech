@@ -1,27 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
-import AlertModal from '../../../common/AlertModal';
-
-import Lookup from '../../../common/Lookup';
-import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from '@mui/styles';
+
+import { useDispatch, useSelector } from "react-redux";
+import Lookup from '../../../common/Lookup';
+import AlertModal from '../../../common/AlertModal';
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
 import { getCustomers } from "../../../actions/customerActions";
-import { updateJob,getJob } from '../../../actions/action';
-import { useState } from "react";
+import { updateJob, getJob } from '../../../actions/action';
 import './jobdetails.css';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
-    //height: '10rem', //remove this
     color: theme.palette.text.secondary,
 }));
 

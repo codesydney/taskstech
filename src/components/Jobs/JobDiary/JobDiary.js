@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Container from '@material-ui/core/Container';
+import { Container } from '@mui/material';
 import JobDiaryAccordions from './JobDiaryAccordions';
 import JobDiaryDetails from './JobDiaryDetails';
 import FormDialog from '../../../common/FormDialog';
-import './jobdiary.css';
 
-const theme = createTheme();
 
 export default function JobDiary(props) { 
   const { rows, history } = props;
@@ -46,8 +43,7 @@ export default function JobDiary(props) {
   const handleCloseForm = () => setOpenActivityForm(false);
   
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
+    <Container>
         {
           <JobDiaryAccordions
             diary={rows}
@@ -82,6 +78,5 @@ export default function JobDiary(props) {
             : null
         }
       </Container>
-    </ThemeProvider>
   );
 }

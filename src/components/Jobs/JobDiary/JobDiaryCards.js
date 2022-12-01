@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from '@mui/material/Box';
@@ -15,8 +15,8 @@ import { getActivities } from '../../../actions/activityAction';
 import PhotoUploadDialog from '../../../common/PhotoUploadDialog';
 import DetailsDialog from '../../../common/DetailsDialog';
 //import { getPhoto } from '../../../actions/photosActions';
-import Container from '@material-ui/core/Container';
-//import Container from '@mui/material/Container';
+//import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 import unknownPhoto from '../../../common/assets/images/blank-profile-picture.png';
 
 

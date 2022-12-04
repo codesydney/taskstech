@@ -11,8 +11,9 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
-import wave from'../../components/logo/wave.png';
+import wave from "../../components/logo/wave.png";
 
+// Feel free to untrack git
 const useStyles = makeStyles(theme => ({
     root: {
         height: "100vh",
@@ -24,9 +25,10 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
     },
     wave: {
-        height: '100%',
+        left: '11rem',
+        height: '46.6rem',
         position: 'absolute',
-        left: '21rem'
+        top: '0rem',
     },
     buttonContainer: {
         display: "flex",
@@ -92,13 +94,10 @@ export default function Login () {
     return (
         <Grid container component='main' className={classes.root}>
             <CssBaseline />
-            {/* <img id="wave" src={wave} /> matches === true ? <></> : <Logo />*/}
-            {
-                matches === true 
-                    ? <></> 
-                    : <Logo />
-            }
-            <img id="wave" className={classes.wave} src={wave} />
+            <div className="logo-container">
+                {matches === true ? <></> : <Logo />}
+                <img id='wave' className={classes.wave} src={wave} />
+            </div>
             <Grid
                 item
                 xs={12}
@@ -108,7 +107,6 @@ export default function Login () {
                 elevation={6}
                 square
             >
-                
                 <div className={classes.paper}>
                     <div className={classes.form}>
                         <Container component='main' maxWidth='xs'>
@@ -147,7 +145,7 @@ export default function Login () {
                                         onKeyPress={event => onKeyEnter(event)}
                                     />
                                 </Grid>
-                                
+
                                 <Grid item xs={12}>
                                     <div className={classes.links}>
                                         <Link href='#' variant='body2'>
@@ -167,7 +165,9 @@ export default function Login () {
                                         variant='contained'
                                         className={classes.submit}
                                         style={{
-                                            width: matches ? "78vw" : "25vw !important", /* 38 */
+                                            width: matches
+                                                ? "78vw"
+                                                : "25vw !important" /* 38 */,
                                             height: "7vh",
                                         }}
                                         onClick={() => handleSubmit()}

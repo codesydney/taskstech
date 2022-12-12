@@ -12,23 +12,26 @@ import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
 import wave from "../../components/logo/wave.png";
+import "./login.css";
 
-// Feel free to untrack git
 const useStyles = makeStyles(theme => ({
     root: {
         height: "100vh",
     },
     paper: {
-        margin: theme.spacing(8, 4),
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        height: '100vh'
+    },
+    waveMobile: {
+        display: 'none'
     },
     wave: {
-        left: '11rem',
-        height: '46.6rem',
-        position: 'absolute',
-        top: '0rem',
+        left: "29.9rem",
+        height: "46.6rem",
+        position: "absolute",
+        top: "0rem",
     },
     buttonContainer: {
         display: "flex",
@@ -39,6 +42,9 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         alignItems: "start",
         marginBottom: theme.spacing(1),
+    },
+    formMobile: {
+        width: "90%",
     },
     form: {
         width: "100%", // Fix IE 11 issue.
@@ -94,94 +100,112 @@ export default function Login () {
     return (
         <Grid container component='main' className={classes.root}>
             <CssBaseline />
-            <div className="logo-container">
-                {matches === true ? <></> : <Logo />}
-                <img id='wave' className={classes.wave} src={wave} />
-            </div>
-            <Grid
-                item
-                xs={12}
-                sm={7}
-                md={7}
-                component={Paper}
-                elevation={6}
-                square
-            >
-                <div className={classes.paper}>
-                    <div className={classes.form}>
-                        <Container component='main' maxWidth='xs'>
-                            <Grid container spacing={3}>
-                                <Grid item>
-                                    <p className='title'>Login</p>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        variant='outlined'
-                                        margin='normal'
-                                        required
-                                        fullWidth
-                                        id='email'
-                                        label='Enter your Email'
-                                        name='email'
-                                        placeholder='youremail@mail.com'
-                                        value={email}
-                                        onChange={inputEmail}
-                                        autoComplete='email'
-                                        autoFocus
-                                    />
-                                    <TextField
-                                        variant='outlined'
-                                        margin='normal'
-                                        required
-                                        fullWidth
-                                        label='Enter your password'
-                                        type='password'
-                                        id='password'
-                                        name='password'
-                                        placeholder='Enter your password'
-                                        value={password}
-                                        onChange={inputPassword}
-                                        autoComplete='password'
-                                        onKeyPress={event => onKeyEnter(event)}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    <div className={classes.links}>
-                                        <Link href='#' variant='body2'>
-                                            Forgot password?
-                                        </Link>
-                                        <Link href='/signup' variant='body2'>
-                                            {"Don't have an account? Sign up"}
-                                        </Link>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                            <Grid container className={classes.buttonContainer}>
-                                <Grid item xs={12}>
-                                    <Button
-                                        type='submit'
-                                        fullWidth
-                                        variant='contained'
-                                        className={classes.submit}
-                                        style={{
-                                            width: matches
-                                                ? "78vw"
-                                                : "25vw !important" /* 38 */,
-                                            height: "7vh",
-                                        }}
-                                        onClick={() => handleSubmit()}
-                                    >
-                                        Log in
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </Container>
-
-                        {/* </form> */}
+            <div className='login-container'>
+                <div className='logo-container'>
+                    {matches === true ? <></> : <Logo />}
+                    <div id="wave-container">
+                        <img 
+                            id='wave' 
+                            className={matches === false ? classes.wave : classes.waveMobile} 
+                            src={wave} 
+                        />
                     </div>
                 </div>
-            </Grid>
+                <Grid
+                    item
+                    xs={12}
+                    sm={7}
+                    md={7}
+                    component={Paper}
+                    elevation={6}
+                    square
+                >
+                    <div className={classes.paper}>
+                        <div className={matches === false ? classes.form : classes.formMobile}>
+                            <Container component='main' maxWidth='xs'>
+                                <Grid container spacing={3}>
+                                    <Grid item>
+                                        <p className='title'>Login</p>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant='outlined'
+                                            margin='normal'
+                                            required
+                                            fullWidth
+                                            id='email'
+                                            label='Enter your Email'
+                                            name='email'
+                                            placeholder='youremail@mail.com'
+                                            value={email}
+                                            onChange={inputEmail}
+                                            autoComplete='email'
+                                            autoFocus
+                                        />
+                                        <TextField
+                                            variant='outlined'
+                                            margin='normal'
+                                            required
+                                            fullWidth
+                                            label='Enter your password'
+                                            type='password'
+                                            id='password'
+                                            name='password'
+                                            placeholder='Enter your password'
+                                            value={password}
+                                            onChange={inputPassword}
+                                            autoComplete='password'
+                                            onKeyPress={event =>
+                                                onKeyEnter(event)
+                                            }
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <div className={classes.links}>
+                                            <Link href='#' variant='body2'>
+                                                Forgot password?
+                                            </Link>
+                                            <Link
+                                                href='/signup'
+                                                variant='body2'
+                                            >
+                                                {
+                                                    "Don't have an account? Sign up"
+                                                }
+                                            </Link>
+                                        </div>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    container
+                                    className={classes.buttonContainer}
+                                >
+                                    <Grid item xs={12}>
+                                        <Button
+                                            type='submit'
+                                            fullWidth
+                                            variant='contained'
+                                            className={classes.submit}
+                                            style={{
+                                                width: matches
+                                                    ? "78vw"
+                                                    : "25vw !important" /* 38 */,
+                                                height: "7vh",
+                                            }}
+                                            onClick={() => handleSubmit()}
+                                        >
+                                            Log in
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Container>
+
+                            {/* </form> */}
+                        </div>
+                    </div>
+                </Grid>
+            </div>
         </Grid>
     );
 }

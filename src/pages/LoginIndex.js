@@ -98,7 +98,6 @@ export default function LoginIndex({ history }) {
                                             width: matches ? "34vw" : "38vw",
                                             height: "7vh",
                                         }}
-                                    
                                     >
                                         Register
                                     </Button>

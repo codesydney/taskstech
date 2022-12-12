@@ -11,18 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.logo-container {
-  width: 31rem; 
-  position: relative !important;
-}
-
-.MuiGrid-grid-md-5,
-.MuiGrid-grid-sm-5 {
-  height: 46.6rem !important;
-  max-width: none !important;
-}
-
-.MuiGrid-grid-md-7 {
-  height: 46.6rem !important;
-}

@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
     image: {
         display: "flex",
         alignItems: "center",
+        height: '100vh', 
         justifyContent: "center",
         backgroundColor: "#000000", 
         paddingRight: "4%",

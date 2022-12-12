@@ -1,0 +1,29 @@
+@media screen and (min-width: 877px) {
+    .MuiGrid-grid-md-5,
+    .MuiGrid-grid-sm-5 {
+      height: 46.6rem !important;
+      max-width: none !important;
+    }
+    
+    .MuiGrid-grid-md-7 {
+      height: 46.6rem !important;
+    }
+    
+    .logo-container {
+      width: 30rem;
+      position: relative !important;
+      z-index: 1;
+    }
+    
+    .login-container {
+      position: relative;
+      width: 70rem;
+    }
+    
+    .MuiPaper-root.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-7.MuiGrid-grid-md-7.MuiPaper-elevation6 {
+      position: absolute;
+      left: 30.7rem;
+      top: 0rem;
+      width: 100rem;
+    }
+  }

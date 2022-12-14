@@ -1,29 +1,100 @@
+ /******  submit mui theme ******/
+ .MuiButton-fullWidth {
+    color: #fff !important;
+    background-color: #000000 !important;
+    margin: 3px 2px 3px 0px !important;
+}
+.MuiButton-fullWidth:hover {
+    background-color: #36454F  !important;
+    box-shadow: none;
+}
+/******  submit mui theme ******/
+
+
+/* Desktop Viewport */
 @media screen and (min-width: 877px) {
+    /****** mui theme ******/
+    .wave {
+        left: 29.9rem;
+        height: 46.6rem;
+        position: absolute;
+        top: 0rem;
+    }
+
+    buttonContainer {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .links {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 8px;
+    }
+
+    .form {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+   
+
+    /****** mui theme ******/
+
     .MuiGrid-grid-md-5,
     .MuiGrid-grid-sm-5 {
-      height: 46.6rem !important;
-      max-width: none !important;
+        height: 46.6rem !important;
+        max-width: none !important;
     }
-    
+
     .MuiGrid-grid-md-7 {
-      height: 46.6rem !important;
+        height: 46.6rem !important;
     }
-    
+
     .logo-container {
-      width: 30rem;
-      position: relative !important;
-      z-index: 1;
+        width: 30rem;
+        position: relative !important;
+        z-index: 1;
     }
-    
+
     .login-container {
-      position: relative;
-      width: 70rem;
+        position: relative;
+        width: 70rem;
+    }
+
+    .MuiPaper-root.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-7.MuiGrid-grid-md-7.MuiPaper-elevation6 {
+        position: absolute;
+        left: 30.7rem;
+        top: 0rem;
+        width: 100rem;
+    }
+}
+
+/****** Mobile Viewport ******/
+@media screen and (max-width: 600px) {
+    /****** mui theme ******/
+    .root {
+        height: 100vh;
+    }
+    .paper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+    .waveMobile {
+        display: none;
+    }
+    .formMobile {
+        width: 90%;
+        height: 100vh;
+    }
+    .links {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 8px;
     }
     
-    .MuiPaper-root.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-7.MuiGrid-grid-md-7.MuiPaper-elevation6 {
-      position: absolute;
-      left: 30.7rem;
-      top: 0rem;
-      width: 100rem;
-    }
-  }
+    /****** mui theme ******/
+}

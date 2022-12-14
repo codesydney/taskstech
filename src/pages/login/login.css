@@ -1,3 +1,16 @@
+ /******  submit mui theme ******/
+ .MuiButton-fullWidth {
+    color: #fff !important;
+    background-color: #000000 !important;
+    margin: 3px 2px 3px 0px !important;
+}
+.MuiButton-fullWidth:hover {
+    background-color: #36454F  !important;
+    box-shadow: none;
+}
+/******  submit mui theme ******/
+
+
 /* Desktop Viewport */
 @media screen and (min-width: 877px) {
     /****** mui theme ******/
@@ -24,17 +37,7 @@
         margin-top: 8px;
     }
 
-    /******  submit ******/
-    .MuiButton-fullWidth {
-        color: #fff !important;
-        background-color: #000000 !important;
-        margin: 3px 2px 3px 0px !important;
-    }
-    .MuiButton-fullWidth:hover {
-        background-color: #36454F  !important;
-        box-shadow: none;
-    }
-    /******  submit ******/
+   
 
     /****** mui theme ******/
 
@@ -92,16 +95,6 @@
         align-items: start;
         margin-bottom: 8px;
     }
-    /******  submit ******/
-    .MuiButton-fullWidth {
-        color: #fff !important;
-        background-color: #000000 !important;
-        margin: 3px 2px 3px 0px !important;
-    }
-    .MuiButton-fullWidth:hover {
-        background-color: #36454F;
-        box-shadow: none;
-    }
-    /******  submit ******/
+    
     /****** mui theme ******/
 }

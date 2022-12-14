@@ -8,61 +8,12 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
 import Logo from "../../components/logo/Logo";
 import { signIn } from "../../actions/action";
 import wave from "../../components/logo/wave.png";
 import "./login.css";
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        height: "100vh",
-    },
-    paper: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: '100vh'
-    },
-    waveMobile: {
-        display: 'none'
-    },
-    wave: {
-        left: "29.9rem",
-        height: "46.6rem",
-        position: "absolute",
-        top: "0rem",
-    },
-    buttonContainer: {
-        display: "flex",
-        flexDirection: "row-reverse",
-    },
-    links: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "start",
-        marginBottom: theme.spacing(1),
-    },
-    formMobile: {
-        width: "90%",
-    },
-    form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        color: "#fff",
-        backgroundColor: "#000000",
-        margin: theme.spacing(3, 2, 3, 0),
-        "&:hover": {
-            backgroundColor: "#36454F",
-            boxShadow: "none",
-        },
-    },
-}));
-
+ 
 export default function Login () {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const matches = useMediaQuery("(max-width:600px)");
 
@@ -98,7 +49,7 @@ export default function Login () {
     };
 
     return (
-        <Grid container component='main' className={classes.root}>
+        <Grid container component='main' className='root'>
             <CssBaseline />
             <div className='login-container'>
                 <div className='logo-container'>
@@ -106,7 +57,7 @@ export default function Login () {
                     <div id="wave-container">
                         <img 
                             id='wave' 
-                            className={matches === false ? classes.wave : classes.waveMobile} 
+                            className='wave waveMobile' 
                             src={wave} 
                         />
                     </div>
@@ -120,8 +71,8 @@ export default function Login () {
                     elevation={6}
                     square
                 >
-                    <div className={classes.paper}>
-                        <div className={matches === false ? classes.form : classes.formMobile}>
+                    <div className='paper'>
+                        <div className='form formMobile'>
                             <Container component='main' maxWidth='xs'>
                                 <Grid container spacing={3}>
                                     <Grid item>
@@ -162,7 +113,7 @@ export default function Login () {
                                     </Grid>
 
                                     <Grid item xs={12}>
-                                        <div className={classes.links}>
+                                        <div className='links'>
                                             <Link href='#' variant='body2'>
                                                 Forgot password?
                                             </Link>
@@ -179,18 +130,18 @@ export default function Login () {
                                 </Grid>
                                 <Grid
                                     container
-                                    className={classes.buttonContainer}
+                                    className='buttonContainer'
                                 >
                                     <Grid item xs={12}>
                                         <Button
                                             type='submit'
                                             fullWidth
                                             variant='contained'
-                                            className={classes.submit}
+                                            className='submit'
                                             style={{
                                                 width: matches
                                                     ? "78vw"
-                                                    : "25vw !important" /* 38 */,
+                                                    : "25vw !important",
                                                 height: "7vh",
                                             }}
                                             onClick={() => handleSubmit()}

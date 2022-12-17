@@ -1,0 +1,63 @@
+.MuiTypography-colorPrimary {
+    color: #000 !important;
+}
+
+/****** Desktop Viewport ******/
+@media screen and (min-width: 877px) {
+    .root {
+        height: 100vh;
+    }
+    .paper {
+        padding: 8px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: row-reverse;
+        padding-top: 15vh;
+    }
+
+    .form {
+        width: 100%;
+        margin-top: 10px ;
+    }
+    .submit {
+        margin: 3px 2px 3px 6px;
+    }
+}
+
+/****** Mobile Viewport ******/
+@media screen and (max-width: 600px) {
+    .paper {
+        display: flex;
+        padding: 64px 32px;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    div#login {
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+
+    .MuiGrid-container {
+        display: flex;
+        justify-content: center;
+    }
+    .buttonGrid .MuiButton-fullWidth {
+        width: 34vw;
+        height: 7vh;
+    }
+
+    .mobileButtonContainer {
+        display: flex;
+        flex-direction: unset;
+        padding-top: 0 !important;
+    }
+
+    .buttonGrid {
+        margin: 5% !important;
+    }
+}

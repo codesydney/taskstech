@@ -7,46 +7,19 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Logo from "../../components/logo/Logo";
 import { signUp } from "../../actions/action";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        height: "100vh",
-    },
-    paper: {
-        margin: theme.spacing(8, 4),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-    buttonContainer: {
-        display: "flex",
-        flexDirection: "row-reverse",
-        paddingTop: "15vh",
-    },
-
-    form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(10),
-    },
-    submit: {
-        margin: theme.spacing(3, 2, 3, 6),
-    },
-}));
+import "./signup.css";
 
 export default function TradieSignUp() {
-    const classes = useStyles();
     const dispatch = useDispatch();
 
-    const [firstname, setFirstname] = useState(""),
-        [lastname, setLastname] = useState(""),
-        [email, setEmail] = useState(""),
-        [phone, setPhone] = useState(""),
-        [description, setDescription] = useState(""),
-        [password, setPassword] = useState(""),
-        [confirmPassword, setConfirmPassword] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [description, setDescription] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const inputFirstname = useCallback(
         (event) => {
@@ -131,9 +104,9 @@ export default function TradieSignUp() {
         }
     }
     return (
-        <Grid container component="main" className={classes.root}>
+        <Grid container component="main" className='root'>
             <CssBaseline />
-            <Logo />
+            
             <Grid
                 item
                 xs={12}
@@ -143,15 +116,14 @@ export default function TradieSignUp() {
                 elevation={6}
                 square
             >
-                <div className={classes.paper}>
+                <div className='paper'>
                     <Typography component="h1" variant="h4">
                         Tradies Sign up
                     </Typography>
-                    <div className={classes.form}>
-                        {/* <form className={classes.form} > */}
+                    <div className='form'>
                         <Grid container spacing={3}>
                             <Grid container>
-                                <Grid item>
+                                <Grid item id='login'>
                                     <Link href="login" variant="body2">
                                         {"Already have a account? Sign In"}
                                     </Link>
@@ -212,7 +184,7 @@ export default function TradieSignUp() {
                                 item
                                 xs={12}
                                 sm={12}
-                                className={classes.description}
+                                className='description'
                             >
                                 <TextField
                                     autoComplete="text"
@@ -254,27 +226,27 @@ export default function TradieSignUp() {
 
                                 />
                             </Grid>
-
-                            
                         </Grid>
-                        <Grid container className={classes.buttonContainer}>
-                            <Grid item xs={4}>
+                        <Grid container className='buttonContainer mobileButtonContainer'>
+                            <Grid item xs={4} className="buttonGrid">
                                 <Button
                                     type="submit"
+                                    fullWidth
                                     variant="contained"
                                     color="primary"
-                                    className={classes.submit}
+                                    className='submit'
                                     onClick={() => handleSubmit()}
                                 >
                                     Sign Up
                                 </Button>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={4} className="buttonGrid">
                                 <Button
                                     type="cancel"
+                                    fullWidth
                                     variant="outlined"
                                     color="primary"
-                                    className={classes.submit}
+                                    className='submit'
                                 >
                                     Cancel
                                 </Button>

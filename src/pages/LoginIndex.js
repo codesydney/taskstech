@@ -1,21 +1,17 @@
 import React from "react";
-//import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@material-ui/core/CssBaseline";
-//import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-//import { signIn } from "../../actions/action";
 
 const useStyles = makeStyles(theme => ({
     root: {
         height: "100vh",
     },
     paper: {
-        //margin: theme.spacing(8, 4), fixes the layout issue but its better to hide the navigation in this part
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

@@ -26,6 +26,23 @@ tr.MuiTableRow-root.MuiTableRow-hover {
     font-weight: 700;
 }
 
+/****** title font /******/
+.title {
+    color: #1a1a1a;
+    font-family: Comfortaa;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 32px !important;
+    font-weight: 700;
+  }
+
+/****** Desktop Viewport ******/
+@media screen and (min-width: 877px) {
+
+}
+
+/****** Mobile Viewport ******/
 @media screen and (max-width: 600px) {
     .makeStyles-root-4 { width: 100% !important; }
     .MuiContainer-root { width: 100% !important; }

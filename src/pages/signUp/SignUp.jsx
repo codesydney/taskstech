@@ -20,7 +20,7 @@ export default function TradieSignUp() {
     const [description, setDescription] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
+    
     const inputFirstname = useCallback(
         (event) => {
             setFirstname(event.target.value);
@@ -96,6 +96,16 @@ export default function TradieSignUp() {
                 phone
             )
         );
+    };
+
+    const handleClear = () => {
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+        setPhone('');
+        setDescription('');
+        setPassword('');
+        setConfirmPassword('');
     };
 
     const onKeyEnter = (event)=>{
@@ -247,8 +257,9 @@ export default function TradieSignUp() {
                                     variant="outlined"
                                     color="primary"
                                     className='submit'
+                                    onClick={() => handleClear()}
                                 >
-                                    Cancel
+                                    Clear
                                 </Button>
                             </Grid>
                         </Grid>

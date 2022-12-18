@@ -33,7 +33,7 @@ function App() {
             <Switch>
                 <Route exact path={"/login"} component={loginRenderer} />
                 <Route exact path={url} component={Pages.Login} />
-                <Route exact path="/signup" component={Pages.SignUp} />
+                <Route exact path="/signup" history={history} component={Pages.SignUp} />
 
                 <Auth history={history} matches={matches}>
                     <Navigation />

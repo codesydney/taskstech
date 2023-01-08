@@ -1,40 +1,26 @@
 import React, { useState } from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import CreateIcon from "@material-ui/icons/Create";
-//import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import SelectAllIcon from "@material-ui/icons/SelectAll";
-import SettingsPowerIcon from "@material-ui/icons/SettingsPower";
-//import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-//import PostAddIcon from "@material-ui/icons/PostAdd";
-//import WorkIcon from "@material-ui/icons/Work";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import CreateIcon from "@mui/icons-material/Create";
+//import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SelectAllIcon from "@mui/icons-material/SelectAll";
+import SettingsPowerIcon from "@mui/icons-material/SettingsPower";
+//import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+//import PostAddIcon from "@mui/icons-material/PostAdd";
+//import WorkIcon from "@mui/icons-material/Work";
+import Box from '@mui/material/Box';
 import { withRouter } from "react-router-dom";
 import { useDispatch} from 'react-redux';
 import { signOut } from "../../actions/action";
 
 
-
-//Rigtht sidebar component
-
 function RightSideBar({history}) {
-    // Make use of makeStyle from material UI
-    const useStyles = makeStyles({
-        list: {
-            width: 250,
-        },
-        fullList: {
-            width: "auto",
-        },
-    });
     const dispatch = useDispatch();
-    const classes = useStyles();
     const [state, setState] = useState({
         left: false,
         right: false,
@@ -65,7 +51,6 @@ function RightSideBar({history}) {
             icon: <SelectAllIcon />,
             onClick: () => {
                 history.push("/view/jobs")
-                //window.location.reload()
             }
         },
         /* 
@@ -100,10 +85,9 @@ function RightSideBar({history}) {
 
     // The list of the items on the sidebar
     const list = (anchor) => (
-        <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === "top" || anchor === "bottom",
-            })}
+        <Box
+            //className='list'
+            sx={{ width: '15rem' }}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
@@ -119,7 +103,7 @@ function RightSideBar({history}) {
                 ))}
             </List>
             <Divider />
-        </div>
+        </Box>
     );
 
     return (

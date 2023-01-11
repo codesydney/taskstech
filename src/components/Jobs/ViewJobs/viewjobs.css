@@ -37,6 +37,10 @@ tr.MuiTableRow-root.MuiTableRow-hover {
     font-weight: 700;
   }
 
+/****** Desktop Viewport ******/
+@media screen and (min-width: 877px) {
+
+}
 
 /****** Mobile Viewport ******/
 @media screen and (max-width: 600px) {

@@ -140,7 +140,7 @@ export default function Login () {
                                             className='submit'
                                             style={{
                                                 width: matches
-                                                    ? "78vw"
+                                                    ? "68vw"
                                                     : "25vw !important",
                                                 height: "7vh",
                                             }}

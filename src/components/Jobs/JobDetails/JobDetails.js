@@ -340,7 +340,13 @@ const JobDetails = (props) => {
                     <div>
                         <Button
                             variant="contained"
-                            style={{ color: 'white', backgroundColor: '#000000' }}
+                            style={{ 
+                                backgroundColor: "#000000", 
+                                width: '25%',
+                                color: "#fff",
+                                padding: '8px 22px',
+                                borderRadius: '4px'
+                              }}
                             onClick={handleSubmit}
                         >
                             Update

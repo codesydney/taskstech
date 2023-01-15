@@ -54,7 +54,9 @@ export const FullWidthTabs = ({ history, callback }) => {
           style={{
             marginTop: '1rem',
             marginBottom: '1rem',
-            backgroundColor: '#000000'
+            backgroundColor: '#000000',
+            padding: '8px 22px',
+            borderRadius: '4px'
           }}
         >
           New Job

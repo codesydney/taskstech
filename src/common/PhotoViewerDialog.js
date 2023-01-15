@@ -64,7 +64,7 @@ export default function PhotoViewerDialog({
   
 
   useEffect(() => {
-    if (uploadedPhotos !== undefined) {
+    if (uploadedPhotos !== undefined && actId !== 0) {
       dispatch(getPhoto(actId, filename));
     }
   }, [filename]);

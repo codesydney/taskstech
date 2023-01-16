@@ -85,7 +85,13 @@ export default function ControlledAccordions(props) {
               <Button
                   variant="contained"
                   color="primary"
-                  style={{ backgroundColor: "#000000", margin: '2%' }}
+                  style={{ 
+                    backgroundColor: "#000000",
+                    color: "#fff",
+                    padding: '8px 22px',
+                    margin: '2%',
+                    borderRadius: '4px' 
+                  }}
                   onClick={(event) => {
                     handleJobDetailsClick(event, row);
                   }}
@@ -96,15 +102,18 @@ export default function ControlledAccordions(props) {
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ backgroundColor: "#000000" }}
+                  style={{ 
+                    backgroundColor: "#000000",
+                    color: "#fff",
+                    padding: '8px 22px',
+                    borderRadius: '4px'
+                  }}
                   onClick={(event) => {
                     handleDiaryClick(event, row);
                   }}
                 >
                   <MenuBookIcon />
                 </Button>
-
-                
               </div>
             </Container>
           </Box>

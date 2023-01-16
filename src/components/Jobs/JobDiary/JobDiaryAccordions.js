@@ -66,12 +66,12 @@ export default function JobDiaryAccordions(props) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  
+
   const handleClickOpenPhotoViewerDialog = (id, photos, description) => {
     setActId(id);
     setPhotos(photos);
     setDescription(description)
-    setOpenPhotoViewer(true); 
+    setOpenPhotoViewer(true);
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function JobDiaryAccordions(props) {
     return date.toLocaleString();
   };
 
-  
+
   const activityDetails = activity.payload.map((act) => {
 
     return (
@@ -141,7 +141,14 @@ export default function JobDiaryAccordions(props) {
             <Button
               variant="contained"
               color="primary"
-              style={{ backgroundColor: "#000000", width: '25%', margin: '1% 3%' }}
+              style={{
+                backgroundColor: "#000000",
+                width: '25%',
+                margin: '1% 3%',
+                color: "#fff",
+                padding: '8px 22px',
+                borderRadius: '4px'
+              }}
               onClick={() => handleClickOpenActivityDetailsForm(act.id, act.description, act.create_date, act.update_date, act.update_by, id)}
             >
               <EditIcon />
@@ -149,7 +156,14 @@ export default function JobDiaryAccordions(props) {
             <Button
               variant="contained"
               color="primary"
-              style={{ backgroundColor: "#000000", width: '25%' }}
+              style={{ 
+                backgroundColor: "#000000", 
+                width: '25%',
+                color: "#fff",
+                padding: '8px 22px',
+                borderRadius: '4px'
+              }}
+              
               onClick={() => handleClickOpenPhotoViewerDialog(act.id, act.upload_photos, act.description)}
             >
               <CameraAltIcon />
@@ -182,6 +196,7 @@ export default function JobDiaryAccordions(props) {
             variant="outlined"
             className={classes.activityButtonMobile}
             onMouseUp={handleClickOpenCreateForm}
+            
           >
             <NoteAddIcon
               className={classes.iconColor} />

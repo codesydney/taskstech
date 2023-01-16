@@ -29,7 +29,6 @@ export default function PhotoUploadForm({
       formData.append('activity_id', actId);
 
       dispatch(addPhoto(formData));
-      //handleReload(true);
       handleClear();
     } else console.log('File is empty')
   };
@@ -60,7 +59,7 @@ export default function PhotoUploadForm({
               id='preview'
               style={{
                 width: matches === true
-                  ? '70vw' : '30vw',
+                  ? '70vw' : '60vw',
                 height: matches === true
                   ? '35vh' : '50vh'
               }}>

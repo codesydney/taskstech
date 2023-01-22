@@ -1,52 +1,36 @@
-/*
-div#add-section {
-    margin-bottom: 2%;
+/****** Desktop Viewport ******/
+@media screen and (min-width: 877px) {
+    .root { width: 60vw; };
+    .iconColor { color: black; };
+    .accordion { margin-bottom: 30%; };
+    .content {
+      margin-bottom: 10%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -10px;
+    }
 }
 
-button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
-    border: 1px solid rgba(0, 0, 0, 0.23);
-    padding: 5px 15px;
-    min-width: 10px;
-    height: 30px;
-    background-color: #ffffff;
-    border: none;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    left: 2rem;
-}
-
-svg#icon {
-    font-size: 400px;
-    padding: 0 5%;
-    margin: 0 5%;
-}
-
-button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined:hover {
-    background-color: rgb(117, 117, 115);
-}
-
+/****** Mobile Viewport ******/
 @media screen and (max-width: 600px) {
-    svg#icon {
-        font-size: 250px;
-        padding: 0;
-        margin: 0;
+    /* Adds a margin at the last accordion*/
+    .accordionMobile:last-of-type { 
+        margin-bottom: 30% !important;  
     }
 
-    button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
-        border: 1px solid rgba(0, 0, 0, 0.23);
-        padding: 5px 15px;
-        min-width: 10px;
-        height: 80%;
-        background-color: #ffffff;
-        border: none;
-        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    .activityButtonMobile {
+        position: relative !important;
+        top: 1rem;
         left: 1rem;
-    }
-
-    button:active {
-        background-color: rgb(207, 206, 206) !important;
-        box-shadow: 0 5px #666  !important;
-        transform: translateY(4px) !important;
+        height: 3.1rem !important;
+        width: 0% !important;
+        padding: 5px 15px !important;
+        min-width: 10px;
+        background-color: #ffffff !important;
+        border: 1px solid rgb(105,105,105) !important;
+        border-radius: 50px !important;
+        border-style: solid !important;
+        border-color: black !important;
+        box-shadow: 0 6px 5px #999 !important;
     }
 }
-
-*/

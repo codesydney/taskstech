@@ -11,42 +11,12 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import PhotoViewerDialog from '../../../common/PhotoViewerDialog';
 import { getActivities } from '../../../actions/activityAction';
-
-
-const useStyles = makeStyles(() => ({
-  root: { width: '60vw' },
-  iconColor: { color: 'black' },
-  accordion: { marginBottom: '30%' },
-  content: {
-    marginBottom: '10%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: '-10px'
-  },
-  activityButtonMobile: {
-    position: 'relative',
-    top: '2rem',
-    left: '1rem ',
-    height: '35% !important',
-    width: '35% !important',
-    padding: '5px 15px',
-    minWidth: '10px',
-    backgroundColor: '#ffffff !important',
-    border: '1px solid rgb(105,105,105) !important',
-    borderRadius: '50px !important',
-    "border-style": 'solid !important',
-    "border-color": 'black !important',
-    boxShadow: '0 6px 5px #999 !important',
-  },
-}));
-
+import "./jobdiary.css";
 
 export default function JobDiaryAccordions(props) {
-  const classes = useStyles();
   const [expanded, setExpanded] = React.useState('panel1');
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
@@ -96,11 +66,13 @@ export default function JobDiaryAccordions(props) {
         key={act.id}
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
+        className="accordionMobile"
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
+          sx={{ width: '90%' }}
         >
           <Container>
             <Typography sx={{ width: '44%', flexShrink: 0, marginLeft: '-1.4rem' }}>
@@ -116,7 +88,7 @@ export default function JobDiaryAccordions(props) {
           </Container>
         </AccordionSummary>
         <AccordionDetails >
-          <Container className={classes.content}>
+          <Container className="content">
             <Typography sx={{ width: '31%', flexShrink: 0, marginLeft: '-0.7rem' }}>
               Created on
             </Typography>
@@ -175,8 +147,8 @@ export default function JobDiaryAccordions(props) {
   });
 
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <Grid container spacing={0} className={classes.accordion}>
+    <Container maxWidth="lg" className='root'>
+      <Grid container spacing={0} className='accordion'>
         <Grid item xs={8}>
           <p
             className='title'
@@ -194,12 +166,12 @@ export default function JobDiaryAccordions(props) {
         <Grid item xs={4}>
           <Button
             variant="outlined"
-            className={classes.activityButtonMobile}
+            className='activityButtonMobile'
             onMouseUp={handleClickOpenCreateForm}
             
           >
             <NoteAddIcon
-              className={classes.iconColor} />
+              className='iconColor' />
           </Button>
         </Grid>
         <Grid item xs={12}>

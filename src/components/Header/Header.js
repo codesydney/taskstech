@@ -18,7 +18,7 @@ const Header = () => {
       <Toolbar>
         <Typography className={classes.typographyStyles}>
           <p style={{backgroundColor: 'rgb(0, 0, 0)', color: "#F0F0F0", fontFamily: "Poppins", fontSize: "30px", fontWeight: "500" }}>
-            TASKSTECH
+          worklog
           </p>
         </Typography>
       </Toolbar>

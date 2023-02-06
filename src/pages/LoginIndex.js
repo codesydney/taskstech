@@ -67,7 +67,7 @@ export default function LoginIndex({ history }) {
                                         style={{
                                             marginTop: '20px', position: 'relative',
                                             top: '15rem', fontSize: '48px !important'
-                                        }}>taskstech</p>
+                                        }}>worklog</p>
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.buttonContainer}>

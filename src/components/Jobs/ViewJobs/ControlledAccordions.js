@@ -54,18 +54,19 @@ export default function ControlledAccordions(props) {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
+          sx={{ width: '19rem' }}
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
             Name
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>{row.name}</Typography>{/* */}
+          <Typography sx={{ color: 'text.secondary' }}>{row.name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box sx={{ minWidth: 275 }}>
             <Container style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className='wrapper'  >
+              <div className='wrapper' >
                 <div style={{ display: 'flex' }}>
-                  <Typography id='desc' sx={{ width: '33%', flexShrink: 0 }}>
+                  <Typography id='desc' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.95rem' }}>
                     Summary
                   </Typography>
                   <Typography id='content' sx={{ fontSize: 14, padding: '1%' }} color="text.secondary" gutterBottom>
@@ -73,7 +74,7 @@ export default function ControlledAccordions(props) {
                   </Typography>
                 </div>
                 <div style={{ display: 'flex' }}>
-                  <Typography id='stat' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.50rem' }}>
+                  <Typography id='stat' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.95rem' }}>
                     Status
                   </Typography>
                   <Typography id='content' sx={{ fontSize: 14, padding: '1%' }} color="text.secondary" gutterBottom>

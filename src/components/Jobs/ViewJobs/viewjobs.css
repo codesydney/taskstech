@@ -47,4 +47,7 @@ tr.MuiTableRow-root.MuiTableRow-hover {
     .makeStyles-root-4 { width: 100% !important; }
     .MuiContainer-root { width: 100% !important; }
     span.MuiTab-wrapper { font-size: 12px; }
+
+    /****** Job Accordion ******/
+    .MuiTypography-body1 { text-align: left; }
 }

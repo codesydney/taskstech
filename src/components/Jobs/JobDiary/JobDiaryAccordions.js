@@ -74,41 +74,38 @@ export default function JobDiaryAccordions(props) {
           id="panel1bh-header"
           sx={{ width: '90%' }}
         >
-          <Container>
-            <Typography sx={{ width: '44%', flexShrink: 0, marginLeft: '-1.4rem' }}>
+            <Typography sx={{ fontSize: '1rem',width: '44%', flexShrink: 0, fontWeight: 'bold' }}>
               Description
             </Typography>
             <Typography
               id='content'
-              sx={{ fontSize: 15, textAlign: 'left' }}
+              sx={{ fontSize: '1rem', textAlign: 'left' }}
               color="text.secondary" gutterBottom
             >
               {act.description}
             </Typography>
-          </Container>
         </AccordionSummary>
         <AccordionDetails >
-          <Container className="content">
-            <Typography sx={{ width: '31%', flexShrink: 0, marginLeft: '-0.7rem' }}>
+            <Typography sx={{ fontSize: '1rem', width: '31%', flexShrink: 0, fontWeight: 'bold' }}>
               Created on
             </Typography>
-            <Typography sx={{ color: 'text.secondary', textAlign: 'left' }}>
+            <Typography sx={{ fontSize: '1rem', color: 'text.secondary', textAlign: 'left' }}>
               {convertUTCTimeToLocalTime(act.update_date)}
             </Typography>
-            <Typography id='stat' sx={{ width: '43%', flexShrink: 0, marginLeft: '-.98rem' }}>
+            <Typography id='stat' sx={{ fontSize: '1rem', width: '43%', flexShrink: 0, fontWeight: 'bold' }}>
               Last Updated
             </Typography>
             <Typography
-              sx={{ fontSize: 15, textAlign: 'left' }} color="text.secondary" gutterBottom>
+              sx={{ fontSize: '1rem', textAlign: 'left' }} color="text.secondary" gutterBottom>
               {convertUTCTimeToLocalTime(act.update_date)}
             </Typography>
-            <Typography sx={{ width: '50%', flexShrink: 0, marginLeft: '-.90rem' }}>
+            <Typography sx={{ width: '50%', flexShrink: 0, fontWeight: 'bold' }}>
               Last Updated By
             </Typography>
-            <Typography sx={{ fontSize: 14, textAlign: 'left' }} color="text.secondary" gutterBottom>
+            <Typography sx={{ fontSize: '1rem', textAlign: 'left' }} color="text.secondary" gutterBottom>
               {act.update_by}
             </Typography>
-          </Container>
+          
           <Container>
             <Button
               variant="contained"
@@ -168,10 +165,8 @@ export default function JobDiaryAccordions(props) {
             variant="outlined"
             className='activityButtonMobile'
             onMouseUp={handleClickOpenCreateForm}
-            
           >
-            <NoteAddIcon
-              className='iconColor' />
+            <NoteAddIcon className='iconColor' sx={{ color: 'black !important' }} />
           </Button>
         </Grid>
         <Grid item xs={12}>

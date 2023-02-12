@@ -56,28 +56,28 @@ export default function ControlledAccordions(props) {
           id="panel1bh-header"
           sx={{ width: '19rem' }}
         >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+          <Typography sx={{ width: '33%', flexShrink: 0, padding: '0 4rem 0 0', fontWeight: 'bold' }}>
             Name
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>{row.name}</Typography>
+          <Typography sx={{ color: 'text.secondary', padding: '0 0.5rem 0 0' }}>{row.name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box sx={{ minWidth: 275 }}>
             <Container style={{ display: 'flex', flexDirection: 'column' }}>
               <div className='wrapper' >
                 <div style={{ display: 'flex' }}>
-                  <Typography id='desc' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.95rem' }}>
+                  <Typography id='desc' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.95rem', fontWeight: 'bold' }}>
                     Summary
                   </Typography>
-                  <Typography id='content' sx={{ fontSize: 14, padding: '1%' }} color="text.secondary" gutterBottom>
+                  <Typography id='content' sx={{ fontSize: '1rem', padding: '0 1%' }} color="text.secondary" gutterBottom>
                     {row.description}
                   </Typography>
                 </div>
                 <div style={{ display: 'flex' }}>
-                  <Typography id='stat' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.95rem' }}>
+                  <Typography id='stat' sx={{ width: '33%', flexShrink: 0, marginLeft: '-.95rem', fontWeight: 'bold' }}>
                     Status
                   </Typography>
-                  <Typography id='content' sx={{ fontSize: 14, padding: '1%' }} color="text.secondary" gutterBottom>
+                  <Typography id='content' sx={{ fontSize: '1rem', padding: '1%' }} color="text.secondary" gutterBottom>
                     {row.job_status['name']}
                   </Typography>
                 </div>

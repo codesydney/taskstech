@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,7 +12,10 @@ import "./signup.css";
 
 export default function TradieSignUp() {
     const dispatch = useDispatch();
-
+    
+    const regex = new RegExp('^(?!.{31})[a-z0-9]+(?:\\.[a-z0-9]+)*@[a-z0-9]+(?:[.-][a-z0-9-]+)*\\.[a-z]{2,6}$'); 
+    const [hasError, setHasError] = useState(false);
+    const [errorText, setErrorText] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
@@ -21,6 +24,8 @@ export default function TradieSignUp() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     
+    useEffect(() => { setHasError(false); },[]);
+
     const inputFirstname = useCallback(
         (event) => {
             setFirstname(event.target.value);
@@ -42,9 +47,24 @@ export default function TradieSignUp() {
         [setPhone]
     );
 
+    const validateEmail = () => {
+        if(regex.test(email.toLowerCase())) {
+            setEmail(email);
+            setErrorText("");
+            setHasError(false);
+        } 
+        else if(email === "") {
+            setErrorText("");
+        } else {
+            setErrorText("Maximum character limit of 30 is reached.");
+            setHasError(true);
+        }
+    }
+
     const inputEmail = useCallback(
+        
         (event) => {
-            setEmail(event.target.value);
+            setEmail(event.target.value.toLowerCase());
         },
         [setEmail]
     );
@@ -106,6 +126,7 @@ export default function TradieSignUp() {
         setDescription('');
         setPassword('');
         setConfirmPassword('');
+        setHasError(false);
     };
 
     const onKeyEnter = (event)=>{
@@ -128,7 +149,7 @@ export default function TradieSignUp() {
             >
                 <div className='paper'>
                     <Typography component="h1" variant="h4">
-                        Tradies Sign up
+                        Sign up
                     </Typography>
                     <div className='form'>
                         <Grid container spacing={3}>
@@ -179,6 +200,7 @@ export default function TradieSignUp() {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    error={hasError} 
                                     autoComplete="email"
                                     name="email"
                                     variant="outlined"
@@ -187,7 +209,9 @@ export default function TradieSignUp() {
                                     label="Email*"
                                     autoFocus
                                     value={email}
+                                    helperText={errorText}
                                     onChange={inputEmail}
+                                    onBlur={validateEmail}
                                 />
                             </Grid>
                             <Grid
